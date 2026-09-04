@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 
 import { profile } from "@/lib/data";
 import "./globals.css";
@@ -7,6 +7,12 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jb-mono",
   display: "swap",
 });
 
@@ -31,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${inter.className} dark h-full scroll-smooth antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${inter.className} dark h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full bg-slate-900 font-sans text-slate-400 selection:bg-teal-300 selection:text-teal-900">
         {children}

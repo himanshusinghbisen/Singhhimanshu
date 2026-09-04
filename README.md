@@ -22,6 +22,15 @@ Open [http://localhost:43211](http://localhost:43211).
 
 The résumé at `/resume` is print-ready. Use **Print / Save as PDF** in the browser if you want a PDF to attach or email.
 
+## Two themes
+
+| URL | Theme |
+| --- | --- |
+| `/` | Original Brittany Chiang–inspired navy and mint |
+| `/v2` | Mercury — deep void `#0A0E17`, slate cards `#161F30` / `#23334D`, cyan `#00D2D3` |
+
+Use the **Original / Mercury** control in the bottom-right corner to switch. Same content, different skin. `/v2/resume` is the matching résumé.
+
 ## Deploy and put it on your domain
 
 The straightforward path is [Vercel](https://vercel.com) (this is a Next.js app). Netlify works too.

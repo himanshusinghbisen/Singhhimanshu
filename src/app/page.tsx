@@ -7,6 +7,7 @@ import { ProjectItem } from "@/components/project-item";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
 import { Spotlight } from "@/components/spotlight";
+import { ThemeCompare } from "@/components/theme-compare";
 import { about, experience, profile, projects } from "@/lib/data";
 
 export default function Home() {
@@ -104,12 +105,20 @@ export default function Home() {
                   Brittany Chiang
                 </a>
                 . Built with Next.js and Tailwind CSS, deployed wherever you
-                point the domain. Coded in Cursor.
+                point the domain. Coded in Cursor.{" "}
+                <Link
+                  href="/v2"
+                  className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
+                >
+                  Try the mercury theme
+                </Link>
+                .
               </p>
             </footer>
           </main>
         </div>
       </div>
+      <ThemeCompare current="original" />
     </div>
   );
 }

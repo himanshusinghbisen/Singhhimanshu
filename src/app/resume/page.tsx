@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { PrintResumeButton } from "@/components/print-resume-button";
@@ -31,12 +32,23 @@ export default function ResumePage() {
 
         <article className="rounded-xl bg-white p-8 shadow-sm print:rounded-none print:p-0 print:shadow-none sm:p-12">
           <header className="border-b border-slate-200 pb-6">
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-              {profile.name}
-            </h1>
-            <p className="mt-1 text-base font-medium text-slate-700">
-              {profile.title}
-            </p>
+            <div className="flex items-start gap-5">
+              <Image
+                src="/images/himanshu-singh-headshot.jpg"
+                alt={`${profile.name}, ${profile.title}`}
+                width={160}
+                height={213}
+                className="h-20 w-20 shrink-0 rounded-full object-cover object-[center_18%] ring-1 ring-slate-200 print:h-16 print:w-16"
+              />
+              <div>
+                <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+                  {profile.name}
+                </h1>
+                <p className="mt-1 text-base font-medium text-slate-700">
+                  {profile.title}
+                </p>
+              </div>
+            </div>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
               {profile.headline}
             </p>

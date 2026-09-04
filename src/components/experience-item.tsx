@@ -33,6 +33,9 @@ export function ExperienceItem({ role }: { role: Experience }) {
               </span>
             </a>
           </h3>
+          {role.subtitle ? (
+            <p className="text-sm font-medium text-slate-500">{role.subtitle}</p>
+          ) : null}
           {role.titles && role.titles.length > 1 ? (
             <div className="text-slate-500" aria-hidden>
               {role.titles.slice(1).map((title) => (

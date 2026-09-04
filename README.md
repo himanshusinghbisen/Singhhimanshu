@@ -50,7 +50,7 @@ TLS certificates are issued automatically.
 
 - `src/lib/data.ts` — name, email, LinkedIn, experience bullets, certs
 - `src/app/layout.tsx` — page title and description
-- Replace the student email with a professional address if you prefer
+- Confirm email and phone in `src/lib/data.ts` before you publish
 - Optional: add a GitHub URL in `SocialLinks` if you want that icon
 
 ## Stack

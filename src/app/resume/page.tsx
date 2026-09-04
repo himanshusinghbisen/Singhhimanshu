@@ -42,7 +42,16 @@ export default function ResumePage() {
             </p>
             <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-600">
               <span>{profile.location}</span>
-              <a className="underline decoration-slate-300" href={`mailto:${profile.email}`}>
+              <a
+                className="underline decoration-slate-300"
+                href={profile.phoneHref}
+              >
+                {profile.phone}
+              </a>
+              <a
+                className="underline decoration-slate-300"
+                href={`mailto:${profile.email}`}
+              >
                 {profile.email}
               </a>
               <a
@@ -84,15 +93,18 @@ export default function ResumePage() {
                       {role.period}
                     </p>
                   </div>
+                  {role.subtitle ? (
+                    <p className="text-xs text-slate-500">{role.subtitle}</p>
+                  ) : null}
                   {role.titles && role.titles.length > 1 ? (
                     <p className="text-xs text-slate-500">
                       {role.titles.slice(1).join(" · ")}
                     </p>
                   ) : null}
                   <p className="mt-1 text-sm text-slate-700">{role.summary}</p>
-                  {role.highlights ? (
+                  {(role.resumeHighlights ?? role.highlights) ? (
                     <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700">
-                      {role.highlights.map((item) => (
+                      {(role.resumeHighlights ?? role.highlights)?.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
                     </ul>

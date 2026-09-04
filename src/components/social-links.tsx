@@ -1,5 +1,5 @@
+import { LinkedInIcon, MailIcon, PhoneIcon } from "@/components/icons";
 import { profile } from "@/lib/data";
-import { LinkedInIcon, MailIcon } from "@/components/icons";
 
 const links = [
   {
@@ -11,6 +11,11 @@ const links = [
     href: `mailto:${profile.email}`,
     label: "Email",
     icon: MailIcon,
+  },
+  {
+    href: profile.phoneHref,
+    label: "Phone",
+    icon: PhoneIcon,
   },
 ];
 

@@ -29,6 +29,23 @@ export function MailIcon({ className }: { className?: string }) {
   );
 }
 
+export function PhoneIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className={className}
+    >
+      <path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 .8-.5 1.5-1.3 1.6C10.8 20.3 3.7 13.2 2.9 4.8 2.8 4 3.5 3.5 4.3 3.5h2.2z" />
+    </svg>
+  );
+}
+
 export function ArrowUpRightIcon({ className }: { className?: string }) {
   return (
     <svg

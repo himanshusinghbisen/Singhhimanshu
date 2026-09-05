@@ -7,6 +7,7 @@ import { ProjectItem } from "@/components/project-item";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeCompare } from "@/components/theme-compare";
+import { WritingPreview } from "@/components/writing-preview";
 import { about, experience, profile, projects } from "@/lib/data";
 
 export default function Home() {
@@ -88,6 +89,8 @@ export default function Home() {
                 ))}
               </ul>
             </section>
+
+            <WritingPreview />
 
             <Credentials />
 

@@ -9,7 +9,7 @@ export function Credentials() {
       className="mb-16 scroll-mt-16 md:mb-24 lg:mb-32 lg:scroll-mt-24"
       aria-label="Education, certifications, and skills"
     >
-      <SectionHeading index="04">Credentials</SectionHeading>
+      <SectionHeading index="05">Credentials</SectionHeading>
 
       <h3 className="mb-4 text-xs font-bold tracking-[0.2em] text-ink/50 uppercase">
         Education

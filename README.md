@@ -31,6 +31,15 @@ Open [http://localhost:43211](http://localhost:43211).
 
 Use the **Journal / Mercury** control in the bottom-right corner to switch. Same content, different skin. Matching résumés: `/resume` and `/v2/resume`.
 
+## Writing / blog preview
+
+| URL | What it is |
+| --- | --- |
+| `/#writing` | Latest posts teaser on the home page |
+| `/blog` | Full writing index |
+| `/blog/[slug]` | Individual post |
+
+Sample posts live in `src/lib/posts.ts`. This is a layout preview — swap in MDX later if you want.
 ## Deploy
 
 1. Push this repo to GitHub.

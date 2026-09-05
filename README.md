@@ -31,15 +31,16 @@ Open [http://localhost:43211](http://localhost:43211).
 
 Use the **Journal / Mercury** control in the bottom-right corner to switch. Same content, different skin. Matching résumés: `/resume` and `/v2/resume`.
 
-## Writing / blog preview
+## Writing / blog
 
-| URL | What it is |
+Posts live in one place: `src/lib/posts.ts`. Both themes read from it.
+
+| URL | Theme |
 | --- | --- |
-| `/#writing` | Latest posts teaser on the home page |
-| `/blog` | Full writing index |
-| `/blog/[slug]` | Individual post |
+| `/#writing` · `/blog` · `/blog/[slug]` | Journal |
+| `/v2#writing` · `/v2/blog` · `/v2/blog/[slug]` | Mercury |
 
-Sample posts live in `src/lib/posts.ts`. This is a layout preview — swap in MDX later if you want.
+Add or edit a post in `src/lib/posts.ts` and it shows up in both skins.
 ## Deploy
 
 1. Push this repo to GitHub.

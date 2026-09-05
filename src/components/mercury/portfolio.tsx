@@ -6,6 +6,7 @@ import { MercuryHeading } from "@/components/mercury/heading";
 import { MercurySpotlight } from "@/components/mercury/spotlight";
 import { ArrowUpRightIcon } from "@/components/icons";
 import { ThemeCompare } from "@/components/theme-compare";
+import { WritingPreview } from "@/components/writing-preview";
 import {
   about,
   certifications,
@@ -111,6 +112,8 @@ export function MercuryPortfolio() {
                 ))}
               </ul>
             </section>
+
+            <WritingPreview theme="mercury" basePath="/v2/blog" />
 
             <section
               id="credentials"

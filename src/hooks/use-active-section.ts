@@ -4,37 +4,40 @@ import { useEffect, useState } from "react";
 
 import { navItems } from "@/lib/data";
 
+type SectionId = (typeof navItems)[number]["id"];
+
+function readActiveSection(): SectionId {
+  const ids = navItems.map((item) => item.id);
+  const marker = window.innerHeight * 0.28;
+  let current: SectionId = ids[0] ?? "about";
+
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    if (el.getBoundingClientRect().top - marker <= 0) {
+      current = id;
+    }
+  }
+
+  return current;
+}
+
 export function useActiveSection() {
-  const [activeId, setActiveId] = useState<(typeof navItems)[number]["id"]>(
-    "about",
-  );
+  const [activeId, setActiveId] = useState<SectionId>("about");
 
   useEffect(() => {
-    const ids = navItems.map((item) => item.id);
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
+    const update = () => setActiveId(readActiveSection());
 
-    if (elements.length === 0) return;
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    window.addEventListener("hashchange", update);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible[0]?.target.id) {
-          setActiveId(visible[0].target.id as (typeof navItems)[number]["id"]);
-        }
-      },
-      {
-        rootMargin: "-20% 0px -55% 0px",
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-      },
-    );
-
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      window.removeEventListener("hashchange", update);
+    };
   }, []);
 
   return activeId;

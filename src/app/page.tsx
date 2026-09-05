@@ -6,6 +6,7 @@ import { ArrowUpRightIcon } from "@/components/icons";
 import { ProjectItem } from "@/components/project-item";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
+import { ThemeCompare } from "@/components/theme-compare";
 import { about, experience, profile, projects } from "@/lib/data";
 
 export default function Home() {
@@ -94,12 +95,20 @@ export default function Home() {
               <p>
                 An engineering journal for architecture notes, production
                 systems, and the craft of shipping claims platforms. Built with
-                Next.js and Tailwind CSS.
+                Next.js and Tailwind CSS.{" "}
+                <Link
+                  href="/v2"
+                  className="font-medium text-navy-link underline decoration-amber-mark/40 underline-offset-4 hover:decoration-amber-mark"
+                >
+                  Switch to mercury theme
+                </Link>
+                .
               </p>
             </footer>
           </main>
         </div>
       </div>
+      <ThemeCompare current="journal" />
     </div>
   );
 }

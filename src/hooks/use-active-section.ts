@@ -6,12 +6,7 @@ import { navItems } from "@/lib/data";
 
 type SectionId = (typeof navItems)[number]["id"];
 
-/**
- * Active section = last nav target whose top has crossed a line near the
- * top of the viewport. Prefer this over IntersectionObserver: tall
- * sections (especially About) keep intersecting a mid-viewport band and
- * incorrectly stay highlighted.
- */
+/** Last section whose top has crossed a line near the top of the viewport. */
 function sectionFromScroll(offset = 120): SectionId {
   let current: SectionId = navItems[0].id;
 
@@ -45,7 +40,6 @@ export function useActiveSection() {
     update();
 
     // Capture hears scroll on nested containers (preview iframes, etc.).
-    // Native scroll does not bubble; capture still sees the event on the way down.
     window.addEventListener("scroll", onScrollOrResize, {
       passive: true,
       capture: true,

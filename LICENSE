@@ -1,0 +1,22 @@
+Copyright (c) 2026 Himanshu Singh
+
+All rights reserved.
+
+This repository contains the personal portfolio website for Himanshu Singh
+(singhhimanshu.com), including original writing, résumé content, photographs,
+and site design.
+
+You may not copy, modify, redistribute, or reuse the site content, personal
+data, or brand presentation for another person or commercial product without
+prior written permission from the copyright holder.
+
+Exception — open-source dependencies:
+Third-party packages listed in package.json (for example Next.js, React,
+Tailwind CSS, and shadcn/ui primitives) remain under their respective open-
+source licenses. Those licenses are not transferred to the portfolio content.
+
+Trademarks:
+Employer names, product names, and certification marks (including but not
+limited to Cigna, Infosys, Amazon Web Services, Microsoft, and TOGAF®) are
+the property of their respective owners and are used here only for factual
+identification of work history and credentials.

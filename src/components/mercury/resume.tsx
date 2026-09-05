@@ -63,7 +63,7 @@ export function MercuryResume() {
               Healthcare systems architect and senior developer focused on
               payment integrity — modernizing post-pay applications, vendor
               integrations, and recovery workflows. Decade-plus on core payer
-              platforms (QNXT, Facets, NASCO). TOGAF 9 Certified. Hands-on in
+              platforms (QNXT, Facets, NASCO). TOGAF® 9 Certified. Hands-on in
               C#, .NET, SQL Server, AWS, and Azure. Currently completing an M.S.
               in Data Science (4.0 GPA) to bring statistical rigor to claims
               anomaly detection.

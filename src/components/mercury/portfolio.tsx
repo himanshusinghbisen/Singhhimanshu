@@ -227,6 +227,10 @@ export function MercuryPortfolio() {
                 .
               </p>
               <VisitorCounter theme="mercury" />
+              <p className="mt-4 text-[11px] tracking-wide text-[#64748B]">
+                © {new Date().getFullYear()} Himanshu Singh. All rights
+                reserved.
+              </p>
             </footer>
           </main>
         </div>

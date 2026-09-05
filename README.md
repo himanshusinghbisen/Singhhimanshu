@@ -68,6 +68,17 @@ The site ships with:
 
 After go-live, submit `https://singhhimanshu.com/sitemap.xml` in [Google Search Console](https://search.google.com/search-console).
 
+
+## Ownership & trademarks
+
+Site content (copy, résumé details, photos, and design) is © Himanshu Singh — see `LICENSE`.
+
+- Do not reuse this portfolio’s wording or photo for another person’s site.
+- Employer and product names (Cigna, Infosys, AWS, Microsoft, QNXT, Facets, etc.) and certification marks (including TOGAF®) belong to their respective owners and appear only to describe work history and credentials.
+- Open-source libraries in `package.json` keep their own licenses (MIT/Apache, etc.).
+
+Before hosting, replace the headshot in `public/images/` with your official photo if the current file is only a placeholder.
+
 ## Deploy
 
 1. Push this repo to GitHub.

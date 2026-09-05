@@ -109,6 +109,10 @@ export default function Home() {
                 .
               </p>
               <VisitorCounter theme="journal" />
+              <p className="mt-4 text-[11px] tracking-wide text-ink/35">
+                © {new Date().getFullYear()} Himanshu Singh. All rights
+                reserved.
+              </p>
             </footer>
           </main>
         </div>

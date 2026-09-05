@@ -1,8 +1,10 @@
 # Himanshu Singh — Engineering Journal
 
-Personal site for [Himanshu Singh](https://www.linkedin.com/in/himanshusingh007/) — a healthcare systems architect focused on claims and payment integrity.
+Personal site for [Himanshu Singh](https://www.linkedin.com/in/himanshusingh007/) — software engineer, systems architect, and technology consultant based in Dallas–Fort Worth (from Gorakhpur, India). Focused on healthcare claims and payment integrity.
 
-**Theme:** Engineering Journal & Lab — warm parchment canvas, charcoal ink, navy links, amber highlights, Newsreader + Source Sans 3.
+**Production domain:** [singhhimanshu.com](https://singhhimanshu.com)
+
+**Theme:** Engineering Journal — warm parchment, charcoal ink, navy links, amber highlights (Newsreader + Source Sans 3). Alternate Mercury theme at `/v2`.
 
 Content lives in `src/lib/data.ts`.
 
@@ -29,23 +31,49 @@ Open [http://localhost:43211](http://localhost:43211).
 | `/` | Engineering Journal — parchment, serif headings, navy + amber |
 | `/v2` | Mercury — deep void, slate cards, cyan accents |
 
-Use the **Journal / Mercury** control in the bottom-right corner to switch. Same content, different skin. Matching résumés: `/resume` and `/v2/resume`.
+Use the **Journal / Mercury** control in the bottom-right corner to switch. Matching résumés: `/resume` and `/v2/resume`.
 
 ## Writing / blog
 
-Posts live in one place: `src/lib/posts.ts`. Both themes read from it.
+Posts live in `src/lib/posts.ts` (shared by both themes).
 
 | URL | Theme |
 | --- | --- |
 | `/#writing` · `/blog` · `/blog/[slug]` | Journal |
 | `/v2#writing` · `/v2/blog` · `/v2/blog/[slug]` | Mercury |
 
-Add or edit a post in `src/lib/posts.ts` and it shows up in both skins.
+## Visitor counter
+
+The footer shows a visit count. Each browser session is counted once.
+
+- **Local / VPS:** counts persist in `.data/visitors.json`
+- **Vercel / serverless:** add free [Upstash Redis](https://upstash.com/) and set:
+
+```bash
+UPSTASH_REDIS_REST_URL=...
+UPSTASH_REDIS_REST_TOKEN=...
+NEXT_PUBLIC_SITE_URL=https://singhhimanshu.com
+```
+
+Without Redis on serverless, the count still works but can reset when the instance cold-starts.
+
+## SEO
+
+The site ships with:
+
+- Canonical metadata for **singhhimanshu.com**
+- Keywords targeting Himanshu Singh + Gorakhpur + Dallas + engineer / architect / consultant
+- JSON-LD `Person` / `WebSite` / `ProfilePage` structured data
+- `sitemap.xml` and `robots.txt`
+
+After go-live, submit `https://singhhimanshu.com/sitemap.xml` in [Google Search Console](https://search.google.com/search-console).
+
 ## Deploy
 
 1. Push this repo to GitHub.
 2. Import on [Vercel](https://vercel.com/new) (Next.js defaults).
-3. Add your custom domain under **Settings → Domains**.
+3. Add domain **singhhimanshu.com** under **Settings → Domains**.
+4. Set the env vars above (especially `NEXT_PUBLIC_SITE_URL` and Upstash for a durable counter).
 
 ## Stack
 

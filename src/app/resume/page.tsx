@@ -54,7 +54,7 @@ export default function ResumePage() {
               {profile.headline}
             </p>
             <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink/60">
-              <span>{profile.location}</span>
+              <span>{profile.locationLabel}</span>
               <a href={profile.phoneHref}>{profile.phone}</a>
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
               <a href={profile.linkedin}>linkedin.com/in/himanshusingh007</a>

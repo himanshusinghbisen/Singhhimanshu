@@ -6,6 +6,7 @@ import { MercuryHeading } from "@/components/mercury/heading";
 import { MercurySpotlight } from "@/components/mercury/spotlight";
 import { ArrowUpRightIcon } from "@/components/icons";
 import { ThemeCompare } from "@/components/theme-compare";
+import { VisitorCounter } from "@/components/visitor-counter";
 import { WritingPreview } from "@/components/writing-preview";
 import {
   about,
@@ -225,6 +226,7 @@ export function MercuryPortfolio() {
                 </Link>
                 .
               </p>
+              <VisitorCounter theme="mercury" />
             </footer>
           </main>
         </div>

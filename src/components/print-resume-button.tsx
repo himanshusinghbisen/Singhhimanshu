@@ -8,7 +8,7 @@ export function PrintResumeButton() {
       type="button"
       variant="outline"
       onClick={() => window.print()}
-      className="print:hidden border-slate-300 bg-white text-slate-800 hover:bg-slate-100"
+      className="print:hidden border-rule bg-card text-ink hover:bg-parchment-deep"
     >
       Print / Save as PDF
     </Button>

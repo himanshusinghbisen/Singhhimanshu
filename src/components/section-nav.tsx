@@ -4,35 +4,67 @@ import { navItems } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { useActiveSection } from "@/hooks/use-active-section";
 
-export function SectionNav() {
+export function SectionNav({
+  variant = "sidebar",
+}: {
+  variant?: "sidebar" | "masthead";
+}) {
   const activeId = useActiveSection();
 
+  if (variant === "masthead") {
+    return (
+      <nav aria-label="In-page" className="mt-8">
+        <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          {navItems.map((item) => {
+            const isActive = activeId === item.id;
+            return (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  className={cn(
+                    "text-sm font-semibold tracking-wide uppercase transition-colors",
+                    isActive
+                      ? "text-navy-link"
+                      : "text-ink/55 hover:text-navy-link",
+                  )}
+                  aria-current={isActive ? "location" : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    );
+  }
+
   return (
-    <nav className="nav hidden lg:block" aria-label="In-page">
-      <ul className="mt-16 w-max">
+    <nav className="hidden lg:block" aria-label="In-page">
+      <ul className="mt-12 w-max space-y-1">
         {navItems.map((item) => {
           const isActive = activeId === item.id;
           return (
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
-                className="group flex items-center py-3"
+                className="group flex items-center gap-3 py-2"
                 aria-current={isActive ? "location" : undefined}
               >
                 <span
                   className={cn(
-                    "mr-4 h-px transition-all motion-reduce:transition-none",
+                    "h-px transition-all motion-reduce:transition-none",
                     isActive
-                      ? "w-16 bg-slate-200"
-                      : "w-8 bg-slate-600 group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200",
+                      ? "w-10 bg-amber-mark"
+                      : "w-5 bg-rule group-hover:w-10 group-hover:bg-amber-mark",
                   )}
                 />
                 <span
                   className={cn(
-                    "text-xs font-bold tracking-widest uppercase transition-colors",
+                    "text-xs font-bold tracking-[0.18em] uppercase transition-colors",
                     isActive
-                      ? "text-slate-200"
-                      : "text-slate-500 group-hover:text-slate-200 group-focus-visible:text-slate-200",
+                      ? "text-ink"
+                      : "text-ink/45 group-hover:text-ink",
                   )}
                 >
                   {item.label}

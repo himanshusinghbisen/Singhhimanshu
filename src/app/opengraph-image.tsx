@@ -14,22 +14,39 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          background: "#0f172a",
-          color: "#e2e8f0",
+          background: "#F4F1EA",
+          color: "#1F2937",
           padding: "80px",
         }}
       >
-        <div style={{ fontSize: 22, color: "#5eead4", letterSpacing: 4 }}>
-          HEALTHCARE SYSTEMS ARCHITECT
+        <div
+          style={{
+            fontSize: 20,
+            color: "#D97706",
+            letterSpacing: 6,
+            fontWeight: 600,
+          }}
+        >
+          ENGINEERING JOURNAL
         </div>
-        <div style={{ fontSize: 72, fontWeight: 700, marginTop: 16 }}>
+        <div style={{ fontSize: 72, fontWeight: 700, marginTop: 20 }}>
           Himanshu Singh
         </div>
         <div
           style={{
             fontSize: 28,
-            color: "#94a3b8",
-            marginTop: 24,
+            color: "#1D4ED8",
+            marginTop: 12,
+            fontWeight: 600,
+          }}
+        >
+          Healthcare Systems Architect
+        </div>
+        <div
+          style={{
+            fontSize: 26,
+            color: "#4B5563",
+            marginTop: 28,
             maxWidth: 900,
             lineHeight: 1.4,
           }}

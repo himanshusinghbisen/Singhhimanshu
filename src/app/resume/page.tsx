@@ -18,68 +18,53 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-800 print:bg-white">
+    <div className="min-h-screen bg-parchment text-ink print:bg-white">
       <div className="mx-auto max-w-3xl px-6 py-10 print:max-w-none print:px-0 print:py-0">
         <div className="mb-6 flex items-center justify-between print:hidden">
           <Link
             href="/"
-            className="text-sm font-medium text-slate-600 hover:text-teal-700"
+            className="text-sm font-medium text-ink/60 hover:text-navy-link"
           >
-            ← Back to site
+            ← Back to journal
           </Link>
           <PrintResumeButton />
         </div>
 
-        <article className="rounded-xl bg-white p-8 shadow-sm print:rounded-none print:p-0 print:shadow-none sm:p-12">
-          <header className="border-b border-slate-200 pb-6">
+        <article className="rounded-sm border border-rule bg-card p-8 shadow-sm print:rounded-none print:border-0 print:bg-white print:p-0 print:shadow-none sm:p-12">
+          <header className="border-b border-rule pb-6">
             <div className="flex items-start gap-5">
               <Image
                 src="/images/himanshu-singh-headshot.jpg"
                 alt={`${profile.name}, ${profile.title}`}
                 width={160}
                 height={213}
-                className="h-20 w-20 shrink-0 rounded-full object-cover object-[center_18%] ring-1 ring-slate-200 print:h-16 print:w-16"
+                className="h-20 w-20 shrink-0 rounded-full object-cover object-[center_18%] ring-1 ring-rule print:h-16 print:w-16"
               />
               <div>
-                <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+                <h1 className="font-journal text-3xl font-semibold tracking-tight text-ink">
                   {profile.name}
                 </h1>
-                <p className="mt-1 text-base font-medium text-slate-700">
+                <p className="mt-1 text-base font-medium text-navy-link">
                   {profile.title}
                 </p>
               </div>
             </div>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink/65">
               {profile.headline}
             </p>
-            <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-600">
+            <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink/60">
               <span>{profile.location}</span>
-              <a
-                className="underline decoration-slate-300"
-                href={profile.phoneHref}
-              >
-                {profile.phone}
-              </a>
-              <a
-                className="underline decoration-slate-300"
-                href={`mailto:${profile.email}`}
-              >
-                {profile.email}
-              </a>
-              <a
-                className="underline decoration-slate-300"
-                href={profile.linkedin}
-              >
-                linkedin.com/in/himanshusingh007
-              </a>
+              <a href={profile.phoneHref}>{profile.phone}</a>
+              <a href={`mailto:${profile.email}`}>{profile.email}</a>
+              <a href={profile.linkedin}>linkedin.com/in/himanshusingh007</a>
             </p>
           </header>
 
           <section className="mt-8">
-            <h2 className="text-xs font-bold tracking-[0.2em] text-teal-800 uppercase">
+            <h2 className="text-xs font-bold tracking-[0.2em] text-amber-mark uppercase">
               Summary
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+            <p className="mt-3 text-sm leading-relaxed text-ink/75">
               Healthcare systems architect and senior developer focused on
               payment integrity — modernizing post-pay applications, vendor
               integrations, and recovery workflows. Decade-plus on core payer
@@ -91,34 +76,36 @@ export default function ResumePage() {
           </section>
 
           <section className="mt-8">
-            <h2 className="text-xs font-bold tracking-[0.2em] text-teal-800 uppercase">
+            <h2 className="text-xs font-bold tracking-[0.2em] text-amber-mark uppercase">
               Experience
             </h2>
             <div className="mt-4 space-y-6">
               {experience.map((role) => (
                 <div key={role.id}>
                   <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
-                    <h3 className="text-sm font-semibold text-slate-900">
+                    <h3 className="text-sm font-semibold text-ink">
                       {role.titles?.[0] ?? role.title} · {role.company}
                     </h3>
-                    <p className="text-xs font-medium tracking-wide text-slate-500 uppercase">
+                    <p className="text-xs font-medium tracking-wide text-ink/45 uppercase">
                       {role.period}
                     </p>
                   </div>
                   {role.subtitle ? (
-                    <p className="text-xs text-slate-500">{role.subtitle}</p>
+                    <p className="text-xs text-navy-link">{role.subtitle}</p>
                   ) : null}
                   {role.titles && role.titles.length > 1 ? (
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-ink/45">
                       {role.titles.slice(1).join(" · ")}
                     </p>
                   ) : null}
-                  <p className="mt-1 text-sm text-slate-700">{role.summary}</p>
+                  <p className="mt-1 text-sm text-ink/70">{role.summary}</p>
                   {(role.resumeHighlights ?? role.highlights) ? (
-                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700">
-                      {(role.resumeHighlights ?? role.highlights)?.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-ink/70">
+                      {(role.resumeHighlights ?? role.highlights)?.map(
+                        (item) => (
+                          <li key={item}>{item}</li>
+                        ),
+                      )}
                     </ul>
                   ) : null}
                 </div>
@@ -127,7 +114,7 @@ export default function ResumePage() {
           </section>
 
           <section className="mt-8">
-            <h2 className="text-xs font-bold tracking-[0.2em] text-teal-800 uppercase">
+            <h2 className="text-xs font-bold tracking-[0.2em] text-amber-mark uppercase">
               Education
             </h2>
             <ul className="mt-4 space-y-3">
@@ -135,18 +122,18 @@ export default function ResumePage() {
                 <li key={item.school} className="text-sm">
                   <div className="flex flex-col justify-between gap-1 sm:flex-row">
                     <span>
-                      <span className="font-semibold text-slate-900">
+                      <span className="font-semibold text-ink">
                         {item.school}
                       </span>
                       {" — "}
                       {item.credential}
                     </span>
-                    <span className="text-xs font-medium tracking-wide text-slate-500 uppercase">
+                    <span className="text-xs font-medium tracking-wide text-ink/45 uppercase">
                       {item.period}
                     </span>
                   </div>
                   {item.detail ? (
-                    <p className="text-slate-600">{item.detail}</p>
+                    <p className="text-ink/60">{item.detail}</p>
                   ) : null}
                 </li>
               ))}
@@ -154,13 +141,13 @@ export default function ResumePage() {
           </section>
 
           <section className="mt-8">
-            <h2 className="text-xs font-bold tracking-[0.2em] text-teal-800 uppercase">
+            <h2 className="text-xs font-bold tracking-[0.2em] text-amber-mark uppercase">
               Certifications
             </h2>
-            <ul className="mt-4 space-y-1.5 text-sm text-slate-700">
+            <ul className="mt-4 space-y-1.5 text-sm text-ink/70">
               {certifications.map((cert) => (
                 <li key={cert.name}>
-                  <span className="font-medium text-slate-900">{cert.name}</span>
+                  <span className="font-medium text-ink">{cert.name}</span>
                   {" — "}
                   {cert.issuer}, {cert.issued}
                   {cert.expires ? ` (expires ${cert.expires})` : ""}
@@ -170,15 +157,13 @@ export default function ResumePage() {
           </section>
 
           <section className="mt-8">
-            <h2 className="text-xs font-bold tracking-[0.2em] text-teal-800 uppercase">
+            <h2 className="text-xs font-bold tracking-[0.2em] text-amber-mark uppercase">
               Skills
             </h2>
-            <ul className="mt-4 space-y-1.5 text-sm text-slate-700">
+            <ul className="mt-4 space-y-1.5 text-sm text-ink/70">
               {skillGroups.map((group) => (
                 <li key={group.label}>
-                  <span className="font-semibold text-slate-900">
-                    {group.label}:
-                  </span>{" "}
+                  <span className="font-semibold text-ink">{group.label}:</span>{" "}
                   {group.skills.join(", ")}
                 </li>
               ))}

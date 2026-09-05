@@ -21,17 +21,17 @@ const links = [
 
 export function SocialLinks() {
   return (
-    <ul className="ml-1 mt-8 flex items-center" aria-label="Social">
+    <ul className="mt-8 flex items-center gap-5" aria-label="Contact">
       {links.map((link) => (
-        <li key={link.href} className="mr-5 shrink-0">
+        <li key={link.href}>
           <a
             href={link.href}
             target={link.href.startsWith("http") ? "_blank" : undefined}
             rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-            className="block text-slate-400 transition hover:text-slate-200 focus-visible:text-slate-200"
+            className="block text-ink/50 transition hover:text-navy-link focus-visible:text-navy-link"
             aria-label={link.label}
           >
-            <link.icon className="h-6 w-6" />
+            <link.icon className="h-5 w-5" />
           </a>
         </li>
       ))}

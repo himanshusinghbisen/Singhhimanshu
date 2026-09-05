@@ -7,7 +7,7 @@ import { profile } from "@/lib/data";
 
 export function SiteHeader() {
   return (
-    <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
+    <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[42%] lg:flex-col lg:justify-between lg:py-24">
       <div>
         <Link
           href="/"
@@ -20,16 +20,19 @@ export function SiteHeader() {
             width={320}
             height={427}
             priority
-            className="h-24 w-24 rounded-full object-cover object-[center_18%] ring-2 ring-slate-200/10 transition group-hover:ring-teal-300/60 sm:h-28 sm:w-28"
+            className="h-24 w-24 rounded-full object-cover object-[center_18%] ring-1 ring-rule shadow-sm transition group-hover:ring-amber-mark sm:h-28 sm:w-28"
           />
         </Link>
-        <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
+        <p className="mt-8 text-xs font-semibold tracking-[0.28em] text-amber-mark uppercase">
+          Engineering Journal
+        </p>
+        <h1 className="font-journal mt-3 text-4xl leading-tight font-semibold tracking-tight text-ink sm:text-5xl">
           <Link href="/">{profile.name}</Link>
         </h1>
-        <h2 className="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">
+        <h2 className="mt-3 text-lg font-medium tracking-tight text-ink/80 sm:text-xl">
           {profile.title}
         </h2>
-        <p className="mt-4 max-w-xs leading-normal text-slate-400">
+        <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-ink/60">
           {profile.tagline}
         </p>
         <SectionNav />

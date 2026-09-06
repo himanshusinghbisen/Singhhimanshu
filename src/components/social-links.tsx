@@ -1,5 +1,6 @@
 import {
   GitHubIcon,
+  GoodreadsIcon,
   LinkedInIcon,
   MailIcon,
   PhoneIcon,
@@ -16,6 +17,11 @@ const links = [
     href: profile.github,
     label: "GitHub",
     icon: GitHubIcon,
+  },
+  {
+    href: profile.goodreads,
+    label: "Goodreads",
+    icon: GoodreadsIcon,
   },
   {
     href: `mailto:${profile.email}`,

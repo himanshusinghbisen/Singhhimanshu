@@ -59,6 +59,19 @@ export function GitHubIcon({ className }: { className?: string }) {
   );
 }
 
+export function GoodreadsIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+      className={className}
+    >
+      <path d="M11.76 1.2c-3.9 0-6.5 2.6-6.5 6.7 0 3.4 2 6.1 5.1 6.8v.2c-1.5.5-2.6 1.3-3.3 2.4-.7 1.1-1 2.4-1 4 0 .4 0 .7.1 1h1.7c-.1-.3-.1-.6-.1-.9 0-2.5 1.3-4.2 4-4.8v5.7h1.6v-5.7c2.7.6 4 2.3 4 4.8 0 .3 0 .6-.1.9h1.7c.1-.3.1-.6.1-1 0-1.6-.3-2.9-1-4-.7-1.1-1.8-1.9-3.3-2.4v-.2c3.1-.7 5.1-3.4 5.1-6.8 0-4.1-2.6-6.7-6.5-6.7zm0 1.5c2.9 0 4.7 1.9 4.7 5.2 0 3.4-1.8 5.4-4.7 5.4s-4.7-2-4.7-5.4c0-3.3 1.8-5.2 4.7-5.2z" />
+    </svg>
+  );
+}
+
 export function ArrowUpRightIcon({ className }: { className?: string }) {
   return (
     <svg

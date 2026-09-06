@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MercuryNav } from "@/components/mercury/nav";
 import {
   GitHubIcon,
+  GoodreadsIcon,
   LinkedInIcon,
   MailIcon,
   PhoneIcon,
@@ -13,6 +14,7 @@ import { profile } from "@/lib/data";
 const links = [
   { href: profile.linkedin, label: "LinkedIn", icon: LinkedInIcon },
   { href: profile.github, label: "GitHub", icon: GitHubIcon },
+  { href: profile.goodreads, label: "Goodreads", icon: GoodreadsIcon },
   { href: `mailto:${profile.email}`, label: "Email", icon: MailIcon },
   { href: profile.phoneHref, label: "Phone", icon: PhoneIcon },
 ];

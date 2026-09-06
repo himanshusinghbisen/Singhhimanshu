@@ -12,6 +12,7 @@ export const profile = {
   phoneHref: "tel:+15622566239",
   linkedin: "https://www.linkedin.com/in/himanshusingh007/",
   github: "https://github.com/himanshusinghbisen",
+  goodreads: "https://www.goodreads.com/singhhimanshu",
   headline:
     "Healthcare Systems Architect, Software Engineer & Technology Consultant | Dallas · Gorakhpur",
   siteUrl: "https://singhhimanshu.com",

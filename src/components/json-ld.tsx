@@ -28,7 +28,7 @@ export function JsonLd() {
       addressRegion: "TX",
       addressCountry: "US",
     },
-    sameAs: [profile.linkedin, profile.github],
+    sameAs: [profile.linkedin, profile.github, profile.goodreads],
     knowsAbout: [
       "Software architecture",
       "Healthcare payment integrity",

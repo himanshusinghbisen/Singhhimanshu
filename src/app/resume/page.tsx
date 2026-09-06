@@ -58,7 +58,7 @@ export default function ResumePage() {
               <a href={profile.phoneHref}>{profile.phone}</a>
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
               <a href={profile.linkedin}>linkedin.com/in/himanshusingh007</a>
-              <a href={profile.github}>github.com/Himanshusingh007</a>
+              <a href={profile.github}>github.com/himanshusinghbisen</a>
             </p>
           </header>
 

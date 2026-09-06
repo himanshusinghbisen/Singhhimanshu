@@ -2,11 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { MercuryNav } from "@/components/mercury/nav";
-import { LinkedInIcon, MailIcon, PhoneIcon } from "@/components/icons";
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  MailIcon,
+  PhoneIcon,
+} from "@/components/icons";
 import { profile } from "@/lib/data";
 
 const links = [
   { href: profile.linkedin, label: "LinkedIn", icon: LinkedInIcon },
+  { href: profile.github, label: "GitHub", icon: GitHubIcon },
   { href: `mailto:${profile.email}`, label: "Email", icon: MailIcon },
   { href: profile.phoneHref, label: "Phone", icon: PhoneIcon },
 ];
@@ -26,7 +32,7 @@ export function MercuryHeader() {
             width={320}
             height={427}
             priority
-            className="h-24 w-24 rounded-full object-cover object-[center_18%] ring-2 ring-[#23334D] transition group-hover:ring-[#00D2D3] sm:h-28 sm:w-28"
+            className="h-24 w-24 rounded-full object-cover object-[center_16%] ring-2 ring-[#23334D] transition group-hover:ring-[#00D2D3] sm:h-28 sm:w-28"
           />
         </Link>
         <p className="mt-8 font-mono text-[11px] tracking-[0.28em] text-[#00D2D3] uppercase">

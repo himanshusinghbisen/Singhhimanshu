@@ -1,4 +1,9 @@
-import { LinkedInIcon, MailIcon, PhoneIcon } from "@/components/icons";
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  MailIcon,
+  PhoneIcon,
+} from "@/components/icons";
 import { profile } from "@/lib/data";
 
 const links = [
@@ -6,6 +11,11 @@ const links = [
     href: profile.linkedin,
     label: "LinkedIn",
     icon: LinkedInIcon,
+  },
+  {
+    href: profile.github,
+    label: "GitHub",
+    icon: GitHubIcon,
   },
   {
     href: `mailto:${profile.email}`,

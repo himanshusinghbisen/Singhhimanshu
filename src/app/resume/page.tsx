@@ -39,7 +39,7 @@ export default function ResumePage() {
                 alt={`${profile.name}, ${profile.title}`}
                 width={160}
                 height={213}
-                className="h-20 w-20 shrink-0 rounded-full object-cover object-[center_18%] ring-1 ring-rule print:h-16 print:w-16"
+                className="h-20 w-20 shrink-0 rounded-full object-cover object-[center_16%] ring-1 ring-rule print:h-16 print:w-16"
               />
               <div>
                 <h1 className="font-journal text-3xl font-semibold tracking-tight text-ink">
@@ -58,6 +58,7 @@ export default function ResumePage() {
               <a href={profile.phoneHref}>{profile.phone}</a>
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
               <a href={profile.linkedin}>linkedin.com/in/himanshusingh007</a>
+              <a href={profile.github}>github.com/Himanshusingh007</a>
             </p>
           </header>
 

@@ -77,14 +77,28 @@ Site content (copy, résumé details, photos, and design) is © Himanshu Singh �
 - Employer and product names (Cigna, Infosys, AWS, Microsoft, QNXT, Facets, etc.) and certification marks (including TOGAF®) belong to their respective owners and appear only to describe work history and credentials.
 - Open-source libraries in `package.json` keep their own licenses (MIT/Apache, etc.).
 
-Before hosting, replace the headshot in `public/images/` with your official photo if the current file is only a placeholder.
+Before hosting, keep your real headshot at `public/images/himanshu-singh-headshot.jpg`.
 
-## Deploy
+## Deploy to Vercel (recommended)
 
-1. Push this repo to GitHub.
-2. Import on [Vercel](https://vercel.com/new) (Next.js defaults).
-3. Add domain **singhhimanshu.com** under **Settings → Domains**.
-4. Set the env vars above (especially `NEXT_PUBLIC_SITE_URL` and Upstash for a durable counter).
+1. In Cursor, click **Create repo** so this project has a real GitHub repository (or push to your existing GitHub account).
+2. Go to [vercel.com/new](https://vercel.com/new) → **Import** that GitHub repo.
+3. Framework preset: **Next.js** (defaults are fine).
+4. Add environment variables:
+
+| Name | Value |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | `https://singhhimanshu.com` |
+| `UPSTASH_REDIS_REST_URL` | from [Upstash](https://upstash.com/) (optional) |
+| `UPSTASH_REDIS_REST_TOKEN` | from Upstash (optional) |
+
+5. Click **Deploy** and confirm the `*.vercel.app` preview works.
+6. **Settings → Domains** → add `singhhimanshu.com` and `www.singhhimanshu.com`.
+7. At your domain registrar, set DNS as Vercel shows (typical):
+   - `A` record for `@` → `76.76.21.21`
+   - `CNAME` for `www` → `cname.vercel-dns.com`
+8. Wait for DNS + HTTPS (often minutes).
+9. Submit `https://singhhimanshu.com/sitemap.xml` in [Google Search Console](https://search.google.com/search-console).
 
 ## Stack
 

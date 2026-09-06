@@ -20,7 +20,7 @@ export function SiteHeader() {
             width={320}
             height={427}
             priority
-            className="h-24 w-24 rounded-full object-cover object-[center_18%] ring-1 ring-rule shadow-sm transition group-hover:ring-amber-mark sm:h-28 sm:w-28"
+            className="h-24 w-24 rounded-full object-cover object-[center_16%] ring-1 ring-rule shadow-sm transition group-hover:ring-amber-mark sm:h-28 sm:w-28"
           />
         </Link>
         <p className="mt-8 text-xs font-semibold tracking-[0.28em] text-amber-mark uppercase">

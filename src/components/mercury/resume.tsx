@@ -33,7 +33,7 @@ export function MercuryResume() {
                 alt={`${profile.name}, ${profile.title}`}
                 width={160}
                 height={213}
-                className="h-20 w-20 shrink-0 rounded-full object-cover object-[center_18%] ring-2 ring-[#23334D] print:h-16 print:w-16 print:ring-slate-200"
+                className="h-20 w-20 shrink-0 rounded-full object-cover object-[center_16%] ring-2 ring-[#23334D] print:h-16 print:w-16 print:ring-slate-200"
               />
               <div>
                 <h1 className="text-3xl font-bold tracking-tight text-[#F1F5F9] print:text-slate-900">
@@ -52,6 +52,7 @@ export function MercuryResume() {
               <a href={profile.phoneHref}>{profile.phone}</a>
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
               <a href={profile.linkedin}>linkedin.com/in/himanshusingh007</a>
+              <a href={profile.github}>github.com/Himanshusingh007</a>
             </p>
           </header>
 

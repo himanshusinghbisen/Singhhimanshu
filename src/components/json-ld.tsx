@@ -1,5 +1,5 @@
 import { profile } from "@/lib/data";
-import { seo, siteUrl } from "@/lib/site";
+import { seo, siteName, siteUrl } from "@/lib/site";
 
 export function JsonLd() {
   const person = {
@@ -45,7 +45,8 @@ export function JsonLd() {
     "@type": "WebSite",
     "@id": `${siteUrl}/#website`,
     url: siteUrl,
-    name: `${profile.name} · Engineering Journal`,
+    name: siteName,
+    alternateName: ["singhhimanshu.com", `${profile.name} · Engineering Journal`],
     description: seo.description,
     publisher: { "@id": `${siteUrl}/#person` },
     inLanguage: "en-US",

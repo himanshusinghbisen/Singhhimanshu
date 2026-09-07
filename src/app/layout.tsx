@@ -3,7 +3,7 @@ import { Newsreader, Source_Sans_3 } from "next/font/google";
 
 import { JsonLd } from "@/components/json-ld";
 import { profile } from "@/lib/data";
-import { seo, siteUrl } from "@/lib/site";
+import { seo, siteName, siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: `%s · ${profile.name}`,
   },
   description: seo.description,
-  applicationName: `${profile.name} · Engineering Journal`,
+  applicationName: siteName,
   authors: [{ name: profile.name, url: siteUrl }],
   creator: profile.name,
   publisher: profile.name,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: `${profile.name} · Engineering Journal`,
+    siteName,
     title: seo.title,
     description: seo.description,
   },

@@ -6,33 +6,49 @@ const FILE_PATH = path.join(process.cwd(), ".data", "visitors.json");
 
 type CounterStore = { count: number };
 
+/** Strip accidental quotes/whitespace from Vercel/dashboard paste. */
+function cleanEnv(value: string | undefined): string | null {
+  if (!value) return null;
+  const cleaned = value.trim().replace(/^['"]|['"]$/g, "");
+  return cleaned.length > 0 ? cleaned : null;
+}
+
 function envRedis() {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const url = cleanEnv(process.env.UPSTASH_REDIS_REST_URL);
+  const token = cleanEnv(process.env.UPSTASH_REDIS_REST_TOKEN);
   if (!url || !token) return null;
   return { url: url.replace(/\/$/, ""), token };
 }
 
 async function redisGet(url: string, token: string): Promise<number | null> {
-  const res = await fetch(`${url}/get/${encodeURIComponent(COUNTER_KEY)}`, {
-    headers: { Authorization: `Bearer ${token}` },
-    cache: "no-store",
-  });
-  if (!res.ok) return null;
-  const data = (await res.json()) as { result?: string | null };
-  const n = Number(data.result);
-  return Number.isFinite(n) ? n : null;
+  try {
+    const res = await fetch(`${url}/get/${encodeURIComponent(COUNTER_KEY)}`, {
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { result?: string | number | null };
+    if (data.result === null || data.result === undefined) return 0;
+    const n = Number(data.result);
+    return Number.isFinite(n) ? n : null;
+  } catch {
+    return null;
+  }
 }
 
 async function redisIncr(url: string, token: string): Promise<number | null> {
-  const res = await fetch(`${url}/incr/${encodeURIComponent(COUNTER_KEY)}`, {
-    headers: { Authorization: `Bearer ${token}` },
-    cache: "no-store",
-  });
-  if (!res.ok) return null;
-  const data = (await res.json()) as { result?: number };
-  const n = Number(data.result);
-  return Number.isFinite(n) ? n : null;
+  try {
+    const res = await fetch(`${url}/incr/${encodeURIComponent(COUNTER_KEY)}`, {
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { result?: number | null };
+    const n = Number(data.result);
+    return Number.isFinite(n) ? n : null;
+  } catch {
+    return null;
+  }
 }
 
 async function readFileStore(): Promise<CounterStore> {

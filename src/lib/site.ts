@@ -10,7 +10,7 @@ export const seo = {
     "Himanshu Singh | Software Engineer, Architect & Consultant in Dallas (from Gorakhpur)",
   shortTitle: "Himanshu Singh · Healthcare Systems Architect",
   description:
-    "Himanshu Singh is a software engineer, systems architect, and technology consultant based in Dallas–Fort Worth, originally from Gorakhpur, India. He designs and builds healthcare claims and payment integrity platforms.",
+    "Himanshu Singh is a software engineer, systems architect, and technology consultant based in Dallas–Fort Worth, USA. He designs and builds healthcare claims and payment integrity platforms.",
   keywords: [
     "Himanshu Singh",
     "Himanshu Singh USA",

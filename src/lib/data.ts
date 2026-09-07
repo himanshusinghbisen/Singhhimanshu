@@ -27,7 +27,7 @@ export const navItems = [
 ] as const;
 
 export const about = [
-  "I'm Himanshu Singh — a software engineer, systems architect, and technology consultant based in Dallas–Fort Worth, originally from Gorakhpur, India. I help healthcare organizations modernize claims and payment integrity platforms.",
+  "I'm Himanshu Singh — a software engineer, systems architect, and technology consultant based in Dallas–Fort Worth, USA. I help healthcare organizations modernize claims and payment integrity platforms.",
   "Most healthcare enterprises lose millions each year to payment inaccuracies, improper claims, and fraud — because legacy architectures can't adjudicate and detect anomalies fast enough.",
   "When massive claims volumes run through fragmented, high-latency systems, post-payment recovery becomes an uphill battle. Brittle ETL pipelines break, coordination of benefits slips through the cracks, and engineering teams spend critical hours firefighting system failures instead of preventing leakage.",
   "I work on both sides of that problem: I design the architecture that prevents it, and I write the code that ships it. Today I focus on payment integrity — modernizing post-pay applications, implementing Auto-Recoup workflows, and building Power BI vendor-performance dashboards that track recovery across Medicare, Medicaid, and Commercial. I also own technology roadmaps, vendor RFPs, and system design (TOGAF® 9 Certified) while staying hands-on in C#, .NET, and SQL Server — including migrating legacy .NET apps to Node.js/Angular on AWS and SSIS pipelines to AWS Glue.",

@@ -35,11 +35,12 @@ export default function ResumePage() {
           <header className="border-b border-rule pb-6">
             <div className="flex items-start gap-5">
               <Image
-                src="/images/himanshu-singh-headshot.jpg"
+                src="/images/himanshu-singh-avatar.jpg"
                 alt={`${profile.name}, ${profile.title}`}
-                width={160}
-                height={213}
-                className="h-20 w-20 shrink-0 rounded-full object-cover object-[center_16%] ring-1 ring-rule print:h-16 print:w-16"
+                width={80}
+                height={80}
+                sizes="80px"
+                className="h-20 w-20 shrink-0 rounded-full object-cover ring-1 ring-rule print:h-16 print:w-16"
               />
               <div>
                 <h1 className="font-journal text-3xl font-semibold tracking-tight text-ink">

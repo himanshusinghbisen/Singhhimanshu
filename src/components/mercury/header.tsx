@@ -29,12 +29,13 @@ export function MercuryHeader() {
           aria-label={`${profile.name} home`}
         >
           <Image
-            src="/images/himanshu-singh-headshot.jpg"
+            src="/images/himanshu-singh-avatar.jpg"
             alt={`${profile.name}, ${profile.title}`}
-            width={320}
-            height={427}
+            width={112}
+            height={112}
+            sizes="112px"
             priority
-            className="h-24 w-24 rounded-full object-cover object-[center_16%] ring-2 ring-[#23334D] transition group-hover:ring-[#00D2D3] sm:h-28 sm:w-28"
+            className="h-24 w-24 rounded-full object-cover ring-2 ring-[#23334D] transition group-hover:ring-[#00D2D3] sm:h-28 sm:w-28"
           />
         </Link>
         <p className="mt-8 font-mono text-[11px] tracking-[0.28em] text-[#00D2D3] uppercase">

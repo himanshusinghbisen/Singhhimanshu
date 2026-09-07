@@ -29,11 +29,12 @@ export function MercuryResume() {
           <header className="border-b border-[#23334D] pb-6 print:border-slate-200">
             <div className="flex items-start gap-5">
               <Image
-                src="/images/himanshu-singh-headshot.jpg"
+                src="/images/himanshu-singh-avatar.jpg"
                 alt={`${profile.name}, ${profile.title}`}
-                width={160}
-                height={213}
-                className="h-20 w-20 shrink-0 rounded-full object-cover object-[center_16%] ring-2 ring-[#23334D] print:h-16 print:w-16 print:ring-slate-200"
+                width={80}
+                height={80}
+                sizes="80px"
+                className="h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-[#23334D] print:h-16 print:w-16 print:ring-slate-200"
               />
               <div>
                 <h1 className="text-3xl font-bold tracking-tight text-[#F1F5F9] print:text-slate-900">

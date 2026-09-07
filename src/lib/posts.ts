@@ -10,6 +10,26 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   {
+    slug: "beyond-pay-and-chase-payment-integrity-engine",
+    title:
+      "Beyond pay-and-chase: a closed-loop payment integrity architecture",
+    summary:
+      "Pre-pay and post-pay only work together—fast inline scoring for adjudication, deeper retrospective analytics as the feedback loop that keeps the rules honest.",
+    date: "2026-09-07",
+    readingMinutes: 8,
+    tags: ["Payment Integrity", "Architecture", "Healthcare"],
+    body: [
+      "Payers have lived with an uncomfortable compromise for a long time: pay claims quickly enough to meet prompt-pay rules, then recover improper payments months later through auditors and contingency vendors. That retrospective model—pay-and-chase—still recovers dollars, but it is expensive in ways that do not show up on a single claim. Contingency fees consume a large share of what comes back. Provider disputes and insolvency leave balances uncollectible. And every clawback spends relationship capital the network does not easily replace.",
+      "The obvious engineering reaction is to push everything upstream into pre-payment adjudication. That instinct is right about leakage and wrong about latency. If an inline integrity check floods the pend queue with false positives, stalls past state prompt-pay windows, or demands charts the old fax way, the plan trades recovery savings for interest penalties and provider abrasion. The useful question is not pre-pay versus post-pay. It is how the two become one system.",
+      "I have spent enough years around QNXT, Facets, and post-pay recovery workflows to see the same split repeat: adjudication teams optimize for throughput, integrity teams optimize for depth, and the handoff between them is a file drop or a vendor portal. The architecture that holds up treats post-pay as the asynchronous research loop and pre-pay as the low-latency execution path those findings eventually harden into.",
+      "The tradeoff is latency versus context. Pre-pay sees a point-in-time claim—an 837 or FHIR payload, eligibility at the moment of adjudication, and whatever features you can hydrate in tens of milliseconds. Post-pay sees months of cross-facility history, retrospective eligibility changes, coordination-of-benefits signals, and chart-level evidence. Pre-pay fails when it pends too much. Post-pay fails when money is already gone and the chase costs more than the return. A closed-loop engine accepts both constraints instead of pretending one phase can do the other’s job.",
+      "In practice that means a two-phase design connected by an event stream. Phase one is an inline pipeline that must finish before adjudication commits the line—deterministic edits first (NCCI, MUE, mutually exclusive pairs), then feature hydration from a fast store, then a compact model score, then a value-aware routing decision. Not every high anomaly score deserves a human review. A small office visit that would cost more to chart-review than it could save should often fast-path. A high-dollar implant claim with the same score should not.",
+      "Phase two starts when payment goes out. The claim is still emitted onto a stream and landed in an analytical store where graph analytics, longitudinal drift detection, and retrospective eligibility can run without a prompt-pay clock. That is where organized billing patterns, impossible rendering hours, and code creep across a peer group become visible. Those findings should not die in a spreadsheet. They should become candidate rules or features, shadow-replayed against recent history for false-positive rate and net dollar impact, and only then promoted into the inline path.",
+      "Provider abrasion is the failure mode that kills otherwise good pre-pay designs. Generic additional documentation requests and mail-based chart chases cannot keep pace with a statutory clock. Targeted FHIR exchanges—asking for the specific Observation or Procedure evidence you need—and clear remittance remark codes are part of the architecture, not a polite afterthought. If the provider cannot tell why a claim was edited, the model score does not matter.",
+      "The strategic takeaway is simple. Post-pay alone leaves recovery to contingency economics and delayed trust damage. Pre-pay alone risks regulatory pressure and operational gridlock. The durable pattern uses pre-pay as the execution engine and post-pay as the continuous intelligence pipeline—linked by streaming, backtesting, and promotion criteria that prefer precision over theater.",
+    ],
+  },
+  {
     slug: "payment-integrity-architecture-notes",
     title: "Where payment integrity architectures usually break",
     summary:

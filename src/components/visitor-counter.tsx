@@ -52,7 +52,7 @@ export function VisitorCounter({
       <p
         className={cn(
           "mt-4 font-mono text-[11px] tracking-wide uppercase",
-          theme === "mercury" ? "text-[#64748B]" : "text-ink/35",
+          theme === "mercury" ? "text-[#94A3B8]" : "text-ink/65",
         )}
         aria-hidden
       >
@@ -65,7 +65,7 @@ export function VisitorCounter({
     <p
       className={cn(
         "mt-4 font-mono text-[11px] tracking-wide uppercase",
-        theme === "mercury" ? "text-[#64748B]" : "text-ink/40",
+        theme === "mercury" ? "text-[#94A3B8]" : "text-ink/65",
       )}
       aria-label={`${formatCount(count)} site visits`}
     >

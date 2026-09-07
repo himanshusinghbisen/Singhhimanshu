@@ -36,7 +36,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <article className="mx-auto max-w-2xl px-6 py-12 md:py-20">
         <Link
           href="/blog"
-          className="text-sm font-medium text-ink/55 hover:text-navy-link"
+          className="text-sm font-medium text-ink/70 hover:text-navy-link"
         >
           ← All writing
         </Link>
@@ -45,7 +45,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <time
               dateTime={post.date}
-              className="font-mono text-[11px] font-semibold tracking-wide text-ink/45 uppercase"
+              className="font-mono text-[11px] font-semibold tracking-wide text-ink/65 uppercase"
             >
               {formatPostDate(post.date)}
             </time>
@@ -56,7 +56,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <h1 className="font-journal mt-4 text-4xl leading-tight font-semibold tracking-tight text-ink sm:text-5xl">
             {post.title}
           </h1>
-          <p className="mt-4 text-lg leading-relaxed text-ink/60 italic">
+          <p className="mt-4 text-lg leading-relaxed text-ink/70 italic">
             {post.summary}
           </p>
           <ul className="mt-6 flex flex-wrap gap-2">
@@ -85,17 +85,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <p className="font-journal text-xl font-semibold text-ink">
             {profile.name}
           </p>
-          <p className="mt-1 text-sm text-ink/55">{profile.title}</p>
+          <p className="mt-1 text-sm text-ink/70">{profile.title}</p>
           <div className="mt-6 flex flex-wrap gap-4 text-sm">
             <Link href="/blog" className="font-medium text-navy-link">
               More writing
             </Link>
-            <Link href="/#writing" className="font-medium text-ink/55 hover:text-navy-link">
+            <Link href="/#writing" className="font-medium text-ink/70 hover:text-navy-link">
               Back to home
             </Link>
             <Link
               href={`/v2/blog/${post.slug}`}
-              className="font-medium text-ink/55 hover:text-navy-link"
+              className="font-medium text-ink/70 hover:text-navy-link"
             >
               View in Mercury theme
             </Link>

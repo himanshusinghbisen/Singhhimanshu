@@ -9,7 +9,7 @@ export function ExperienceItem({ role }: { role: Experience }) {
   return (
     <li className="mb-10">
       <article className="group relative grid gap-2 border-l-2 border-rule pl-5 transition hover:border-amber-mark sm:grid-cols-[7.5rem_1fr] sm:gap-8 sm:border-l-0 sm:pl-0">
-        <header className="pt-1 text-xs font-semibold tracking-[0.14em] text-ink/45 uppercase sm:text-right">
+        <header className="pt-1 text-xs font-semibold tracking-[0.14em] text-ink/65 uppercase sm:text-right">
           {role.period}
         </header>
         <div>
@@ -33,7 +33,7 @@ export function ExperienceItem({ role }: { role: Experience }) {
             </p>
           ) : null}
           {role.titles && role.titles.length > 1 ? (
-            <div className="text-ink/45">
+            <div className="text-ink/65">
               {role.titles.slice(1).map((title) => (
                 <div key={title} className="text-sm font-medium">
                   {title}

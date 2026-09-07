@@ -44,7 +44,7 @@ export function SocialLinks() {
             href={link.href}
             target={link.href.startsWith("http") ? "_blank" : undefined}
             rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-            className="block text-ink/50 transition hover:text-navy-link focus-visible:text-navy-link"
+            className="block text-ink/65 transition hover:text-navy-link focus-visible:text-navy-link"
             aria-label={link.label}
           >
             <link.icon className="h-5 w-5" />

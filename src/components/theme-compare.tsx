@@ -15,7 +15,7 @@ export function ThemeCompare({
         "fixed right-4 bottom-4 z-50 flex items-center gap-1 rounded-full border px-1.5 py-1 text-[11px] font-semibold tracking-wide uppercase backdrop-blur-md",
         isMercury
           ? "border-[#23334D] bg-[#161F30]/90 text-[#94A3B8]"
-          : "border-rule bg-parchment/95 text-ink/55 shadow-sm",
+          : "border-rule bg-parchment/95 text-ink/70 shadow-sm",
       )}
     >
       <Link

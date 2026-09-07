@@ -25,7 +25,7 @@ export function SectionNav({
                     "text-sm font-semibold tracking-wide uppercase transition-colors",
                     isActive
                       ? "text-navy-link"
-                      : "text-ink/55 hover:text-navy-link",
+                      : "text-ink/70 hover:text-navy-link",
                   )}
                   aria-current={isActive ? "location" : undefined}
                 >
@@ -64,7 +64,7 @@ export function SectionNav({
                     "text-xs font-bold tracking-[0.18em] uppercase transition-colors",
                     isActive
                       ? "text-ink"
-                      : "text-ink/45 group-hover:text-ink",
+                      : "text-ink/65 group-hover:text-ink",
                   )}
                 >
                   {item.label}

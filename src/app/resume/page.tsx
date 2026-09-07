@@ -24,7 +24,7 @@ export default function ResumePage() {
         <div className="mb-6 flex items-center justify-between print:hidden">
           <Link
             href="/"
-            className="text-sm font-medium text-ink/60 hover:text-navy-link"
+            className="text-sm font-medium text-ink/70 hover:text-navy-link"
           >
             ← Back to journal
           </Link>
@@ -54,7 +54,7 @@ export default function ResumePage() {
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink/65">
               {profile.headline}
             </p>
-            <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink/60">
+            <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink/70">
               <span>{profile.locationLabel}</span>
               <a href={profile.phoneHref}>{profile.phone}</a>
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
@@ -90,7 +90,7 @@ export default function ResumePage() {
                     <h3 className="text-sm font-semibold text-ink">
                       {role.titles?.[0] ?? role.title} · {role.company}
                     </h3>
-                    <p className="text-xs font-medium tracking-wide text-ink/45 uppercase">
+                    <p className="text-xs font-medium tracking-wide text-ink/65 uppercase">
                       {role.period}
                     </p>
                   </div>
@@ -98,7 +98,7 @@ export default function ResumePage() {
                     <p className="text-xs text-navy-link">{role.subtitle}</p>
                   ) : null}
                   {role.titles && role.titles.length > 1 ? (
-                    <p className="text-xs text-ink/45">
+                    <p className="text-xs text-ink/65">
                       {role.titles.slice(1).join(" · ")}
                     </p>
                   ) : null}
@@ -132,12 +132,12 @@ export default function ResumePage() {
                       {" — "}
                       {item.credential}
                     </span>
-                    <span className="text-xs font-medium tracking-wide text-ink/45 uppercase">
+                    <span className="text-xs font-medium tracking-wide text-ink/65 uppercase">
                       {item.period}
                     </span>
                   </div>
                   {item.detail ? (
-                    <p className="text-ink/60">{item.detail}</p>
+                    <p className="text-ink/70">{item.detail}</p>
                   ) : null}
                 </li>
               ))}

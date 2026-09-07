@@ -36,7 +36,7 @@ export function WritingPreview({
       <p
         className={cn(
           "mb-8 max-w-prose text-[15px] leading-relaxed",
-          isMercury ? "text-[#94A3B8]" : "text-ink/60",
+          isMercury ? "text-[#94A3B8]" : "text-ink/70",
         )}
       >
         Notes on claims platforms, payment integrity, and the systems work
@@ -61,7 +61,7 @@ export function WritingPreview({
                   dateTime={post.date}
                   className={cn(
                     "font-mono text-[11px] font-semibold tracking-wide uppercase",
-                    isMercury ? "text-[#94A3B8]" : "text-ink/45",
+                    isMercury ? "text-[#94A3B8]" : "text-ink/65",
                   )}
                 >
                   {formatPostDate(post.date)}

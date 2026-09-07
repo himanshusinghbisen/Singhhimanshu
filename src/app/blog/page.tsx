@@ -18,7 +18,7 @@ export default function BlogIndexPage() {
       <div className="mx-auto max-w-3xl px-6 py-12 md:py-20">
         <Link
           href="/#writing"
-          className="text-sm font-medium text-ink/55 hover:text-navy-link"
+          className="text-sm font-medium text-ink/70 hover:text-navy-link"
         >
           ← Back to journal
         </Link>
@@ -44,7 +44,7 @@ export default function BlogIndexPage() {
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <time
                     dateTime={post.date}
-                    className="font-mono text-[11px] font-semibold tracking-wide text-ink/45 uppercase"
+                    className="font-mono text-[11px] font-semibold tracking-wide text-ink/65 uppercase"
                   >
                     {formatPostDate(post.date)}
                   </time>

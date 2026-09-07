@@ -33,7 +33,7 @@ export function SiteHeader() {
         <h2 className="mt-3 text-lg font-medium tracking-tight text-ink/80 sm:text-xl">
           {profile.title}
         </h2>
-        <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-ink/60">
+        <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-ink/70">
           {profile.tagline}
         </p>
         <SectionNav />

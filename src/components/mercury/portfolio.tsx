@@ -142,7 +142,7 @@ export function MercuryPortfolio() {
                     </div>
                     <p className="text-sm text-[#94A3B8]">{item.credential}</p>
                     {item.detail ? (
-                      <p className="mt-1 text-sm text-[#94A3B8]/80">
+                      <p className="mt-1 text-sm text-[#94A3B8]">
                         {item.detail}
                       </p>
                     ) : null}
@@ -215,7 +215,7 @@ export function MercuryPortfolio() {
               </dl>
             </section>
 
-            <footer className="max-w-md pb-16 text-sm text-[#94A3B8]/80 sm:pb-0">
+            <footer className="max-w-md pb-16 text-sm text-[#94A3B8] sm:pb-0">
               <p>
                 Mercury theme — deep void canvas, slate cards, mercury cyan.{" "}
                 <Link
@@ -227,7 +227,7 @@ export function MercuryPortfolio() {
                 .
               </p>
               <VisitorCounter theme="mercury" />
-              <p className="mt-4 text-[11px] tracking-wide text-[#64748B]">
+              <p className="mt-4 text-[11px] tracking-wide text-[#94A3B8]">
                 © {new Date().getFullYear()} Himanshu Singh. All rights
                 reserved.
               </p>

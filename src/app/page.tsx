@@ -95,7 +95,7 @@ export default function Home() {
 
             <Credentials />
 
-            <footer className="max-w-md border-t border-rule pt-8 pb-16 text-sm text-ink/45 sm:pb-0">
+            <footer className="max-w-md border-t border-rule pt-8 pb-16 text-sm text-ink/65 sm:pb-0">
               <p>
                 An engineering journal for architecture notes, production
                 systems, and the craft of shipping claims platforms. Built with
@@ -109,7 +109,7 @@ export default function Home() {
                 .
               </p>
               <VisitorCounter theme="journal" />
-              <p className="mt-4 text-[11px] tracking-wide text-ink/35">
+              <p className="mt-4 text-[11px] tracking-wide text-ink/65">
                 © {new Date().getFullYear()} Himanshu Singh. All rights
                 reserved.
               </p>

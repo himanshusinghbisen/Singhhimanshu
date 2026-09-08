@@ -21,9 +21,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return { title: `Writing · ${profile.name}` };
+
+  const url = `/blog/${post.slug}`;
   return {
-    title: `${post.title} · ${profile.name}`,
+    title: post.title,
     description: post.summary,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title: post.title,
+      description: post.summary,
+      siteName: profile.name,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.summary,
+    },
   };
 }
 

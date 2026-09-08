@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BlogBlocks } from "@/components/blog-blocks";
 import { ThemeCompare } from "@/components/theme-compare";
 import { profile } from "@/lib/data";
 import { formatPostDate, getAllPosts, getPost } from "@/lib/posts";
@@ -70,16 +71,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </ul>
         </header>
 
-        <div className="mt-10 space-y-6">
-          {post.body.map((paragraph) => (
-            <p
-              key={paragraph.slice(0, 48)}
-              className="text-[17px] leading-[1.75] text-ink/75"
-            >
-              {paragraph}
-            </p>
-          ))}
-        </div>
+        <BlogBlocks blocks={post.body} theme="journal" />
 
         <footer className="mt-14 border-t border-rule pt-8">
           <p className="font-journal text-xl font-semibold text-ink">

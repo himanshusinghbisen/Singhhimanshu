@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BlogBlocks } from "@/components/blog-blocks";
 import { ThemeCompare } from "@/components/theme-compare";
 import { profile } from "@/lib/data";
 import { formatPostDate, getAllPosts, getPost } from "@/lib/posts";
@@ -72,16 +73,7 @@ export default async function MercuryBlogPostPage({
           </ul>
         </header>
 
-        <div className="mt-10 space-y-6">
-          {post.body.map((paragraph) => (
-            <p
-              key={paragraph.slice(0, 48)}
-              className="text-[17px] leading-[1.75] text-[#94A3B8]"
-            >
-              {paragraph}
-            </p>
-          ))}
-        </div>
+        <BlogBlocks blocks={post.body} theme="mercury" />
 
         <footer className="mt-14 border-t border-[#23334D] pt-8">
           <p className="text-xl font-semibold text-[#F1F5F9]">{profile.name}</p>

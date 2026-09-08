@@ -113,6 +113,27 @@ export default function Home() {
                 © {new Date().getFullYear()} Himanshu Singh. All rights
                 reserved.
               </p>
+              <p className="mt-2 text-[11px] tracking-wide text-ink/55">
+                Powered by{" "}
+                <a
+                  href="https://nextjs.org"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-navy-link hover:underline"
+                >
+                  Next.js
+                </a>
+                {" · "}
+                Hosted by{" "}
+                <a
+                  href="https://vercel.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-navy-link hover:underline"
+                >
+                  Vercel
+                </a>
+              </p>
             </footer>
           </main>
         </div>

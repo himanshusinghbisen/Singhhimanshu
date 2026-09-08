@@ -231,6 +231,27 @@ export function MercuryPortfolio() {
                 © {new Date().getFullYear()} Himanshu Singh. All rights
                 reserved.
               </p>
+              <p className="mt-2 text-[11px] tracking-wide text-[#64748B]">
+                Powered by{" "}
+                <a
+                  href="https://nextjs.org"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-[#F1F5F9] hover:text-[#00D2D3]"
+                >
+                  Next.js
+                </a>
+                {" · "}
+                Hosted by{" "}
+                <a
+                  href="https://vercel.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-[#F1F5F9] hover:text-[#00D2D3]"
+                >
+                  Vercel
+                </a>
+              </p>
             </footer>
           </main>
         </div>

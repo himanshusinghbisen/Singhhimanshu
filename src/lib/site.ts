@@ -7,7 +7,7 @@ export const siteName = "Himanshu Singh";
 
 export const seo = {
   title:
-    "Himanshu Singh | Software Engineer, Architect & Consultant in Dallas (from Gorakhpur)",
+    "Himanshu Singh | Software Engineer, Architect & Consultant in Dallas",
   shortTitle: "Himanshu Singh · Healthcare Systems Architect",
   description:
     "Himanshu Singh is a software engineer, systems architect, and technology consultant based in Dallas–Fort Worth, USA. He designs and builds healthcare claims and payment integrity platforms.",
@@ -16,7 +16,6 @@ export const seo = {
     "Himanshu Singh USA",
     "Himanshu Singh US",
     "Himanshu Singh United States",
-    "Himanshu Singh Gorakhpur",
     "Himanshu Singh Dallas",
     "Himanshu Singh Texas",
     "Himanshu Singh software engineer",
@@ -28,10 +27,8 @@ export const seo = {
     "healthcare systems architect",
     "payment integrity architect",
     "claims systems engineer",
-    "Gorakhpur software engineer",
     "Himanshu Singh software architect",
     "Himanshu Singh technology consultant",
-    "software engineer Gorakhpur Dallas",
     "architect consultant Dallas",
     "singhhimanshu.com",
   ],

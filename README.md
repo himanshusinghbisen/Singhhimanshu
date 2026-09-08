@@ -1,6 +1,6 @@
 # Himanshu Singh — Engineering Journal
 
-Personal site for [Himanshu Singh](https://www.linkedin.com/in/himanshusingh007/) — software engineer, systems architect, and technology consultant based in Dallas–Fort Worth (from Gorakhpur, India). Focused on healthcare claims and payment integrity.
+Personal site for [Himanshu Singh](https://www.linkedin.com/in/himanshusingh007/) — software engineer, systems architect, and technology consultant based in Dallas–Fort Worth. Focused on healthcare claims and payment integrity.
 
 **Production domain:** [singhhimanshu.com](https://singhhimanshu.com)
 
@@ -62,7 +62,7 @@ Without Redis on serverless, the count still works but can reset when the instan
 The site ships with:
 
 - Canonical metadata for **singhhimanshu.com**
-- Keywords targeting Himanshu Singh + Gorakhpur + Dallas + engineer / architect / consultant
+- Keywords targeting Himanshu Singh + Dallas + engineer / architect / consultant
 - JSON-LD `Person` / `WebSite` / `ProfilePage` structured data
 - `sitemap.xml` and `robots.txt`
 

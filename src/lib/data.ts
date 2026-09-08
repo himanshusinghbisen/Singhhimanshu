@@ -5,8 +5,7 @@ export const profile = {
   tagline:
     "I design and build scalable claims and payment integrity platforms — architecture that prevents leakage, and code that ships in production.",
   location: "Dallas–Fort Worth",
-  origin: "Gorakhpur, India",
-  locationLabel: "Dallas–Fort Worth · From Gorakhpur, India",
+  locationLabel: "Dallas–Fort Worth, Texas",
   email: "himanshu.singhh@outlook.com",
   phone: "+1 (562) 256-6239",
   phoneHref: "tel:+15622566239",
@@ -14,7 +13,7 @@ export const profile = {
   github: "https://github.com/himanshusinghbisen",
   goodreads: "https://www.goodreads.com/singhhimanshu",
   headline:
-    "Healthcare Systems Architect, Software Engineer & Technology Consultant | Dallas · Gorakhpur",
+    "Healthcare Systems Architect, Software Engineer & Technology Consultant | Dallas",
   siteUrl: "https://singhhimanshu.com",
 };
 

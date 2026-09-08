@@ -18,10 +18,6 @@ export function JsonLd() {
       "@type": "Place",
       name: "Dallas–Fort Worth, Texas, USA",
     },
-    birthPlace: {
-      "@type": "Place",
-      name: "Gorakhpur, Uttar Pradesh, India",
-    },
     address: {
       "@type": "PostalAddress",
       addressLocality: "Dallas",

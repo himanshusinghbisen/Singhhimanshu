@@ -19,6 +19,31 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   {
+    slug: "why-data-formats-still-matter",
+    title: "Why data formats still matter",
+    summary:
+      "Cloud APIs made systems more format-tolerant—but integrity, performance, interoperability, and storage cost still hang on the contracts you define for files and types.",
+    date: "2026-09-19",
+    readingMinutes: 6,
+    tags: ["Data", "Engineering", "Architecture"],
+    body: [
+      "After enough years close to databases and integration pipelines, “what format is it in?” stops sounding pedantic. Format is the contract that decides whether data survives the trip between systems. That contract includes the container—CSV, JSON, text, Avro, Parquet—and the types inside it. An Excel sheet can show the same value as Feb 19, 2025 or 02/19/2025. Presentation is not the same thing as the typed value underneath. When those disagree across environments, joins and calculations fail in ways that look like business bugs.",
+      {
+        type: "figure",
+        src: "/images/blog/data-toolkit-formats-matter.jpg",
+        alt: "Four reasons data formats matter: integrity, performance, interoperability, and storage cost.",
+        caption:
+          "Formats are contracts. Consistency protects integrity, speed, interoperability, and cost.",
+      },
+      "Integrity is the first reason formats matter. mm/dd/yyyy versus dd/mm/yyyy is a classic silent corruption. So is an amount stored as integer in one feed and decimal in another. Once two systems disagree about type or layout, every downstream dashboard inherits the ambiguity. Consistent formats keep data recognizable as it moves from operational stores to analytic ones.",
+      "Performance is the second. Cleanup is compute. If every job begins by coercing strings into dates, guessing encodings, and reshaping nested JSON into rows, you pay a tax before analysis starts. Columnar formats such as Parquet change scan cost for analytical workloads; row-oriented JSON may be the right choice for APIs and event payloads. The “best” format depends on access pattern—but choosing deliberately is faster than rediscovering the wrong choice in production.",
+      "Interoperability is the third. Standard shapes move across vendors and teams with less custom parsing. A clear CSV schema or Avro contract is cheaper than a tribal understanding of “the file Finance drops on Thursdays.” Storage efficiency is the fourth. Compression ratios and encoding choices show up on cloud invoices. The same logical dataset can be inexpensive or painful depending on whether you store it as verbose JSON or a compressed columnar layout.",
+      "None of this means formats should be rigid forever. APIs and cloud platforms are more format-tolerant than older batch estates. Payloads get translated, reshaped, and exchanged as needed. That flexibility is useful—especially when producers and consumers evolve on different clocks. But tolerance is not the same as having no contract. Someone still decides the schema at the boundary. Treat formats as flexible containers with explicit types, not as an excuse to skip design.",
+      "A practical habit from claims and payment-integrity pipelines: define the exchange contract before the transform logic. Name the file or message type, freeze the field types, document null rules and date layouts, and version the schema when it changes. Then choose CSV for simple tabular handoffs, JSON for API-shaped payloads, and Parquet/Avro when volume and repeated analytic reads dominate. Format choice becomes an architecture decision instead of an afterthought.",
+      "Bar charts remain a strong default once the data is trustworthy. Column charts compare categories or time periods; horizontal bars encode magnitude cleanly; stacked bars show parts-to-whole; diverging bars handle gains and losses around a center line. They rank high on perceptual accuracy—but they cannot rescue biased collection, missing values, or a misleading level of aggregation. Format discipline reduces one class of error. Statistical honesty has to handle the rest.",
+    ],
+  },
+  {
     slug: "python-vs-r-production-vs-analysis",
     title: "Python vs R: when each wins in production vs analysis",
     summary:

@@ -15,6 +15,7 @@ import {
 export const metadata: Metadata = {
   title: `Résumé · ${profile.name}`,
   description: `${profile.name} — ${profile.headline}`,
+  alternates: { canonical: "/resume" },
 };
 
 export default function ResumePage() {

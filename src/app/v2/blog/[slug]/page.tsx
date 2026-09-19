@@ -27,6 +27,7 @@ export async function generateMetadata({
     title: `${post.title} · Mercury`,
     description: post.summary,
     alternates: { canonical: `/blog/${post.slug}` },
+    robots: { index: false, follow: true },
     openGraph: {
       type: "article",
       url,

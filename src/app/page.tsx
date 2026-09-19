@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Credentials } from "@/components/credentials";
@@ -10,6 +11,10 @@ import { ThemeCompare } from "@/components/theme-compare";
 import { VisitorCounter } from "@/components/visitor-counter";
 import { WritingPreview } from "@/components/writing-preview";
 import { about, experience, profile, projects } from "@/lib/data";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (

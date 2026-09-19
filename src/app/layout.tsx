@@ -31,9 +31,6 @@ export const metadata: Metadata = {
   creator: profile.name,
   publisher: profile.name,
   keywords: [...seo.keywords],
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: "en_US",

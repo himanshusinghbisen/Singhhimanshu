@@ -8,6 +8,7 @@ import { formatPostDate, getAllPosts } from "@/lib/posts";
 export const metadata: Metadata = {
   title: `Writing · ${profile.name}`,
   description: `Architecture notes and engineering essays by ${profile.name}.`,
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogIndexPage() {

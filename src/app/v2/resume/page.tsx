@@ -6,6 +6,8 @@ import { profile } from "@/lib/data";
 export const metadata: Metadata = {
   title: `Résumé · ${profile.name} · Mercury`,
   description: `${profile.name} — ${profile.headline}`,
+  alternates: { canonical: "/resume" },
+  robots: { index: false, follow: true },
 };
 
 export default function MercuryResumePage() {

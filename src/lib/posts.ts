@@ -29,10 +29,24 @@ export const posts: BlogPost[] = [
     body: [
       "Sampling variability is the natural difference between statistics computed from different random samples of the same population. Draw two honest samples. Compute the same mean. The numbers will not match. The arithmetic can be perfect and the gap will still be there. That gap is sampling variability.",
       "Sleep in a city makes the idea concrete. Interviewing everyone is impractical, so you take a smaller group and ask about last night. Draw a second group at random from the same city and the average sleep time moves. The question did not change. The people did. Each sample is a subset, a snapshot, and two snapshots frame different faces. The mean, the median, and the standard deviation move with whoever was drawn. A sample result is an estimate with a built-in wobble, not a final statement about the whole group.",
+      {
+        type: "figure",
+        src: "/images/blog/sampling-two-samples.jpg",
+        alt: "One population of sleep hours with a mean of 7.1 hours, and two random samples with means of 6.4 and 7.8 hours.",
+        caption:
+          "Same population, two draws. The mean is allowed to move.",
+      },
       "How wide that wobble is depends first on sample size. A larger sample usually lands closer to the population value because it covers more of the group. A handful of unusual people cannot swing it as easily. A small sample is at the mercy of whoever happened to be included. Ten night-shift workers can make a city look sleepless. A few hundred people, drawn the same way, are much harder to tip.",
       "The second driver is how mixed the population is. A diverse city—wide age ranges, day jobs, call centers, night work—puts very different people into each draw, so the sample means jump around more. A narrower group moves less from sample to sample. Same sample size, more heterogeneity, more sampling variability. Size and diversity are doing different jobs. A mixed population stays mixed no matter how carefully you randomize the next draw.",
       "The standard error of the mean is how you measure that wobble for averages. The standard deviation describes the people inside one sample: how far individual sleep times sit from one another. The standard error answers a different question. If you repeated the sample many times, how far would those sample averages sit from the true average of the city? A smaller standard error means the average in front of you is a sharper estimate of the population average.",
       "For a simple random sample, the standard error of the mean is the sample standard deviation divided by the square root of the sample size. Two levers sit in that formula. A more mixed population, a larger standard deviation, widens the error. A larger sample shrinks it, and the shrink follows the square root, not a straight line. Quadrupling the sample cuts the standard error roughly in half. Going from 30 people to 40 does less than a project plan usually hopes.",
+      {
+        type: "figure",
+        src: "/images/blog/sampling-standard-error.jpg",
+        alt: "The standard error formula, SE equals s divided by the square root of n, and a curve falling from 0.40 hours at 25 people to 0.05 hours at 1,600.",
+        caption:
+          "Quadrupling the sample size cuts the standard error roughly in half.",
+      },
       "A small standard error is a reason to trust the sample average as a stand-in for the population average. A large one is a reason to slow down. The average can still be your best guess. The standard error is the wiggle room around that guess, the part that exists because you only saw a piece of the group. Publish the average alone and the snapshot is being asked to stand in for the city.",
       "The law of large numbers is why the wiggle room shrinks at all. Repeat a random experiment independently, many times, and the average of what you observe moves toward the expected value. A fair coin has a probability of heads of one half. Ten flips can land far from that. Thousands of flips usually do not. The proportion of heads settles toward one half because the odd runs get diluted. Any single flip stays just as random.",
       "That principle is the permission slip for using a sample statistic as an estimate of a population parameter. Take a large enough random sample and the sample mean is a reliable estimate of the population mean. Surveys, polls, and a lot of industrial measurement rest on that permission. Insurance uses it when one policy is unpredictable and a large book of policies is not. Finance uses it when one return is noise and a long average is a rate. Quality control uses it when one item can be off and a long run reveals the process. Science uses it when one trial misleads and a long series converges.",
@@ -54,6 +68,13 @@ export const posts: BlogPost[] = [
       "Data simulation is how you study a dataset you do not actually have. You build artificial rows that carry the statistical shape of a real process—similar center, spread, dependence, and timing—without copying anyone's private records. It is a dummy dataset with a job: stand in for the world long enough to test a model, train an algorithm, or walk through a scenario.",
       "That job shows up whenever real data is difficult, expensive, or ethically hard to collect. A rare failure might appear only a few times a year. A shock you want to rehearse may not have happened yet. An extract may be real and still off-limits for an experiment. Finance, healthcare, and engineering run into the same wall. The cases you most want to study are the ones that are scarce, sensitive, or still in the future. Simulation lets you keep the statistical properties that matter and vary everything else on purpose.",
       "Five methods cover most of this work. They are not five names for the same trick. Each one is a different bet about where the uncertainty lives.",
+      {
+        type: "figure",
+        src: "/images/blog/simulation-five-methods.jpg",
+        alt: "Five simulation methods and when to use each: Monte Carlo, agent-based models, discrete events, system dynamics, and the bootstrap.",
+        caption:
+          "Pick the method by the kind of uncertainty, not by which name sounds more advanced.",
+      },
       "Monte Carlo simulation answers that bet with random sampling. The name comes from roulette at the Monte Carlo resorts: repeat a chance process enough times and the pattern of outcomes becomes visible. The classroom picture is rolling a die thousands of times and tallying the faces. In analysis you replace the die with a model of the quantity you care about—a return, a demand, a loss, a waiting time—draw it over and over, and summarize the cloud. You are not hunting a single average. You are asking how wide the range is, how often a bad outcome shows up, and which input drives the spread.",
       "It fits problems with a lot of uncertainty, as long as you can say how the randomness enters. Stock-market paths and customer behavior are the usual examples. A cost distribution or a project-delay distribution is the same idea. The method is only as honest as those distributions. Put a thin normal curve on a heavy-tailed loss and the simulation will hide the risk you built it to see. Keep the seed, state the assumptions, and treat one pretty histogram as a hypothesis until the real process agrees with it.",
       "Agent-based modeling moves the unit of the simulation from one equation to many actors. Each agent—a person, a company, a household—follows rules and reacts to other agents. The story you care about is what emerges: how a disease moves through a population, how a market absorbs a new product, how a default or a rumor cascades. You do not write the system-level curve directly. You write local behavior and let the curve appear.",
@@ -268,6 +289,13 @@ export const posts: BlogPost[] = [
       "I have spent enough years around QNXT, Facets, and post-pay recovery workflows to see the same split repeat: adjudication teams optimize for throughput, integrity teams optimize for depth, and the handoff between them is a file drop or a vendor portal. The architecture that holds up treats post-pay as the asynchronous research loop and pre-pay as the low-latency execution path those findings eventually harden into.",
       "The tradeoff is latency versus context. Pre-pay sees a point-in-time claim—an 837 or FHIR payload, eligibility at the moment of adjudication, and whatever features you can hydrate in tens of milliseconds. Post-pay sees months of cross-facility history, retrospective eligibility changes, coordination-of-benefits signals, and chart-level evidence. Pre-pay fails when it pends too much. Post-pay fails when money is already gone and the chase costs more than the return. A closed-loop engine accepts both constraints instead of pretending one phase can do the other’s job.",
       "In practice that means a two-phase design connected by an event stream. Phase one is an inline pipeline that must finish before adjudication commits the line—deterministic edits first (NCCI, MUE, mutually exclusive pairs), then feature hydration from a fast store, then a compact model score, then a value-aware routing decision. Not every high anomaly score deserves a human review. A small office visit that would cost more to chart-review than it could save should often fast-path. A high-dollar implant claim with the same score should not.",
+      {
+        type: "figure",
+        src: "/images/blog/payment-integrity-closed-loop.jpg",
+        alt: "Pre-pay checks on the left and post-pay analytics on the right, with payment flowing across and candidate rules returning to the inline path.",
+        caption:
+          "Pre-pay executes. Post-pay learns. Only precise rules travel back.",
+      },
       "Phase two starts when payment goes out. The claim is still emitted onto a stream and landed in an analytical store where graph analytics, longitudinal drift detection, and retrospective eligibility can run without a prompt-pay clock. That is where organized billing patterns, impossible rendering hours, and code creep across a peer group become visible. Those findings should not die in a spreadsheet. They should become candidate rules or features, shadow-replayed against recent history for false-positive rate and net dollar impact, and only then promoted into the inline path.",
       "Provider abrasion is the failure mode that kills otherwise good pre-pay designs. Generic additional documentation requests and mail-based chart chases cannot keep pace with a statutory clock. Targeted FHIR exchanges—asking for the specific Observation or Procedure evidence you need—and clear remittance remark codes are part of the architecture, not a polite afterthought. If the provider cannot tell why a claim was edited, the model score does not matter.",
       "The strategic takeaway is simple. Post-pay alone leaves recovery to contingency economics and delayed trust damage. Pre-pay alone risks regulatory pressure and operational gridlock. The durable pattern uses pre-pay as the execution engine and post-pay as the continuous intelligence pipeline—linked by streaming, backtesting, and promotion criteria that prefer precision over theater.",
@@ -284,6 +312,13 @@ export const posts: BlogPost[] = [
     body: [
       "Most payment integrity programs start with the right instinct: catch overpayments, credit-balance issues, and subrogation opportunities before leakage compounds. The failure mode is rarely the business rule itself. It is the architecture around the rule.",
       "When recovery workflows sit downstream of fragmented claims platforms, every hop adds delay. SSIS packages stall. Vendor files arrive late or incomplete. Dashboards report yesterday’s truth while finance is already asking for today’s recovery posture. By the time an overpayment is confirmed, the operational cost of collecting it has climbed.",
+      {
+        type: "figure",
+        src: "/images/blog/payment-integrity-break-points.jpg",
+        alt: "Three failure points in recovery architecture: latency between systems, late vendor files, and claims context that no longer matches adjudication.",
+        caption:
+          "Leakage compounds in the hops, the vendor seam, and the stale extract.",
+      },
       "The systems that hold up share a few traits. They treat adjudication context as a first-class input, not an afterthought. They keep Auto-Recoup and vendor orchestration close to the claims path. And they make recovery metrics observable in the same cadence leadership actually uses to make decisions.",
       "That is why a decade on QNXT and Facets still matters for integrity work. Payment integrity is not a bolt-on analytics problem. It is a claims-systems problem with financial consequences.",
     ],
@@ -299,6 +334,13 @@ export const posts: BlogPost[] = [
     body: [
       "SSIS is comfortable until it is not. For years it moved claims extracts, payment files, and vendor feeds reliably enough. Then volumes rose, package ownership spread across teams, and a single failed overnight job could freeze an entire recovery cycle.",
       "Migrating to AWS Glue is not a lift-and-shift of DTSX files into the cloud. The useful work is deciding which transforms belong near the warehouse, which should stay close to operational SQL Server, and which vendor handoffs need explicit contracts instead of shared folder folklore.",
+      {
+        type: "figure",
+        src: "/images/blog/ssis-to-glue-contract.jpg",
+        alt: "Aged SSIS packages and shared folders compared with AWS Glue jobs that name field types, retries, and the adjudication run.",
+        caption:
+          "The move pays off when the extract can name the adjudication run it came from.",
+      },
       "What improved first was operability: clearer retries, cloud-native scaling for bursty claim loads, and fewer silent failures in lower environments. What still required discipline was lineage. If a payment extract cannot explain which adjudication run it came from, Glue only moves the ambiguity faster.",
       "The lesson for payer engineering teams is simple. Cloud ETL helps when the pipeline contract is designed. It does not forgive an unclear claims data model.",
     ],
@@ -314,6 +356,13 @@ export const posts: BlogPost[] = [
     body: [
       "TOGAF is easy to parody: endless capability maps, slideware roadmaps, and architecture review boards that arrive after the code is already in QA. Used poorly, it becomes ceremony. Used well, it keeps payer platforms from accumulating irreversible coupling.",
       "On claims and payment integrity work, the valuable TOGAF artifacts are the ones that force tradeoffs into the open. Which system owns coordination of benefits? Where does recovery state live? What is the integration boundary with a vendor pricing engine? Those answers prevent six teams from inventing six incompatible truths.",
+      {
+        type: "figure",
+        src: "/images/blog/togaf-delivery-questions.jpg",
+        alt: "Three architecture questions around production claims: who owns coordination of benefits, where recovery state lives, and where the pricing vendor boundary sits.",
+        caption:
+          "Useful architecture is a short list of ownership questions, answered next to the code.",
+      },
       "The practice that works for me is architecture in the same loop as delivery. Roadmaps and RFPs matter, but so does staying close enough to the .NET and SQL implementation to know when a diagram is lying.",
       "Enterprise architecture earns trust when it reduces production risk. Everything else is decoration.",
     ],

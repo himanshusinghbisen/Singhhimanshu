@@ -1,3 +1,5 @@
+import { lifecycleSeries } from "./lifecycle-series";
+
 export type BlogFigure = {
   type: "figure";
   src: string;
@@ -18,6 +20,7 @@ export type BlogPost = {
 };
 
 export const posts: BlogPost[] = [
+  ...lifecycleSeries,
   {
     slug: "sampling-variability-standard-error",
     title: "Sampling variability: why two samples from the same population disagree",
@@ -369,14 +372,22 @@ export const posts: BlogPost[] = [
   },
 ];
 
+/** Future-dated posts stay in the repo and go live on their date in production. */
+export function isReleased(date: string) {
+  if (process.env.NODE_ENV !== "production") return true;
+  return date <= new Date().toISOString().slice(0, 10);
+}
+
 export function getPost(slug: string) {
-  return posts.find((post) => post.slug === slug);
+  const post = posts.find((item) => item.slug === slug);
+  if (!post || !isReleased(post.date)) return undefined;
+  return post;
 }
 
 export function getAllPosts() {
-  return [...posts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
+  return posts
+    .filter((post) => isReleased(post.date))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export function formatPostDate(date: string) {

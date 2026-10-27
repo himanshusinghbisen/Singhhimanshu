@@ -12,7 +12,7 @@ export const lifecycleSeries: BlogPost[] = [
     summary:
       "Part 1 of 8. A data science effort starts by turning a vague ask into a question, a metric, and a constraint. Classification when the action is a label. Regression when the action needs a number.",
     date: "2026-10-26",
-    readingMinutes: 8,
+    readingMinutes: 9,
     tags: ["Data Science", "Machine Learning", "Lifecycle"],
     body: [
       "This is part 1 of a series on the data science lifecycle, from the question through cleaning, wrangling, exploration, mining, modeling, and the chart that has to carry a decision. Each part stands alone. Together they are the order of the work.",
@@ -33,6 +33,14 @@ export const lifecycleSeries: BlogPost[] = [
         alt: "Side-by-side examples of classification and regression: a yes-or-no member outcome, a proper-or-improper claim, and a provider tier, versus expected payment, days until discharge, and next-quarter volume.",
         caption:
           "Classification changes the action by category. Regression changes the action by the size of a number.",
+      },
+      "Here is that choice as two pictures. Classification, for a member who might leave: claims in the past year against months since the last visit. The clouds look like clusters. They differ from clustering because the dots already have names, stays or leaves. A new member is a point, and the action is which side of the line they land on. Regression, for a claim not yet paid: billed amount against what similar claims paid. The cloud has a slope. The line reads off a dollar amount, and that amount is the reserve. If you only needed to know whether the payment would clear a cap, you would draw a threshold across this same picture and be back in classification.",
+      {
+        type: "figure",
+        src: "/images/blog/lifecycle-task-examples.jpg",
+        alt: "Two graphs. Classification plots members by claims and months since the last visit, split into stays and leaves by a line. Regression plots billed amount against paid amount, with a line estimating four thousand dollars for a six-thousand-dollar claim.",
+        caption:
+          "Labeled groups decide an action. A fitted line estimates a value.",
       },
       "The metric has to match the cost of being wrong. Accuracy is a poor default when the event you care about is rare. A model that calls every member a stayer can look accurate and never catch a cancellation. Recall matters when missing a case is expensive and you can still act. Precision matters when a false alarm spends a reviewer’s hour or a provider’s patience. Sometimes the honest metric is not a percentage at all. It is dollars kept, hours saved, or error against a naive baseline that a careful person could have computed in a spreadsheet.",
       "Constraints belong on that same page, or they arrive later as surprises. Which data are you allowed to use. How fast the decision has to return. What privacy rule covers the row. Whether the result has to run inside a system that already exists, or whether a monthly memo is the whole deployment. A question you cannot answer under those constraints is a different project, not a harder version of this one.",

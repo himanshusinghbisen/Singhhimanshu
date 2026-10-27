@@ -154,6 +154,133 @@ def classification_vs_regression():
     save(image, "lifecycle-classification-regression.jpg")
 
 
+def _rotated(base: Image.Image, text: str, xy: tuple[int, int], face, fill) -> None:
+    probe = ImageDraw.Draw(Image.new("RGB", (1, 1)))
+    width = int(probe.textlength(text, font=face)) + 4
+    height = face.size + 6
+    layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    ImageDraw.Draw(layer).text((0, 0), text, font=face, fill=(*fill, 255))
+    layer = layer.rotate(90, expand=True)
+    base.paste(layer, xy, layer)
+
+
+def _axes(draw, box, x0, x1, y0, y1, xticks, yticks):
+    left, top, right, bottom = box
+
+    def X(x):
+        return left + (x - x0) / (x1 - x0) * (right - left)
+
+    def Y(y):
+        return bottom - (y - y0) / (y1 - y0) * (bottom - top)
+
+    draw.line([(left, bottom), (right, bottom)], fill=INK, width=3)
+    draw.line([(left, top), (left, bottom)], fill=INK, width=3)
+    tick = F(REG, 22)
+    for t in xticks:
+        px = X(t)
+        draw.line([(px, bottom), (px, bottom + 8)], fill=INK, width=2)
+        label = str(t)
+        tw = draw.textlength(label, font=tick)
+        draw.text((px - tw / 2, bottom + 14), label, font=tick, fill=MUTED)
+    for t in yticks:
+        py = Y(t)
+        draw.line([(left - 8, py), (left, py)], fill=INK, width=2)
+        label = str(t)
+        tw = draw.textlength(label, font=tick)
+        draw.text((left - 18 - tw, py - 12), label, font=tick, fill=MUTED)
+    return X, Y
+
+
+def example_graphs():
+    image, draw = canvas(1100, 1560)
+    heading(draw, "Two example problems")
+    draw.text(
+        (64, 116),
+        "Labeled groups, or a number you still have to estimate.",
+        font=F(REG, 24),
+        fill=MUTED,
+    )
+
+    rounded(draw, (48, 176, 1052, 820), 20, ORANGE_BG, ORANGE_BD, 2)
+    draw.text((76, 200), "Classification", font=F(BOLD, 34), fill=AMBER)
+    draw.text((76, 248), "Will this member leave in 60 days?", font=F(REG, 24), fill=INK)
+    draw.ellipse((700, 210, 726, 236), fill=NAVY)
+    draw.text((736, 208), "Stays", font=F(MED, 22), fill=INK)
+    draw.ellipse((860, 210, 886, 236), fill=AMBER)
+    draw.text((896, 208), "Leaves", font=F(MED, 22), fill=INK)
+
+    plot = (150, 320, 980, 640)
+    X, Y = _axes(draw, plot, 0, 12, 0, 16, (0, 4, 8, 12), (0, 4, 8, 12, 16))
+    draw.line([X(3.2), Y(15.2), X(11.6), Y(4.2)], fill=INK, width=4)
+    stays = [
+        (1.1, 1.6), (1.8, 2.8), (2.4, 1.2), (2.2, 4.0), (3.1, 2.2), (3.4, 4.6),
+        (4.0, 1.4), (4.2, 3.2), (4.8, 2.4), (5.1, 4.4), (1.6, 5.2), (5.6, 3.0),
+    ]
+    leaves = [
+        (6.6, 12.6), (7.2, 11.6), (7.6, 13.4), (8.4, 10.8), (8.8, 13.8), (9.4, 9.4),
+        (9.8, 12.2), (10.4, 11.0), (10.8, 14.4), (11.2, 9.8), (6.9, 14.2), (11.6, 12.8),
+    ]
+    for x, y in stays:
+        draw.ellipse((X(x) - 11, Y(y) - 11, X(x) + 11, Y(y) + 11), fill=NAVY)
+    for x, y in leaves:
+        draw.ellipse((X(x) - 11, Y(y) - 11, X(x) + 11, Y(y) + 11), fill=AMBER)
+    draw.text((X(0.45), Y(14.8)), "Call above the line", font=F(MED, 22), fill=INK)
+    _rotated(image, "Months since last visit", (36, 360), F(MED, 22), INK)
+    face = F(MED, 22)
+    xlabel = "Claims in the past year"
+    draw.text((565 - draw.textlength(xlabel, font=face) / 2, 668), xlabel, font=face, fill=INK)
+    lines(
+        draw,
+        "The clouds look like clusters, but the dots are already named. That name is the decision: outreach, or not.",
+        76,
+        724,
+        940,
+        F(REG, 22),
+        MUTED,
+        6,
+    )
+
+    rounded(draw, (48, 856, 1052, 1496), 20, BLUE_BG, BLUE_BD, 2)
+    draw.text((76, 880), "Regression", font=F(BOLD, 34), fill=NAVY)
+    draw.text((76, 928), "What will this claim pay?", font=F(REG, 24), fill=INK)
+    draw.ellipse((760, 890, 786, 916), fill=NAVY)
+    draw.text((796, 888), "Past claims", font=F(MED, 22), fill=INK)
+
+    plot = (150, 1000, 980, 1288)
+    X, Y = _axes(draw, plot, 0, 10, 0, 8, (0, 2, 4, 6, 8, 10), (0, 2, 4, 6, 8))
+    draw.line([(X(0.4), Y(0.55)), (X(9.6), Y(6.35))], fill=AMBER, width=4)
+    paid = [
+        (1.2, 1.1), (1.8, 0.8), (2.4, 1.9), (3.0, 1.6), (3.4, 2.5), (4.0, 2.2),
+        (4.6, 3.2), (5.0, 2.7), (5.6, 3.8), (6.2, 3.4), (7.2, 4.6), (7.8, 5.2),
+        (8.4, 4.8), (8.8, 5.8), (9.2, 5.4),
+    ]
+    for x, y in paid:
+        draw.ellipse((X(x) - 10, Y(y) - 10, X(x) + 10, Y(y) + 10), fill=NAVY)
+    est_x, est_y = 6.0, 4.0
+    px, py = X(est_x), Y(est_y)
+    for step in range(0, int(px - plot[0]), 14):
+        draw.line([(plot[0] + step, py), (plot[0] + step + 7, py)], fill=MUTED, width=2)
+    for step in range(0, int(plot[3] - py), 14):
+        draw.line([(px, py + step), (px, py + step + 7)], fill=MUTED, width=2)
+    draw.ellipse((px - 14, py - 14, px + 14, py + 14), fill=WHITE, outline=AMBER, width=4)
+    draw.rounded_rectangle((px + 22, py - 46, px + 250, py - 6), 10, fill=WHITE, outline=AMBER, width=2)
+    draw.text((px + 36, py - 40), "Estimate  $4,000", font=F(BOLD, 22), fill=AMBER)
+    _rotated(image, "Paid amount, thousands", (28, 1048), F(MED, 22), INK)
+    xlabel = "Billed amount, thousands"
+    draw.text((565 - draw.textlength(xlabel, font=face) / 2, 1324), xlabel, font=face, fill=INK)
+    lines(
+        draw,
+        "The line estimates a paid amount for a claim billed at $6,000. The reserve uses that number. Knowing only whether it will exceed a cap would turn the same picture back into classification.",
+        76,
+        1388,
+        940,
+        F(REG, 22),
+        MUTED,
+        6,
+    )
+    save(image, "lifecycle-task-examples.jpg")
+
+
 def ingestion():
     image, draw = canvas(1480, 860)
     heading(draw, "Raw sources, then a repeatable pull")
@@ -377,6 +504,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     framing()
     classification_vs_regression()
+    example_graphs()
     ingestion()
     cleaning()
     wrangling()

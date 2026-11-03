@@ -105,15 +105,6 @@ export default function Home() {
                   </a>
                   .
                 </p>
-                <div className="mt-8">
-                  <Link
-                    href="/about"
-                    className="group inline-flex items-center font-semibold text-ink hover:text-navy-link"
-                  >
-                    Full profile
-                    <ArrowUpRightIcon className="ml-1 h-4 w-4 text-amber-mark transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </Link>
-                </div>
               </div>
             </section>
 
@@ -208,7 +199,7 @@ export default function Home() {
             </section>
 
             <footer className="max-w-md border-t border-rule pt-8 pb-16 text-sm text-ink/65 sm:pb-0">
-                <p>
+              <p>
                 Notes on healthcare payer architecture and data science. Built
                 with Next.js and Tailwind CSS.{" "}
                 <Link

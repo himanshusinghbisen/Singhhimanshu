@@ -1,5 +1,5 @@
 import { lifecycleSeries } from "./lifecycle-series";
-import { qnxtSeries } from "./qnxt-series";
+import { coverageArchitecture } from "./coverage-architecture";
 
 export type BlogFigure = {
   type: "figure";
@@ -21,7 +21,7 @@ export type BlogPost = {
 };
 
 export const posts: BlogPost[] = [
-  ...qnxtSeries,
+  ...coverageArchitecture,
   ...lifecycleSeries,
   {
     slug: "sampling-variability-standard-error",

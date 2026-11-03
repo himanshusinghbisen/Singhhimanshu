@@ -360,79 +360,33 @@ def togaf_loop() -> None:
     save(image, "togaf-delivery-questions.jpg")
 
 
-def qnxt_carrier() -> None:
-    image, draw = canvas(1100, 820)
-    heading(draw, "Three books, not one ledger")
-    draw.text((64, 122), "A sponsor is created under one line of business.", font=F(REG, 24), fill=MUTED)
-    books = [
-        (56, "Commercial", "Employer groups. The contract is the rulebook.", BLUE_BG, BLUE_BD, NAVY),
-        (400, "Medicare", "A federal program. Encounters and risk adjustment stay here.", ORANGE_BG, ORANGE_BD, AMBER),
-        (744, "Medicaid", "A state program. The report and the ledger stay with the state.", GREEN_BG, GREEN_BD, TEAL),
+def coverage_architecture() -> None:
+    image, draw = canvas(1100, 1280)
+    heading(draw, "How coverage is connected")
+    draw.text((64, 122), "Each row answers a question the row below does not reopen.", font=F(REG, 24), fill=MUTED)
+    layers = [
+        ("Carrier", "Who administers the coverage, and in which book.", BLUE_BG, BLUE_BD, NAVY),
+        ("Sponsor", "Who buys or funds it.", ORANGE_BG, ORANGE_BD, AMBER),
+        ("Policy", "The contract: term, funding, and who is covered.", GREEN_BG, GREEN_BD, TEAL),
+        ("Plan", "The package the policy points at.", BLUE_BG, BLUE_BD, NAVY),
+        ("Benefit", "One covered service, and what the member pays.", ORANGE_BG, ORANGE_BD, AMBER),
     ]
-    for x, title, body, fill, outline, color in books:
-        rounded(draw, (x, 200, x + 312, 560), 20, fill, outline, 2)
-        draw.text((x + 28, 248), title, font=F(BOLD, 32), fill=color)
-        paragraph(draw, body, x + 28, 320, 256, F(REG, 24), INK, gap=8)
-    rounded(draw, (56, 620, 1044, 748), 18, WHITE, LINE, 2)
-    paragraph(draw, "Rules, rates, and reports do not cross between these books.", 88, 662, 900, F(MED, 24), INK, gap=6)
-    save(image, "qnxt-carrier-line-of-business.jpg")
-
-
-def qnxt_sponsor() -> None:
-    image, draw = canvas(1100, 1040)
-    heading(draw, "Who bought the coverage")
-    draw.text((64, 122), "A parent can hold more than one contract.", font=F(REG, 24), fill=MUTED)
-    rounded(draw, (280, 190, 820, 330), 20, BLUE_BG, BLUE_BD, 2)
-    draw.text((320, 214), "Parent sponsor", font=F(BOLD, 32), fill=NAVY)
-    draw.text((320, 266), "One organization. Many contracts underneath.", font=F(REG, 22), fill=INK)
-    arrow(draw, (288, 334), (288, 392), INK, 4)
-    arrow(draw, (812, 334), (812, 392), INK, 4)
-    rounded(draw, (56, 400, 520, 680), 20, ORANGE_BG, ORANGE_BD, 2)
-    draw.text((88, 432), "Self-funded", font=F(BOLD, 30), fill=AMBER)
-    paragraph(draw, "The sponsor pays the claims. The plan administers them.", 88, 496, 390, F(REG, 24), INK, gap=8)
-    rounded(draw, (580, 400, 1044, 680), 20, GREEN_BG, GREEN_BD, 2)
-    draw.text((612, 432), "Fully insured", font=F(BOLD, 30), fill=TEAL)
-    paragraph(draw, "The plan holds the risk. The sponsor pays a premium.", 612, 496, 390, F(REG, 24), INK, gap=8)
-    rounded(draw, (56, 760, 1044, 960), 20, CREAM, LINE, 2)
-    draw.text((88, 796), "Eligibility file", font=F(BOLD, 30), fill=INK)
-    paragraph(
-        draw,
-        "The roster attaches a person to a subgroup, as of a date. No row on the roster, no plan to attach.",
-        88,
-        856,
-        900,
-        F(REG, 24),
-        MUTED,
-        gap=8,
-    )
-    save(image, "qnxt-sponsor.jpg")
-
-
-def qnxt_benefit_plan() -> None:
-    image, draw = canvas(1100, 980)
-    heading(draw, "The package a person is on")
-    draw.text((64, 122), "Adjudication reads these rows. It does not invent them.", font=F(REG, 24), fill=MUTED)
-    rows = [
-        ("Covered services", "What the plan will consider at all."),
-        ("Cost share", "Copay, coinsurance, deductible, out-of-pocket maximum."),
-        ("Limits", "Visits, units, and the period they reset in."),
-        ("Network", "Which providers the rate applies to."),
-        ("Rider", "The exception this sponsor bought, and the next one did not."),
-    ]
-    y = 190
-    for title, body in rows:
-        rounded(draw, (56, y, 1044, y + 120), 18, BLUE_BG, BLUE_BD, 2)
-        draw.text((88, y + 22), title, font=F(BOLD, 28), fill=NAVY)
-        draw.text((88, y + 66), body, font=F(REG, 24), fill=INK)
-        y += 140
-    save(image, "qnxt-benefit-plan.jpg")
+    y = 186
+    for title, body, fill, outline, color in layers:
+        rounded(draw, (120, y, 980, y + 140), 20, fill, outline, 2)
+        draw.text((156, y + 24), title, font=F(BOLD, 32), fill=color)
+        draw.text((156, y + 78), body, font=F(REG, 24), fill=INK)
+        if title != "Benefit":
+            arrow(draw, (550, y + 144), (550, y + 188), INK, 4)
+        y += 188
+    rounded(draw, (56, 1128, 1044, 1224), 18, WHITE, LINE, 2)
+    paragraph(draw, "A visit looks up the benefit. It does not choose the carrier.", 88, 1158, 900, F(MED, 24), INK, gap=6)
+    save(image, "healthcare-coverage-architecture.jpg")
 
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    qnxt_carrier()
-    qnxt_sponsor()
-    qnxt_benefit_plan()
+    coverage_architecture()
     sampling_two_samples()
     sampling_standard_error()
     simulation_methods()

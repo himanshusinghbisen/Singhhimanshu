@@ -3,7 +3,7 @@ import type { BlogPost } from "@/lib/posts";
 /**
  * Healthcare payer business architecture.
  * Part 1 only. Later parts stay unwritten until this one is ready to publish.
- * The date keeps a production build from showing it early.
+ * Published 2026-11-02 so a production build includes it.
  */
 export const coverageArchitecture: BlogPost[] = [
   {
@@ -11,7 +11,7 @@ export const coverageArchitecture: BlogPost[] = [
     title: "Healthcare payer business architecture: the five core entities",
     summary:
       "Part 1 of 6. Carrier, sponsor, policy, plan, and benefit. The same words point to different organizations in commercial coverage, Medicare, and Medicaid.",
-    date: "2026-11-16",
+    date: "2026-11-02",
     readingMinutes: 12,
     tags: ["Healthcare", "Business Architecture", "Payer Systems"],
     body: [

@@ -9,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { path: "", changeFrequency: "monthly" as const, priority: 1 },
-    { path: "/about", changeFrequency: "monthly" as const, priority: 0.9 },
     { path: "/writing", changeFrequency: "weekly" as const, priority: 0.9 },
     {
       path: "/writing/healthcare-architecture",

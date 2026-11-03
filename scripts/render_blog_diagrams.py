@@ -394,26 +394,46 @@ def coverage_architecture() -> None:
         fill=MUTED,
     )
 
-    node(
-        (36, 158, 360, 292),
+    def role_card(box, fill, stroke, ink, title, detail) -> None:
+        rounded(draw, box, 18, fill, stroke, 3)
+        title_face = F(BOLD, 26)
+        detail_face = F(MED, 20)
+        max_w = box[2] - box[0] - 36
+        lines = wrap(draw, detail, detail_face, max_w)
+        block_h = title_face.size + 8 + len(lines) * (detail_face.size + 4) - 4
+        y = box[1] + ((box[3] - box[1]) - block_h) / 2
+        width = box[2] - box[0]
+        tw = draw.textlength(title, font=title_face)
+        draw.text((box[0] + (width - tw) / 2, y), title, font=title_face, fill=ink)
+        y += title_face.size + 8
+        for line in lines:
+            lw = draw.textlength(line, font=detail_face)
+            draw.text((box[0] + (width - lw) / 2, y), line, font=detail_face, fill=ink)
+            y += detail_face.size + 4
+
+    role_card(
+        (36, 156, 360, 332),
         carrier_fill,
         carrier_stroke,
         carrier_ink,
-        [("Insurer", BOLD, 26), ("Assumes the risk", MED, 22)],
+        "Insurer",
+        "Assumes risk in a fully insured arrangement",
     )
-    node(
-        (376, 158, 700, 292),
+    role_card(
+        (376, 156, 700, 332),
         WHITE,
         carrier_stroke,
         carrier_ink,
-        [("Administrator", BOLD, 26), ("Runs the services", MED, 22)],
+        "Administrator",
+        "Runs the administrative services",
     )
-    node(
-        (716, 158, 1044, 292),
+    role_card(
+        (716, 156, 1044, 332),
         enroll_fill,
         enroll_stroke,
         enroll_ink,
-        [("Sponsor", BOLD, 26), ("Acme Corporation", MED, 22)],
+        "Sponsor",
+        "Acme Corporation",
     )
 
     def centered_label(text: str, center: int, y: int) -> None:
@@ -426,35 +446,35 @@ def coverage_architecture() -> None:
         (538, "Administers"),
         (880, "Sponsors or funds"),
     ):
-        centered_label(label, center, 304)
-        arrow(draw, (center, 340), (center, 428), edge, 4)
+        centered_label(label, center, 344)
+        arrow(draw, (center, 378), (center, 466), edge, 4)
 
     node(
-        (120, 440, 960, 612),
+        (120, 478, 960, 650),
         arrange_fill,
         arrange_stroke,
         arrange_ink,
         [("Coverage arrangement", BOLD, 30), ("Group contract or plan documents", MED, 24)],
     )
 
-    arrow(draw, (540, 652), (540, 748), edge, 4)
-    edge_label("Defines available options", 564, 684)
+    arrow(draw, (540, 662), (540, 758), edge, 4)
+    edge_label("Defines available options", 564, 694)
 
     node(
-        (120, 760, 960, 990),
+        (120, 770, 960, 1000),
         plan_fill,
         plan_stroke,
         plan_ink,
         [("Plan options", BOLD, 30), ("Standard PPO 1500", MED, 26), ("Premium PPO 500", MED, 26)],
     )
 
-    arrow(draw, (268, 1002), (268, 1110), edge, 4)
-    edge_label("Contains", 292, 1040)
-    arrow(draw, (812, 1110), (812, 1002), edge, 4)
-    edge_label("Enrolls in", 836, 1040)
+    arrow(draw, (268, 1012), (268, 1120), edge, 4)
+    edge_label("Contains", 292, 1050)
+    arrow(draw, (812, 1120), (812, 1012), edge, 4)
+    edge_label("Enrolls in", 836, 1050)
 
     node(
-        (36, 1122, 500, 1360),
+        (36, 1132, 500, 1370),
         plan_fill,
         plan_stroke,
         plan_ink,
@@ -466,13 +486,13 @@ def coverage_architecture() -> None:
         ],
     )
     node(
-        (580, 1122, 1044, 1360),
+        (580, 1132, 1044, 1370),
         enroll_fill,
         enroll_stroke,
         enroll_ink,
         [("Member enrollment", BOLD, 28), ("Employee + selected plan", MED, 24)],
     )
-    save(image, "healthcare-payer-responsibilities.jpg")
+    save(image, "healthcare-payer-responsibilities-2.jpg")
 
 
 def coverage_cover() -> None:
@@ -534,9 +554,9 @@ def coverage_programs() -> None:
             (30, 58, 138),
             "Commercial",
             [
-                ("Authority", "The contract, under state insurance rules or ERISA"),
+                ("Regulatory framework", "Applicable state insurance laws and federal laws, including ERISA where applicable."),
                 ("Sponsor", "Employer or other group"),
-                ("Administers", "An insurer, or a TPA when the employer keeps the risk"),
+                ("Administrator", "Insurer or TPA, depending on the arrangement"),
             ],
         ),
         (
@@ -584,7 +604,7 @@ def coverage_programs() -> None:
             line_y = paragraph(draw, value, 68, line_y, 920, F(REG, 24), INK, gap=4)
             line_y += 8
         y += 296
-    save(image, "healthcare-payer-program-roles.jpg")
+    save(image, "healthcare-payer-program-roles-2.jpg")
 
 
 def coverage_takeaways() -> None:

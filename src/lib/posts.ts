@@ -23,7 +23,14 @@ export type BlogLinks = {
   items: BlogLink[];
 };
 
-export type BlogBlock = string | BlogFigure | BlogHeading | BlogLinks;
+export type BlogCode = {
+  type: "code";
+  language: "python" | "sql" | "bash" | "yaml";
+  code: string;
+  caption?: string;
+};
+
+export type BlogBlock = string | BlogFigure | BlogHeading | BlogLinks | BlogCode;
 
 export type BlogPost = {
   slug: string;

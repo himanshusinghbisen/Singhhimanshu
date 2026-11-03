@@ -1,7 +1,7 @@
 import type { BlogPost } from "@/lib/posts";
 
 /**
- * Weekly data-science lifecycle series.
+ * End-to-end data science lifecycle series.
  * Production shows a part on its date. Development shows every part.
  * Mondays: Oct 26, Nov 2, Nov 9, Nov 16, Nov 23, Nov 30, Dec 7, Dec 14 (2026).
  */
@@ -10,13 +10,13 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "problem-framing-before-the-model",
     title: "Problem framing: the question before the model",
     summary:
-      "Part 1 of 8. A data science effort starts by turning a vague ask into a question, a metric, and a constraint. Classification when the action is a label. Regression when the action needs a number.",
+      "Part 1 of 10. Translate a business problem into an analytical question, define the target and success metrics, and make the constraints explicit before choosing a model.",
     date: "2026-10-26",
-    readingMinutes: 9,
-    tags: ["Data Science", "Machine Learning", "Lifecycle"],
+    readingMinutes: 14,
+    tags: ["Data Science", "Problem Framing", "Machine Learning", "Lifecycle"],
     body: [
-      "This is part 1 of a series on the data science lifecycle, from the question through cleaning, wrangling, exploration, mining, modeling, and the chart that has to carry a decision. Each part stands alone. Together they are the order of the work.",
-      "A data science effort fails early when it starts in a notebook. Someone says reduce churn, find the bad claims, or tell us what next quarter looks like. Those sentences are asks. They are not yet questions a dataset can answer. The first job is translation: what decision will change if the analysis is right, and what would count as right.",
+      "This is part 1 of a practical series on the end-to-end data science lifecycle: framing the problem, acquiring and preparing data, exploring patterns, building and validating models, and putting results into use. The methods apply across industries. Examples will draw from different domains—including healthcare—but the focus is on transferable analytical and engineering skills.",
+      "A data science effort can fail before the first line of Python when it starts with a tool instead of a decision. Someone says reduce customer churn, detect suspicious transactions, improve a manufacturing yield, or forecast next quarter\u2019s demand. Those are business asks, not yet analytical questions. Translate the request into a decision: who will act on the result, what action could change, and what evidence would make that action worthwhile.",
       {
         type: "figure",
         src: "/images/blog/lifecycle-problem-framing.jpg",
@@ -25,8 +25,8 @@ export const lifecycleSeries: BlogPost[] = [
           "The ask, the question, and the metric belong on one page, with the constraints that will not move.",
       },
       "The translation names the task. Classification asks which case belongs in a class. Regression asks for a number. Clustering, which comes later in this series, asks for groups when nobody has labeled the rows yet. Picking the task is not a technical preference. It is a statement of what the business is willing to act on.",
-      "Classification is the right task when the decision is a label. Two cases should be treated differently because they fall in different classes, and a score is only a way to reach that label. A member either receives an outreach call or does not: will they leave in the next 60 days, yes or no. A claim line is queued for review or it is paid: proper or improper. A provider is placed in a tier, low, medium, or high, and the tier changes the audit rate. Two classes or several classes are both classification. What makes it classification is that the action is the class.",
-      "Regression is the right task when the decision needs the number itself. A difference of dollars, days, or volume changes what you reserve, staff, or schedule. Expected paid amount is a reserve, not a yes or no. Days until discharge is a bed count. Volume next quarter tells you what is coming. Forecasting is regression pointed at a future time: the same kind of number, with the clock as part of the question. If you only needed to know whether volume will cross a threshold, you have turned it back into classification, and the threshold belongs on the framing page.",
+      "Classification is the right task when the decision is a label. A customer may renew or cancel; a transaction may be legitimate or suspicious; a manufactured unit may pass or fail inspection. Healthcare offers another example: a member may or may not need an outreach intervention. Binary and multiclass problems are both classification. What makes the task classification is that the action depends on the predicted category.",
+      "Regression is the right task when the decision needs a numeric estimate. Predicting customer lifetime value, delivery time, equipment energy use, or monthly sales volume are examples. Healthcare can provide a familiar case too, such as estimating length of stay or expected cost. Forecasting is regression with time made explicit. If the real decision is only whether a value will cross a threshold, the task may instead be classification; document that threshold during framing.",
       {
         type: "figure",
         src: "/images/blog/lifecycle-classification-regression.jpg",
@@ -34,7 +34,7 @@ export const lifecycleSeries: BlogPost[] = [
         caption:
           "Classification changes the action by category. Regression changes the action by the size of a number.",
       },
-      "Here is that choice as two pictures. Classification, for a member who might leave: claims in the past year against months since the last visit. The clouds look like clusters. They differ from clustering because the dots already have names, stays or leaves. A new member is a point, and the action is which side of the line they land on. Regression, for a claim not yet paid: billed amount against what similar claims paid. The cloud has a slope. The line reads off a dollar amount, and that amount is the reserve. If you only needed to know whether the payment would clear a cap, you would draw a threshold across this same picture and be back in classification.",
+      "The classification picture might compare customer activity with time since the last purchase, using known renewals and cancellations as labels. The regression picture might compare advertising spend with sales, then estimate sales for a proposed budget. These examples make the distinction visible: classification predicts a category; regression estimates a quantity. The same distinction applies to healthcare, finance, retail, and industrial data.",
       {
         type: "figure",
         src: "/images/blog/lifecycle-task-examples.jpg",
@@ -42,39 +42,203 @@ export const lifecycleSeries: BlogPost[] = [
         caption:
           "Labeled groups decide an action. A fitted line estimates a value.",
       },
-      "The metric has to match the cost of being wrong. Accuracy is a poor default when the event you care about is rare. A model that calls every member a stayer can look accurate and never catch a cancellation. Recall matters when missing a case is expensive and you can still act. Precision matters when a false alarm spends a reviewer’s hour or a provider’s patience. Sometimes the honest metric is not a percentage at all. It is dollars kept, hours saved, or error against a naive baseline that a careful person could have computed in a spreadsheet.",
+      "The metric has to match the cost of being wrong. Accuracy is a poor default when the event is rare: a fraud detector that labels every transaction legitimate may look accurate while missing every fraudulent event. Recall matters when missed cases are costly; precision matters when false alarms trigger expensive reviews. For regression, consider MAE, RMSE, or error against a simple baseline. Ultimately, connect technical metrics to business outcomes such as revenue retained, defects avoided, time saved, or service levels improved.",
       "Constraints belong on that same page, or they arrive later as surprises. Which data are you allowed to use. How fast the decision has to return. What privacy rule covers the row. Whether the result has to run inside a system that already exists, or whether a monthly memo is the whole deployment. A question you cannot answer under those constraints is a different project, not a harder version of this one.",
-      "Write the frame in one place before any cleaning: the decision, the population, the time window, the metric, the baseline you have to beat, and what you will not try. If that page is still vague, more data will not rescue it. Next week is where the raw material enters: sources, a repeatable pull, and what the file is allowed to be used for.",
+      {
+        type: "heading",
+        text: "A worked example: predicting customer churn",
+      },
+      "Suppose a subscription business wants to reduce avoidable cancellations. The first question is not which classifier to train. It is which customers can the retention team realistically contact, early enough to change an outcome, and what counts as a successful intervention? A useful starting definition might be: for each active customer at the end of a calendar week, estimate the probability that the customer will cancel during the following 30 days. The unit of analysis is one customer at one weekly scoring date. This definition makes repeated observations possible while keeping the decision point explicit.",
+      "Separate the observation window from the prediction window. For a score generated on 30 June, the observation window might cover the previous 90 days of usage, support contacts, billing events, and product engagement. The prediction window is 1–30 July. The label is whether the customer meets the agreed cancellation definition during that future window. Exclude customers who are not eligible for the retention action, such as accounts already closed at scoring time. Decide how to treat pauses, failed payments, plan changes, and voluntary versus involuntary cancellations before building labels; otherwise different analysts can create different targets from the same source tables.",
+      "Write down the intervention as well as the label. If the retention team can contact only 500 customers each week, a ranked list may be more useful than a yes/no prediction for every account. If outreach is expensive, precision among the top 500 may matter. If missing a high-value customer is particularly costly, recall or expected retained value may matter more. A probability score is not itself a business outcome: the team still needs a capacity rule, an offer or action, and a way to measure whether that action changed retention.",
+      {
+        type: "heading",
+        text: "Turn the brief into measurable design choices",
+      },
+      "A compact framing brief for this example could read: decision—prioritize weekly retention outreach; analytical question—which eligible active customers are most likely to cancel in the next 30 days?; unit—customer-week; label—cancellation within the future 30-day horizon; features—only information available by the weekly scoring cutoff; primary evaluation—precision and retained value among the 500 customers the team can contact; baseline—rank by a simple historical cancellation rate or recent engagement rule; constraints—score by Monday morning, respect contact permissions, and do not expose sensitive attributes to the outreach workflow; action—assign the ranked list to the retention team and record contact and outcome.",
+      "The baseline matters because it tells you whether a model adds value. Compare the proposed score with a simple rule such as lowest recent engagement or a historical segment-level churn rate. Evaluate both on the same time-based test period and at the same outreach capacity. Do not compare a model's top 500 with a baseline that was allowed to contact 5,000. Report precision at 500, lift over the baseline, the number of customers retained, and the cost of outreach. Where possible, use a controlled experiment to estimate incremental retention; a predictive model alone cannot prove that contacting a high-risk customer caused that customer to stay.",
+      {
+        type: "heading",
+        text: "Protect the prediction timestamp",
+      },
+      "Feature availability is a timestamp question. A support ticket opened after the weekly score, a cancellation reason entered after closure, or a final invoice generated at month-end cannot be used to predict churn at the start of that month. Build the training table as it would have appeared at each historical scoring date, not from today's fully updated customer record. Split training and evaluation by time so future behavior cannot leak backward. If customers appear in multiple weekly snapshots, also check whether your validation design matches the real deployment and avoids accidental overlap that makes the test unrealistically easy.",
+      "Create a short problem-framing brief before data exploration: business decision; analytical question; unit of analysis and eligible population; target variable and prediction horizon; available-at-decision-time features; success metric and baseline; operational constraints; and the action that follows the result. Check for target leakage: a feature must not contain information that would only become available after the prediction is made. This brief becomes the contract between the business question and the technical work. Part 2 moves into source discovery and reliable data ingestion.",
     ],
   },
   {
     slug: "data-collection-and-ingestion",
-    title: "Data collection: where the raw material enters",
+    title: "Data collection and ingestion: building a reliable data foundation",
     summary:
-      "Part 2 of 8. Sources, a pull you can run again tomorrow, and a record of grain, as-of time, and allowed use.",
+      "Part 2 of 10. Build a reliable data foundation with source discovery, SQL and API extraction, batch and streaming patterns, data contracts, validation, orchestration, and lineage.",
     date: "2026-11-02",
-    readingMinutes: 7,
-    tags: ["Data Science", "Data Engineering", "Lifecycle"],
+    readingMinutes: 21,
+    tags: ["Data Engineering", "ETL", "APIs", "Data Pipelines", "Lifecycle"],
     body: [
-      "Part 2 of the lifecycle series. The question is framed. Now the rows have to arrive, and they have to arrive the same way next week.",
-      "Raw material shows up in a few shapes. Operational tables behind SQL. A warehouse such as Snowflake or BigQuery, already somewhat arranged for analysis. APIs that hand you events or a partner’s feed. Files: CSV when a person exported a sheet, JSON when a service emitted a payload, Parquet when someone expected the data to be scanned more than once. The format is a contract. It is not a detail you discover halfway through a join.",
+      "Part 2 of the data science lifecycle. With the analytical question, target, and constraints defined, the next task is to acquire the right data and move it reliably into an environment where it can be analyzed. Collection identifies the sources and fields needed for the question. Ingestion is the controlled movement of data from those sources into a platform where it can be validated, tracked, and prepared. These practices apply whether the source is a customer database, a public API, an IoT stream, a financial feed, or a healthcare system.",
+      {
+        type: "heading",
+        text: "1. Start with the business question and source inventory",
+      },
+      "Do not begin by connecting every available database. Start with the decision from part 1: what population, event, and time window does the analysis require? Then make a source inventory that records the system owner, business purpose, data domain, refresh cadence, delivery method, expected volume, sensitivity, retention requirement, and the person who can explain the fields.",
+      "Useful sources depend on the business question. A retail analysis may need orders, products, inventory, web events, and customer interactions. A financial-services use case may combine accounts, transactions, payment events, and market data. An industrial use case may use equipment telemetry, maintenance records, production batches, and quality inspections. A healthcare payer example may combine eligibility, claims, provider, authorization, and pharmacy data. Across domains, systems rarely share identical definitions or keys, so identify the authoritative source for each concept before joining anything.",
+      "A source inventory should also record what is missing. An order extract without returns may overstate net sales. A financial transaction feed without reversals may distort balances. A sensor feed without calibration or maintenance context may create misleading anomaly signals. In a healthcare example, a claims extract without adjustment history may be unsuitable for a paid-claims trend. Write down these limits before treating an extract as complete.",
       {
         type: "figure",
         src: "/images/blog/lifecycle-data-ingestion.jpg",
-        alt: "SQL, warehouses, APIs, and files feeding one repeatable ingestion step, with grain, as-of time, and allowed use underneath.",
+        alt: "SQL systems, cloud warehouses, APIs, and partner files feeding a controlled ingestion process with source inventory, data contract, validation, and lineage.",
         caption:
-          "The pull is not finished until grain, as-of time, and allowed use are written down.",
+          "The ingestion boundary is where source ownership, data contracts, validation, and lineage become explicit.",
       },
-      "A one-time download is not a pipeline. The useful pull is the one you can run again tomorrow and explain when it fails. That can be a script, an Airflow job, a Databricks task, or an ELT flow that lands the raw extract before it is reshaped. ETL reshapes on the way in. ELT lands first and transforms where the warehouse can see the history. Either can be honest. A shared folder with no owner is not.",
-      "Three facts should travel with every extract. Grain: one row is a member, a claim line, or a day, and you can say which. As-of time: the file is true as of a moment, not forever. Allowed use: where the rows came from, under what license or consent, and which questions they may answer. Provenance is not paperwork you add after a model looks good. A row you cannot explain is a row you should not score.",
-      "Write the failure mode next to the job. What happens when the API is late, the file is empty, or the schema gains a column. A pipeline that fails loudly is ahead of one that quietly reuses yesterday’s file. Next week is the unglamorous middle: missing values, duplicate keys, outliers, and types that do not match.",
+      {
+        type: "heading",
+        text: "2. Understand common data sources and formats",
+      },
+      "Most analytical platforms combine data from relational databases, cloud warehouses, application APIs, event brokers, object storage, public datasets, and partner file exchanges. In a healthcare payer example, common administrative EDI transactions include the 834 for enrollment, 837 for claims, 835 for remittance advice, 270/271 for eligibility, 276/277 for claim status, and 278 for authorization-related services. The same source-inventory method applies to retail orders, banking transactions, web events, manufacturing sensors, and customer-support systems; only the domain-specific formats change.",
+      "For healthcare interoperability, FHIR APIs may expose resources such as Patient, Coverage, ExplanationOfBenefit, Claim, Organization, and Practitioner, depending on the implementation and access agreement. This is one domain-specific API example—not a requirement for a general data science pipeline. For any API, understand its schema, authentication, pagination, rate limits, versioning, and permitted use before building the extractor.",
+      "Files remain common because employers, vendors, clearinghouses, and legacy platforms often exchange scheduled extracts. CSV is easy to inspect but weakly typed. JSON represents nested API payloads. XML appears in several established exchange formats. Parquet is efficient for analytical storage because it is columnar and preserves a schema. The extension alone does not define the contract: document encoding, delimiters, compression, null conventions, date formats, code sets, and schema version too.",
+      {
+        type: "heading",
+        text: "3. Choose the ingestion pattern deliberately",
+      },
+      "Batch ingestion is appropriate when scheduled freshness is sufficient: nightly orders, daily account transactions, weekly product catalogs, or periodic sensor summaries. Define the schedule, delivery window, expected volume, and what happens when a delivery is late. A batch process should be restartable for a specific business date or source batch rather than requiring an operator to rerun everything.",
+      "API-based ingestion is useful when a consumer needs request-and-response access or a source publishes resources through a managed interface. Plan for authentication and token renewal, pagination, rate limits, timeouts, retries with backoff, and source throttling. Store the request window and continuation state so a partial page sequence is not mistaken for a complete pull. Respect the API's permitted purpose and access scope.",
+      {
+        type: "heading",
+        text: "An API extraction pattern in Python",
+      },
+      "The example below illustrates a common REST pattern: follow the server-provided next-page URL, set a timeout, retry transient failures, and keep the access token outside the source code. Real APIs differ: some use cursor parameters, some return a Link header, and some require a refreshed token. Follow the provider's pagination and rate-limit contract rather than assuming every endpoint behaves alike.",
+      {
+        type: "code",
+        language: "python",
+        code: `import os
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+retry = Retry(
+    total=5,
+    backoff_factor=1,
+    status_forcelist=[429, 500, 502, 503, 504],
+    allowed_methods=["GET"],
+    respect_retry_after_header=True,
+)
+session = requests.Session()
+session.mount("https://", HTTPAdapter(max_retries=retry))
+
+token = os.environ["SOURCE_API_TOKEN"]
+url = "https://api.example.com/v1/orders"
+headers = {"Authorization": f"Bearer {token}"}
+all_records = []
+
+while url:
+    response = session.get(url, headers=headers, timeout=(5, 30))
+    response.raise_for_status()
+    page = response.json()
+    all_records.extend(page["results"])
+    url = page.get("next")  # Use the API's documented cursor/next link
+
+print(f"Retrieved {len(all_records)} records")`,
+        caption: "Illustrative REST pagination. Store the retrieved pages with a batch ID and extraction window before publishing them downstream.",
+      },
+      "A robust implementation also records the page or cursor reached, request start and end times, response status, and source request ID where available. Do not log bearer tokens or full payloads containing personal information. If the process fails halfway through, resume from a persisted cursor only if the API guarantees that cursor remains valid; otherwise restart the bounded extraction and rely on idempotent landing to prevent duplicates.",
+      "Event-driven ingestion is useful when a downstream process needs lower-latency updates. Events might represent an order being placed, a payment being authorized, a device crossing a temperature threshold, or a claim status changing. Design for at-least-once delivery: a consumer may receive the same event more than once. Use a stable event identifier, idempotent processing, an ordering strategy where required, and a dead-letter path for messages that cannot be processed. Do not promise exactly-once business outcomes merely because a broker offers delivery features.",
+      "ETL transforms data before loading it into its destination. ELT lands source data first and transforms it inside the analytical platform. Neither is universally better. ETL may be appropriate when sensitive fields must be minimized before they reach a destination. ELT can preserve source history and use scalable warehouse compute, provided raw access is tightly controlled. The architecture should follow security, latency, audit, and operating constraints—not fashion.",
+      {
+        type: "heading",
+        text: "4. Define the data contract before building the job",
+      },
+      "A data contract is an agreement between the producer and consumer about what a delivery means. At minimum, define the business grain, schema and version, field definitions, data types, required and optional fields, code sets, primary or natural keys, effective-date rules, timezone, null semantics, delivery cadence, expected volume, and correction behavior. Name the owner on both sides and the process for communicating a breaking change.",
+      "Grain is fundamental to analytical correctness. One row may represent a customer, an order, an order line, a product, an account transaction, or a sensor reading. These are not interchangeable. If an order-level total is joined to several order lines and then summed, the total may multiply. In a healthcare example, a claim header and its service lines also represent different grains. Put the grain in the contract and preserve it in table names and documentation.",
+      "Every extract needs an as-of time and an event or business-effective time when those differ. An order may be placed today, shipped tomorrow, and returned next week. A financial transaction may be posted later than its event date. Store event time, source update time, ingestion time, and effective dates separately where available. This makes late-arriving data explainable instead of silently rewriting history.",
+      {
+        type: "heading",
+        text: "5. Build a repeatable, restartable pipeline",
+      },
+      "A production ingestion job needs more than a SELECT statement or a file copy. A useful sequence is: register the expected delivery; authenticate and retrieve it; validate transport and file integrity; land the original payload; record metadata; parse and validate the schema; apply basic technical checks; publish a success or quarantine outcome; and emit operational metrics. Keep extraction separate from downstream business transformations so a failed model does not force a new source pull.",
+      "Use watermarks or checkpoints to identify what has already been collected. A watermark might be a source update timestamp, monotonically increasing identifier, change-data-capture position, or a partner's sequence number. The correct choice depends on source behavior. A timestamp-only incremental pull can miss records when timestamps are backdated, have low precision, or are updated out of order. Reconcile incremental loads against periodic full counts or bounded historical re-reads.",
+      {
+        type: "heading",
+        text: "Incremental extraction with SQL",
+      },
+      "A simple timestamp watermark is easy to understand, but production code should use a deliberate overlap window and a stable tie-breaker when the source supports it. The example shows the shape of a bounded incremental query; parameter syntax and merge behavior vary by database. Persist the high watermark only after the batch has been validated and committed successfully.",
+      {
+        type: "code",
+        language: "sql",
+        code: `-- :low_watermark and :high_watermark are bound parameters.
+-- The overlap helps catch late updates; deduplicate by order_id
+-- and source_updated_at in the staging step.
+SELECT
+    order_id,
+    customer_id,
+    order_status,
+    order_total,
+    source_updated_at
+FROM source_orders
+WHERE source_updated_at > :low_watermark
+  AND source_updated_at <= :high_watermark
+ORDER BY source_updated_at, order_id;`,
+        caption: "Bounded incremental pull. Choose the overlap and tie-breaker based on source timestamp precision and update behavior.",
+      },
+      "For a mutable source table, a timestamp pull captures changed rows only if every relevant update advances the timestamp reliably. Change data capture (CDC) is often preferable when the source exposes a transaction log or change stream, because it can represent inserts, updates, and deletes with an ordered position. CDC still needs retention monitoring: if the consumer falls behind the source log retention window, it may need a controlled reinitialization. A watermark is a recovery checkpoint, not proof that every change was captured.",
+      "Make reruns safe. A common pattern is to write each delivery to a unique batch location, validate it, then publish it to the curated landing area only after checks pass. Record a batch ID and source file checksum. Use merge or upsert logic keyed to the business event where appropriate, and retain the original delivery for audit. If a partner resends a file, the pipeline should recognize the duplicate delivery rather than double-count its orders or transactions.",
+      {
+        type: "heading",
+        text: "6. Land raw data with lineage and provenance",
+      },
+      "Keep an immutable or access-controlled raw landing layer when policy and retention rules allow it. It should preserve what the source sent, not a cleaned interpretation of it. Alongside the payload, capture source system, source object or endpoint, partner, file name, batch ID, extraction window, received timestamp, ingestion timestamp, schema version, checksum, record count, job version, and processing status. These fields let an engineer answer which delivery produced a row and which code processed it.",
+      "A practical lake or warehouse layout often separates raw, validated, and curated zones. Raw preserves the received representation. Validated data has passed structural and basic quality checks while remaining close to source meaning. Curated data is standardized for analysis and downstream products. These are logical responsibilities; they do not require three separate storage products. Apply access controls at each layer and avoid broad access to raw PHI simply because it is convenient.",
+      "Lineage should be traceable in both directions. From a dashboard value, an analyst should be able to identify the curated table, transformation version, source batches, and upstream systems. From a source delivery, an operator should be able to see which tables, features, models, and reports it affected. This is essential when a vendor corrects a file or a source system reprocesses historical records.",
+      {
+        type: "heading",
+        text: "7. Protect sensitive data and enforce allowed use",
+      },
+      "Data collection is a governance decision as much as an engineering task. Confirm the permitted purpose, legal or contractual basis, minimum-necessary fields, retention period, and approved destinations before moving personal, financial, confidential, or regulated data. In a healthcare implementation, HIPAA requirements may also apply depending on the organizations, roles, data, and use. A data pipeline does not create permission to use information for a new purpose. Involve privacy, security, compliance, and data owners when the use or sharing arrangement is unclear.",
+      "Use encryption in transit and at rest, managed secrets, least-privilege service identities, network restrictions, and auditable access. Separate production credentials from development. Mask or tokenize sensitive identifiers in lower environments, and use synthetic or appropriately de-identified data for testing where feasible. Avoid personal or confidential data in job logs, exception messages, filenames, and monitoring labels. Define retention and secure deletion for both payloads and temporary copies.",
+      "Allowed use belongs in metadata. Record the source, data owner, classification, approved purpose, restrictions, and applicable agreement or policy reference. A dataset that is technically accessible is not automatically approved for every analytic question. Recheck permissions when a new feature, vendor, model, or downstream consumer is introduced.",
+      {
+        type: "heading",
+        text: "8. Validate quality at the ingestion boundary",
+      },
+      "Run checks before data is released to downstream users. Structural checks confirm that the file opens, the schema is recognized, and required columns exist. Completeness checks compare received files and records with expected deliveries. Type and domain checks validate dates, numeric values, code sets, and allowed status values. Key checks identify missing identifiers and duplicate business events. Referential checks test whether claim lines connect to known headers or provider identifiers where the relationship is expected.",
+      "Reconciliation is particularly valuable. Compare source and landed record counts, control totals, billed and paid amounts, file-level totals, and counts by status or business date. For financial feeds, preserve the source control totals and explain any accepted difference. A job that exits with code zero is not proof that the data is complete or correct.",
+      "Not every failed row should stop the whole batch. Define severity: reject the delivery for a broken schema or missing control total; quarantine invalid records when safe partial processing is allowed; warn on noncritical anomalies; and publish only when the agreed acceptance criteria are met. Keep rejected records protected, report the reason, and provide a controlled remediation and replay path.",
+      {
+        type: "heading",
+        text: "9. Make operations observable",
+      },
+      "Monitor freshness, completeness, volume, schema drift, processing duration, retry count, rejected records, and reconciliation differences. Alert on business impact, not just infrastructure noise. A claims feed that is three hours late before a payment run deserves a different response from a low-priority reference file that is a day late.",
+      "Give each pipeline an owner, runbook, service expectation, escalation path, and recovery procedure. The runbook should explain how to identify the affected batch, whether a rerun is safe, how to replay quarantined records, and how to notify downstream consumers. Track recurring incidents and work with the source owner to correct the contract rather than adding another permanent exception.",
+      {
+        type: "heading",
+        text: "Orchestration: coordinate work, do not hide logic",
+      },
+      "An orchestrator such as Apache Airflow can schedule tasks, express dependencies, manage retries, and expose run history. A typical daily workflow might wait for an order file, validate its checksum and schema, load a staging table, run reconciliation, and publish a completion event. Keep business transformations in tested Python or SQL modules and let the DAG coordinate them. Tasks should be small, observable, and safe to retry; avoid putting the entire pipeline into one opaque task or using the scheduler as a substitute for data-quality rules.",
+      "Choose storage with the workload in mind. A relational database or warehouse is useful for structured queries and governed access. Object storage is economical for large raw files and historical payloads. A lakehouse combines object storage with table formats and transaction features that support concurrent analytical workloads. Parquet is often a good analytical file format because columnar reads can scan only required fields, but it is not a replacement for a table catalog, access controls, compaction, or schema-evolution policy. The right platform depends on query patterns, scale, latency, team skills, and operating cost.",
+      {
+        type: "heading",
+        text: "A practical architecture decision guide",
+      },
+      "Use scheduled batch when the business can tolerate a known delay and the source provides complete extracts. Use API pulls when the source is managed through a service interface and the required volume fits its limits. Use CDC when you need reliable changes from a mutable database and can operate the log consumer. Use event streaming when multiple consumers need low-latency events and the organization can support broker operations, schema governance, replay, and consumer monitoring. Streaming is not automatically more modern or more accurate; it adds operational complexity and is justified by a real freshness requirement.",
+      {
+        type: "heading",
+        text: "10. A worked example: ingesting daily commerce data",
+      },
+      "Consider an online retailer receiving daily order files from a commerce platform and inventory updates from a warehouse system. The ingestion service registers each delivery, verifies transport and checksum, stores the original payload in a controlled raw zone, and records the source, batch, timestamps, schema version, and record count. A parser validates the structure and required fields before publishing accepted records to a validated zone. The same design could ingest a healthcare 837 claims feed, but the domain-specific parser and governance rules would differ.",
+      "The order pipeline preserves order-header and order-line grain separately. It reconciles accepted records to delivery control totals, quarantines malformed rows, and makes batch status visible to operations. Inventory events are linked through stable product and location keys rather than being appended as if they were order lines. Corrections are retained as new events or versioned changes according to the source contract, rather than silently overwriting history.",
+      "An analyst can now calculate order volume, fulfillment time, and product availability while tracing each result back to the source delivery and transformation version. That distinction is the difference between a dataset that merely loads and one that can support a defensible business answer.",
+      {
+        type: "heading",
+        text: "A practical ingestion readiness checklist",
+      },
+      "Before calling an ingestion pipeline production-ready, confirm eight things: the source owner and permitted purpose are known; grain, keys, schema, and effective dates are documented; the batch, API, or event pattern meets the freshness need; retries, checkpoints, idempotency, and replay are designed; raw payload and lineage are retained appropriately; sensitive-data access and retention are approved; quality rules and reconciliation are defined; and monitoring, ownership, and a recovery runbook are in place.",
+      "The pull is complete only when it is repeatable, explainable, and permitted. The next part of this series takes the landed data and deals with what is wrong inside it: missing values, duplicate keys, outliers, and types that do not match.",
     ],
   },
   {
     slug: "data-cleaning-and-preparation",
     title: "Data cleaning: making messy records usable",
     summary:
-      "Part 3 of 8. Missing values, duplicate keys, outliers, and types. Cleaning is a set of decisions, not a pass that makes the table innocent.",
+      "Part 3 of 10. Missing values, duplicate keys, outliers, and types. Cleaning is a set of decisions, not a pass that makes the table innocent.",
     date: "2026-11-09",
     readingMinutes: 7,
     tags: ["Data Science", "Data Preparation", "Lifecycle"],
@@ -97,7 +261,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "data-wrangling-and-feature-engineering",
     title: "Data wrangling: shape the table the question needs",
     summary:
-      "Part 4 of 8. Joins, aggregation, and new columns. A feature is a hypothesis about what predicts the outcome.",
+      "Part 4 of 10. Joins, aggregation, and new columns. A feature is a hypothesis about what predicts the outcome.",
     date: "2026-11-16",
     readingMinutes: 7,
     tags: ["Data Science", "Feature Engineering", "Lifecycle"],
@@ -120,7 +284,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "exploratory-data-analysis",
     title: "Exploratory analysis: what the data is willing to say",
     summary:
-      "Part 5 of 8. Distributions, relationships, and a correlation grid. A pattern at this stage is a hypothesis, not a finding for the steering committee.",
+      "Part 5 of 10. Distributions, relationships, and a correlation grid. A pattern at this stage is a hypothesis, not a finding for the steering committee.",
     date: "2026-11-23",
     readingMinutes: 6,
     tags: ["Data Science", "Exploratory Analysis", "Lifecycle"],
@@ -143,7 +307,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "data-mining-and-pattern-discovery",
     title: "Data mining: finding structure you did not label",
     summary:
-      "Part 6 of 8. Principal components, clusters, and association rules. They propose a structure. They do not prove a cause.",
+      "Part 6 of 10. Principal components, clusters, and association rules. They propose a structure. They do not prove a cause.",
     date: "2026-11-30",
     readingMinutes: 7,
     tags: ["Data Science", "Data Mining", "Lifecycle"],
@@ -166,7 +330,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "modeling-baselines-and-validation",
     title: "Modeling: a baseline, then a harder model, then proof",
     summary:
-      "Part 7 of 8. Beat a simple baseline, add complexity only when the errors justify it, and trust the score you did not train on.",
+      "Part 7 of 10. Beat a simple baseline, add complexity only when the errors justify it, and trust the score you did not train on.",
     date: "2026-12-07",
     readingMinutes: 7,
     tags: ["Machine Learning", "Modeling", "Lifecycle"],
@@ -189,7 +353,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "visualization-and-data-storytelling",
     title: "Visualization: the chart has to carry a decision",
     summary:
-      "Part 8 of 8. Choose the chart for the comparison you need, and decide whether the audience needs a live dashboard or a frozen argument.",
+      "Part 8 of 10. Choose the chart for the comparison you need, and decide whether the audience needs a live dashboard or a frozen argument.",
     date: "2026-12-14",
     readingMinutes: 6,
     tags: ["Data Science", "Visualization", "Lifecycle"],

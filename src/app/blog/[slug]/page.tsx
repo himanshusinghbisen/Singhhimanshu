@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 
 import { ArticleJsonLd } from "@/components/article-json-ld";
 import { BlogBlocks } from "@/components/blog-blocks";
+import { PayerArticleEnhancements } from "@/components/payer-article-enhancements";
+import { DataIngestionEnhancements } from "@/components/data-ingestion-enhancements";
 import { ThemeCompare } from "@/components/theme-compare";
 import { profile } from "@/lib/data";
 import { formatPostDate, getAllPosts, getPost, postImage } from "@/lib/posts";
@@ -98,6 +100,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </ul>
         </header>
 
+        {post.slug === "healthcare-payer-business-architecture" ? (
+          <PayerArticleEnhancements
+            headings={post.body.flatMap((block) =>
+              typeof block !== "string" && block.type === "heading" ? [block.text] : [],
+            )}
+          />
+        ) : null}
+
+        {post.slug === "data-collection-and-ingestion" ? (
+          <DataIngestionEnhancements
+            headings={post.body.flatMap((block) =>
+              typeof block !== "string" && block.type === "heading" ? [block.text] : [],
+            )}
+          />
+        ) : null}
+
         <BlogBlocks blocks={post.body} theme="journal" />
 
         <footer className="mt-14 border-t border-rule pt-8">
@@ -107,6 +125,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </Link>
           </p>
           <p className="mt-1 text-sm text-ink/70">{profile.title}</p>
+          <p className="mt-3 max-w-xl text-sm leading-6 text-ink/70">
+            Healthcare architecture and payer technology insights covering claims platforms,
+            payment integrity, data integration, and enterprise modernization.
+          </p>
+          <Link
+            href={profile.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex text-sm font-medium text-navy-link underline decoration-amber-mark/40 underline-offset-4 hover:decoration-amber-mark"
+          >
+            Connect on LinkedIn
+          </Link>
           <p className="mt-3 text-sm text-ink/70">
             Filed under{" "}
             <Link href={section.path} className="font-medium text-navy-link">

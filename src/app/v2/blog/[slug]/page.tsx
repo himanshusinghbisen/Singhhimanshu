@@ -93,7 +93,7 @@ export default async function MercuryBlogPostPage({
 
         <footer className="mt-14 border-t border-[#23334D] pt-8">
           <p className="text-xl font-semibold text-[#F1F5F9]">
-            <Link href="/about" className="hover:text-[#00D2D3]">
+            <Link href="/" className="hover:text-[#00D2D3]">
               {profile.name}
             </Link>
           </p>

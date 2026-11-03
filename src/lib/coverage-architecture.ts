@@ -11,6 +11,10 @@ export const coverageArchitecture: BlogPost[] = [
     title: "Healthcare payer business architecture: the five core entities",
     summary:
       "Part 1 of 6. Carrier, sponsor, policy, plan, and benefit. The same words point to different organizations in commercial coverage, Medicare, and Medicaid.",
+    seoTitle:
+      "Healthcare Payer Business Architecture: 5 Core Entities Explained",
+    seoDescription:
+      "Learn how carriers, sponsors, policies, plans, and benefits work together in healthcare payer business architecture across commercial, Medicare, and Medicaid programs.",
     date: "2026-11-02",
     readingMinutes: 12,
     tags: ["Healthcare", "Business Architecture", "Payer Systems"],
@@ -66,6 +70,16 @@ export const coverageArchitecture: BlogPost[] = [
         alt: "Five questions: who insures and who administers, who establishes or funds, what governs the arrangement, which coverage package, and what rules apply to this service.",
       },
       "Acme Corporation, the contract reference, and the commercial coverage examples are fictional. The Medicare and Medicaid notes describe program roles. They are not a specific contract or product.",
+      "More of this work is collected with the other healthcare architecture notes.",
+      {
+        type: "links",
+        items: [
+          {
+            label: "Healthcare Systems Architecture",
+            href: "/writing/healthcare-architecture",
+          },
+        ],
+      },
       {
         type: "heading",
         text: "References and further reading",

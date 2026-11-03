@@ -51,8 +51,8 @@ export default function OpenGraphImage() {
             lineHeight: 1.4,
           }}
         >
-          Designing and building scalable claims and payment integrity
-          platforms.
+          Payer platforms, claims processing, payment integrity, and
+          enterprise architecture.
         </div>
       </div>
     ),

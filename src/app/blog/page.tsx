@@ -2,13 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ThemeCompare } from "@/components/theme-compare";
-import { profile } from "@/lib/data";
 import { formatPostDate, getAllPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
-  title: `Writing · ${profile.name}`,
-  description: `Architecture notes and engineering essays by ${profile.name}.`,
+  title: "Article archive",
+  description:
+    "Every published article by Himanshu Singh, in chronological order. Healthcare architecture and data science each have their own section.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    url: "/blog",
+    title: "Article archive",
+    description:
+      "Every published article by Himanshu Singh, in chronological order.",
+  },
 };
 
 export default function BlogIndexPage() {
@@ -18,10 +24,10 @@ export default function BlogIndexPage() {
     <div className="min-h-screen bg-parchment text-ink">
       <div className="mx-auto max-w-3xl px-6 py-12 md:py-20">
         <Link
-          href="/#writing"
+          href="/writing"
           className="text-sm font-medium text-ink/70 hover:text-navy-link"
         >
-          ← Back to journal
+          ← Writing sections
         </Link>
 
         <header className="mt-10 border-b border-rule pb-8">
@@ -29,12 +35,21 @@ export default function BlogIndexPage() {
             Engineering Journal
           </p>
           <h1 className="font-journal mt-3 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-            Writing
+            Article archive
           </h1>
           <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-ink/65">
-            Long-form notes on healthcare systems, payment integrity, and
-            shipping architecture that survives production. This is a preview of
-            the blog layout.
+            Every published note, newest first. For a subject, start with{" "}
+            <Link
+              href="/writing/healthcare-architecture"
+              className="font-medium text-navy-link"
+            >
+              Healthcare Systems Architecture
+            </Link>{" "}
+            or{" "}
+            <Link href="/writing/data-science" className="font-medium text-navy-link">
+              Data Science & Engineering
+            </Link>
+            .
           </p>
         </header>
 

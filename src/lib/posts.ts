@@ -29,7 +29,13 @@ export type BlogPost = {
   slug: string;
   title: string;
   summary: string;
+  /** Document title when it should differ from the visible headline. */
+  seoTitle?: string;
+  /** Meta description when it should differ from the visible summary. */
+  seoDescription?: string;
   date: string;
+  /** Set only after a material update. Publication date stays in `date`. */
+  dateModified?: string;
   readingMinutes: number;
   tags: string[];
   body: BlogBlock[];
@@ -412,5 +418,16 @@ export function formatPostDate(date: string) {
     month: "short",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   }).format(new Date(date));
+}
+
+/** First figure in the article, or the public headshot when a post has none. */
+export function postImage(post: BlogPost) {
+  for (const block of post.body) {
+    if (typeof block !== "string" && "type" in block && block.type === "figure") {
+      return block.src;
+    }
+  }
+  return "/images/himanshu-singh-headshot.jpg";
 }

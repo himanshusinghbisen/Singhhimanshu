@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ArticleJsonLd } from "@/components/article-json-ld";
 import { BlogBlocks } from "@/components/blog-blocks";
 import { ThemeCompare } from "@/components/theme-compare";
 import { profile } from "@/lib/data";
-import { formatPostDate, getAllPosts, getPost } from "@/lib/posts";
+import { formatPostDate, getAllPosts, getPost, postImage } from "@/lib/posts";
+import { sectionForPost } from "@/lib/writing";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -20,24 +22,31 @@ export async function generateMetadata({
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
-  if (!post) return { title: `Writing · ${profile.name}` };
+  if (!post) return { title: "Writing" };
 
   const url = `/blog/${post.slug}`;
+  const title = post.seoTitle ?? post.title;
+  const description = post.seoDescription ?? post.summary;
   return {
-    title: post.title,
-    description: post.summary,
+    title,
+    description,
+    authors: [{ name: profile.name, url: "/about" }],
     alternates: { canonical: url },
     openGraph: {
       type: "article",
       url,
-      title: post.title,
-      description: post.summary,
+      title,
+      description,
       siteName: profile.name,
+      publishedTime: post.date,
+      modifiedTime: post.dateModified ?? post.date,
+      images: [postImage(post)],
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.summary,
+      title,
+      description,
+      images: [postImage(post)],
     },
   };
 }
@@ -47,8 +56,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = getPost(slug);
   if (!post) notFound();
 
+  const section = sectionForPost(post);
+
   return (
     <div className="min-h-screen bg-parchment text-ink">
+      <ArticleJsonLd post={post} />
       <article className="mx-auto max-w-2xl px-6 py-12 md:py-20">
         <Link
           href="/blog"
@@ -90,15 +102,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <footer className="mt-14 border-t border-rule pt-8">
           <p className="font-journal text-xl font-semibold text-ink">
-            {profile.name}
+            <Link href="/about" className="hover:text-navy-link">
+              {profile.name}
+            </Link>
           </p>
           <p className="mt-1 text-sm text-ink/70">{profile.title}</p>
-          <div className="mt-6 flex flex-wrap gap-4 text-sm">
-            <Link href="/blog" className="font-medium text-navy-link">
-              More writing
+          <p className="mt-3 text-sm text-ink/70">
+            Filed under{" "}
+            <Link href={section.path} className="font-medium text-navy-link">
+              {section.title}
             </Link>
-            <Link href="/#writing" className="font-medium text-ink/70 hover:text-navy-link">
-              Back to home
+            .
+          </p>
+          <div className="mt-6 flex flex-wrap gap-4 text-sm">
+            <Link href={section.path} className="font-medium text-navy-link">
+              More in this section
+            </Link>
+            <Link href="/writing" className="font-medium text-ink/70 hover:text-navy-link">
+              All writing
             </Link>
             <Link
               href={`/v2/blog/${post.slug}`}

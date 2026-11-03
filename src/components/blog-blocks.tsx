@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import type { BlogBlock } from "@/lib/posts";
@@ -46,21 +47,32 @@ export function BlogBlocks({
         if (block.type === "links") {
           return (
             <ul key={`links-${index}`} className="space-y-3">
-              {block.items.map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(
-                      "font-medium underline decoration-amber-mark/40 underline-offset-4 hover:decoration-amber-mark",
-                      isMercury ? "text-[#00D2D3]" : "text-navy-link",
+              {block.items.map((item) => {
+                const internal =
+                  item.href.startsWith("/") || item.href.startsWith("#");
+                const className = cn(
+                  "font-medium underline decoration-amber-mark/40 underline-offset-4 hover:decoration-amber-mark",
+                  isMercury ? "text-[#00D2D3]" : "text-navy-link",
+                );
+                return (
+                  <li key={item.href}>
+                    {internal ? (
+                      <Link href={item.href} className={className}>
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={className}
+                      >
+                        {item.label}
+                      </a>
                     )}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+                  </li>
+                );
+              })}
             </ul>
           );
         }

@@ -2,8 +2,10 @@ export const profile = {
   name: "Himanshu Singh",
   firstName: "Himanshu",
   title: "Healthcare Systems Architect",
+  positioning:
+    "Healthcare Systems Architect | Payer Technology | Enterprise Architecture",
   tagline:
-    "I design and build scalable claims and payment integrity platforms — architecture that prevents leakage, and code that ships in production.",
+    "I design, modernize, and build enterprise healthcare platforms.",
   location: "Dallas–Fort Worth",
   locationLabel: "Dallas–Fort Worth, Texas",
   email: "himanshu.singhh@outlook.com",
@@ -13,7 +15,7 @@ export const profile = {
   github: "https://github.com/himanshusinghbisen",
   goodreads: "https://www.goodreads.com/singhhimanshu",
   headline:
-    "Healthcare Systems Architect, Software Engineer & Technology Consultant | Dallas",
+    "Healthcare Systems Architect focused on payer platforms, claims processing, payment integrity, and enterprise technology modernization.",
   siteUrl: "https://singhhimanshu.com",
 };
 
@@ -25,8 +27,13 @@ export const navItems = [
   { id: "credentials", label: "Credentials" },
 ] as const;
 
+export const intro = [
+  "I am a Healthcare Systems Architect and technology consultant focused on designing, modernizing, and building enterprise healthcare platforms.",
+  "My work spans healthcare payer systems, claims processing, payment integrity, claims recovery, data integration, and cloud modernization. I combine enterprise architecture and hands-on engineering to help healthcare organizations build scalable, reliable systems.",
+  "Through this website, I share practical insights into healthcare payer business architecture, data architecture, claims platforms, payment integrity, and the technology behind healthcare operations.",
+];
+
 export const about = [
-  "I'm Himanshu Singh — a software engineer, systems architect, and technology consultant based in Dallas–Fort Worth, USA. I help healthcare organizations modernize claims and payment integrity platforms.",
   "Most healthcare enterprises lose millions each year to payment inaccuracies, improper claims, and fraud — because legacy architectures can't adjudicate and detect anomalies fast enough.",
   "When massive claims volumes run through fragmented, high-latency systems, post-payment recovery becomes an uphill battle. Brittle ETL pipelines break, coordination of benefits slips through the cracks, and engineering teams spend critical hours firefighting system failures instead of preventing leakage.",
   "I work on both sides of that problem: I design the architecture that prevents it, and I write the code that ships it. Today I focus on payment integrity — modernizing post-pay applications, implementing Auto-Recoup workflows, and building Power BI vendor-performance dashboards that track recovery across Medicare, Medicaid, and Commercial. I also own technology roadmaps, vendor RFPs, and system design (TOGAF® 9 Certified) while staying hands-on in C#, .NET, and SQL Server — including migrating legacy .NET apps to Node.js/Angular on AWS and SSIS pipelines to AWS Glue.",

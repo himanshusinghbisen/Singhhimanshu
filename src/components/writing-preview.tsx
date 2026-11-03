@@ -4,6 +4,7 @@ import { ArrowUpRightIcon } from "@/components/icons";
 import { MercuryHeading } from "@/components/mercury/heading";
 import { SectionHeading } from "@/components/section-heading";
 import { formatPostDate, getAllPosts } from "@/lib/posts";
+import { sectionForPost } from "@/lib/writing";
 import { cn } from "@/lib/utils";
 
 type WritingPreviewProps = {
@@ -35,12 +36,25 @@ export function WritingPreview({
 
       <p
         className={cn(
-          "mb-8 max-w-prose text-[15px] leading-relaxed",
+          "mb-3 max-w-prose text-[15px] leading-relaxed",
           isMercury ? "text-[#94A3B8]" : "text-ink/70",
         )}
       >
-        Notes on claims platforms, payment integrity, and the systems work
-        behind recovery. One post source powers both themes.
+        Healthcare architecture and data science are separate sections. The
+        notes below are the latest from both.
+      </p>
+      <p
+        className={cn(
+          "mb-8 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold",
+          isMercury ? "text-[#00D2D3]" : "text-navy-link",
+        )}
+      >
+        <Link href="/writing/healthcare-architecture" className="underline decoration-amber-mark/40 underline-offset-4 hover:decoration-amber-mark">
+          Healthcare Architecture
+        </Link>
+        <Link href="/writing/data-science" className="underline decoration-amber-mark/40 underline-offset-4 hover:decoration-amber-mark">
+          Data Science & Engineering
+        </Link>
       </p>
 
       <ul className={cn(isMercury ? "space-y-5" : "space-y-6")}>
@@ -75,6 +89,17 @@ export function WritingPreview({
                   {post.readingMinutes} min read
                 </span>
               </div>
+              <p className="mt-3">
+                <Link
+                  href={sectionForPost(post).path}
+                  className={cn(
+                    "text-[11px] font-semibold tracking-wide uppercase",
+                    isMercury ? "text-[#00D2D3]" : "text-navy-link",
+                  )}
+                >
+                  {sectionForPost(post).title}
+                </Link>
+              </p>
               <h3
                 className={cn(
                   "mt-2 font-semibold",
@@ -123,7 +148,7 @@ export function WritingPreview({
 
       <div className="mt-8">
         <Link
-          href={basePath}
+          href={isMercury ? basePath : "/writing"}
           className={cn(
             "group inline-flex items-center font-semibold",
             isMercury

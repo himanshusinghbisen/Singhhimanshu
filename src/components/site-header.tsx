@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { SectionNav } from "@/components/section-nav";
+import { SiteNav } from "@/components/site-nav";
 import { SocialLinks } from "@/components/social-links";
 import { profile } from "@/lib/data";
 
@@ -30,13 +30,13 @@ export function SiteHeader() {
         <h1 className="font-journal mt-3 text-4xl leading-tight font-semibold tracking-tight text-ink sm:text-5xl">
           <Link href="/">{profile.name}</Link>
         </h1>
-        <h2 className="mt-3 text-lg font-medium tracking-tight text-ink/80 sm:text-xl">
-          {profile.title}
+        <h2 className="mt-3 max-w-sm text-lg font-medium tracking-tight text-ink/80 sm:text-xl">
+          {profile.positioning}
         </h2>
         <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-ink/70">
           {profile.tagline}
         </p>
-        <SectionNav />
+        <SiteNav />
       </div>
       <SocialLinks />
     </header>

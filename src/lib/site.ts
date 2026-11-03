@@ -6,38 +6,31 @@ export const siteUrl =
 export const siteName = "Himanshu Singh";
 
 export const seo = {
-  title:
-    "Himanshu Singh | Software Engineer, Architect & Consultant in Dallas",
-  shortTitle: "Himanshu Singh · Healthcare Systems Architect",
+  title: "Himanshu Singh | Healthcare Systems Architect",
+  shortTitle: "Himanshu Singh | Healthcare Systems Architect",
   description:
-    "Himanshu Singh is a software engineer, systems architect, and technology consultant based in Dallas–Fort Worth, USA. He designs and builds healthcare claims and payment integrity platforms.",
+    "Himanshu Singh is a Healthcare Systems Architect specializing in payer platforms, claims processing, payment integrity, enterprise architecture, and healthcare technology modernization.",
+  openGraphDescription:
+    "Healthcare payer architecture, claims platforms, payment integrity, and enterprise technology.",
+  twitterDescription:
+    "Healthcare payer architecture, claims platforms, and payment integrity.",
   keywords: [
     "Himanshu Singh",
-    "Himanshu Singh USA",
-    "Himanshu Singh US",
-    "Himanshu Singh United States",
+    "Himanshu Singh Healthcare Systems Architect",
+    "Healthcare Systems Architect",
+    "healthcare payer architecture",
+    "payer platforms",
+    "claims processing",
+    "payment integrity",
+    "enterprise architecture",
+    "healthcare technology",
     "Himanshu Singh Dallas",
-    "Himanshu Singh Texas",
-    "Himanshu Singh software engineer",
-    "Himanshu Singh architect",
-    "Himanshu Singh consultant",
-    "software engineer Dallas",
-    "software architect Dallas",
-    "technology consultant Dallas",
-    "healthcare systems architect",
-    "payment integrity architect",
-    "claims systems engineer",
-    "Himanshu Singh software architect",
-    "Himanshu Singh technology consultant",
-    "architect consultant Dallas",
     "singhhimanshu.com",
   ],
   roles: [
-    "Software Engineer",
-    "Software Architect",
-    "Systems Architect",
-    "Technology Consultant",
     "Healthcare Systems Architect",
-    "Senior Developer",
+    "Technology Consultant",
+    "Software Architect",
+    "Software Engineer",
   ],
 } as const;

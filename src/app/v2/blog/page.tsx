@@ -6,7 +6,7 @@ import { profile } from "@/lib/data";
 import { formatPostDate, getAllPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
-  title: `Writing · ${profile.name} · Mercury`,
+  title: { absolute: `Writing · ${profile.name} · Mercury` },
   description: `Architecture notes and engineering essays by ${profile.name}.`,
   alternates: { canonical: "/blog" },
   robots: { index: false, follow: true },

@@ -10,10 +10,16 @@ import { SiteHeader } from "@/components/site-header";
 import { ThemeCompare } from "@/components/theme-compare";
 import { VisitorCounter } from "@/components/visitor-counter";
 import { WritingPreview } from "@/components/writing-preview";
-import { about, experience, profile, projects } from "@/lib/data";
+import { about, experience, intro, profile, projects } from "@/lib/data";
+import { seo } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
+  openGraph: {
+    url: "/",
+    title: seo.title,
+    description: seo.openGraphDescription,
+  },
 };
 
 export default function Home() {
@@ -36,6 +42,47 @@ export default function Home() {
             >
               <SectionHeading index="01">About</SectionHeading>
               <div className="max-w-prose">
+                {intro.map((paragraph) => (
+                  <p
+                    key={paragraph.slice(0, 40)}
+                    className="mb-4 text-[16px] leading-relaxed text-ink/70"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+                <p className="mb-4 text-[16px] leading-relaxed text-ink/70">
+                  I am based in the Dallas–Fort Worth area.
+                </p>
+                <p className="mb-8 text-[16px] leading-relaxed text-ink/70">
+                  Explore my work:{" "}
+                  <Link
+                    href="/writing/healthcare-architecture"
+                    className="font-semibold text-navy-link underline decoration-amber-mark/50 underline-offset-4 hover:decoration-amber-mark"
+                  >
+                    Healthcare Architecture
+                  </Link>
+                  {" · "}
+                  <Link
+                    href="/blog/healthcare-payer-business-architecture"
+                    className="font-semibold text-navy-link underline decoration-amber-mark/50 underline-offset-4 hover:decoration-amber-mark"
+                  >
+                    Payer Systems
+                  </Link>
+                  {" · "}
+                  <Link
+                    href="/blog/beyond-pay-and-chase-payment-integrity-engine"
+                    className="font-semibold text-navy-link underline decoration-amber-mark/50 underline-offset-4 hover:decoration-amber-mark"
+                  >
+                    Payment Integrity
+                  </Link>
+                  {" · "}
+                  <Link
+                    href="/#work"
+                    className="font-semibold text-navy-link underline decoration-amber-mark/50 underline-offset-4 hover:decoration-amber-mark"
+                  >
+                    Enterprise Technology
+                  </Link>
+                </p>
                 {about.map((paragraph) => (
                   <p
                     key={paragraph.slice(0, 40)}
@@ -101,10 +148,9 @@ export default function Home() {
             <Credentials />
 
             <footer className="max-w-md border-t border-rule pt-8 pb-16 text-sm text-ink/65 sm:pb-0">
-              <p>
-                An engineering journal for architecture notes, production
-                systems, and the craft of shipping claims platforms. Built with
-                Next.js and Tailwind CSS.{" "}
+                <p>
+                Notes on healthcare payer architecture and data science. Built
+                with Next.js and Tailwind CSS.{" "}
                 <Link
                   href="/v2"
                   className="font-medium text-navy-link underline decoration-amber-mark/40 underline-offset-4 hover:decoration-amber-mark"

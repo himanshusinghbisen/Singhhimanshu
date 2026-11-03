@@ -20,11 +20,11 @@ export async function generateMetadata({
 }: MercuryBlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
-  if (!post) return { title: `Writing · ${profile.name} · Mercury` };
+  if (!post) return { title: { absolute: `Writing · ${profile.name} · Mercury` } };
 
   const url = `/v2/blog/${post.slug}`;
   return {
-    title: `${post.title} · Mercury`,
+    title: { absolute: `${post.title} · Mercury` },
     description: post.summary,
     alternates: { canonical: `/blog/${post.slug}` },
     robots: { index: false, follow: true },
@@ -92,7 +92,11 @@ export default async function MercuryBlogPostPage({
         <BlogBlocks blocks={post.body} theme="mercury" />
 
         <footer className="mt-14 border-t border-[#23334D] pt-8">
-          <p className="text-xl font-semibold text-[#F1F5F9]">{profile.name}</p>
+          <p className="text-xl font-semibold text-[#F1F5F9]">
+            <Link href="/about" className="hover:text-[#00D2D3]">
+              {profile.name}
+            </Link>
+          </p>
           <p className="mt-1 text-sm text-[#94A3B8]">{profile.title}</p>
           <div className="mt-6 flex flex-wrap gap-4 text-sm">
             <Link href="/v2/blog" className="font-medium text-[#00D2D3]">

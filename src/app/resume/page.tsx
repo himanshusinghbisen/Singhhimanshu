@@ -13,7 +13,7 @@ import {
 } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: `Résumé · ${profile.name}`,
+  title: "Résumé",
   description: `${profile.name} — ${profile.headline}`,
   alternates: { canonical: "/resume" },
 };

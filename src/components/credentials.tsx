@@ -2,14 +2,16 @@ import { certifications, education, skillGroups } from "@/lib/data";
 import { ArrowUpRightIcon } from "@/components/icons";
 import { SectionHeading } from "@/components/section-heading";
 
-export function Credentials() {
+export function Credentials({ indexed = true }: { indexed?: boolean }) {
   return (
     <section
       id="credentials"
       className="mb-16 scroll-mt-16 md:mb-24 lg:mb-32 lg:scroll-mt-24"
       aria-label="Education, certifications, and skills"
     >
-      <SectionHeading index="05">Credentials</SectionHeading>
+      <SectionHeading index={indexed ? "05" : undefined}>
+        Credentials
+      </SectionHeading>
 
       <h3 className="mb-4 text-xs font-bold tracking-[0.2em] text-ink/65 uppercase">
         Education

@@ -9,7 +9,8 @@ export function DataIngestionEnhancements({ headings }: { headings: string[] }) 
         <p className="mt-3 text-[16px] leading-7 text-[#394252]">
           Reliable ingestion is more than moving files. It establishes where data came from,
           what each record represents, whether the delivery is complete, how it may be used,
-          and how the same result can be reproduced after a failure or source correction.
+          and how the same result can be reproduced after a failure or source correction—
+          whether the source is a database, API, event stream, sensor, or partner file.
         </p>
       </section>
 
@@ -18,10 +19,10 @@ export function DataIngestionEnhancements({ headings }: { headings: string[] }) 
         <h2 id="ingestion-flow-title" className="font-journal mt-2 text-2xl font-semibold text-ink">A controlled ingestion pipeline</h2>
         <div className="mt-5 grid gap-2 sm:grid-cols-5">
           {[
-            ["01", "Source", "Payer systems, EDI, APIs, partners"],
-            ["02", "Collect", "Batch, API, CDC, or event stream"],
+            ["01", "Source", "Databases, APIs, files, event streams"],
+            ["02", "Collect", "Batch, API, CDC, or streaming"],
             ["03", "Land", "Original payload and batch metadata"],
-            ["04", "Validate", "Schema, quality, security, control totals"],
+            ["04", "Validate", "Schema, quality, security, reconciliation"],
             ["05", "Publish", "Accepted data with lineage and status"],
           ].map(([number, title, description], index) => (
             <div key={number} className="relative rounded-lg border border-rule bg-background p-3">

@@ -5,7 +5,7 @@ export const profile = {
   positioning:
     "Healthcare Systems Architect | Payer Technology | Enterprise Architecture",
   tagline:
-    "I design, modernize, and build enterprise healthcare platforms.",
+    "I design and build scalable claims and payment integrity platforms — architecture that prevents leakage, and code that ships in production.",
   location: "Dallas–Fort Worth",
   locationLabel: "Dallas–Fort Worth, Texas",
   email: "himanshu.singhh@outlook.com",
@@ -30,7 +30,7 @@ export const navItems = [
 export const intro = [
   "I am a Healthcare Systems Architect and technology consultant focused on designing, modernizing, and building enterprise healthcare platforms.",
   "My work spans healthcare payer systems, claims processing, payment integrity, claims recovery, data integration, and cloud modernization. I combine enterprise architecture and hands-on engineering to help healthcare organizations build scalable, reliable systems.",
-  "Through this website, I share practical insights into healthcare payer business architecture, data architecture, claims platforms, payment integrity, and the technology behind healthcare operations.",
+  "Beyond building production systems, I share practical insights into healthcare payer business architecture, data architecture, claims adjudication, benefit administration, and payment integrity. My goal is to explain the business concepts and technology patterns behind modern healthcare platforms.",
 ];
 
 export const about = [

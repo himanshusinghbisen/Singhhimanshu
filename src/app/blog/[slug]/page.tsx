@@ -30,7 +30,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    authors: [{ name: profile.name, url: "/about" }],
+    authors: [{ name: profile.name, url: "/" }],
     alternates: { canonical: url },
     openGraph: {
       type: "article",
@@ -102,7 +102,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <footer className="mt-14 border-t border-rule pt-8">
           <p className="font-journal text-xl font-semibold text-ink">
-            <Link href="/about" className="hover:text-navy-link">
+            <Link href="/" className="hover:text-navy-link">
               {profile.name}
             </Link>
           </p>

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   description: seo.description,
   applicationName: siteName,
-  authors: [{ name: profile.name, url: `${siteUrl}/about` }],
+  authors: [{ name: profile.name, url: "/" }],
   creator: profile.name,
   publisher: profile.name,
   keywords: [...seo.keywords],

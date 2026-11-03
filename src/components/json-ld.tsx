@@ -23,7 +23,7 @@ export function JsonLd() {
         "@id": personId,
         name: profile.name,
         givenName: profile.firstName,
-        url: `${siteUrl}/about`,
+        url: siteUrl,
         image: `${siteUrl}/images/himanshu-singh-headshot.jpg`,
         email: profile.email,
         telephone: profile.phone,
@@ -66,19 +66,4 @@ export function JsonLd() {
   };
 
   return <JsonLdScript data={data} />;
-}
-
-export function ProfilePageJsonLd() {
-  return (
-    <JsonLdScript
-      data={{
-        "@context": "https://schema.org",
-        "@type": "ProfilePage",
-        "@id": `${siteUrl}/about#profile`,
-        url: `${siteUrl}/about`,
-        name: "About Himanshu Singh",
-        mainEntity: { "@id": `${siteUrl}/#person` },
-      }}
-    />
-  );
 }

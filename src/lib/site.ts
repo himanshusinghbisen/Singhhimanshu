@@ -9,7 +9,7 @@ export const seo = {
   title: "Himanshu Singh | Healthcare Systems Architect",
   shortTitle: "Himanshu Singh | Healthcare Systems Architect",
   description:
-    "Himanshu Singh is a Healthcare Systems Architect specializing in payer platforms, claims processing, payment integrity, enterprise architecture, and healthcare technology modernization.",
+    "Himanshu Singh is a Healthcare Systems Architect specializing in healthcare payer platforms, claims processing, payment integrity, claims recovery, and enterprise technology modernization.",
   openGraphDescription:
     "Healthcare payer architecture, claims platforms, payment integrity, and enterprise technology.",
   twitterDescription:

@@ -8,7 +8,22 @@ export type BlogFigure = {
   caption?: string;
 };
 
-export type BlogBlock = string | BlogFigure;
+export type BlogHeading = {
+  type: "heading";
+  text: string;
+};
+
+export type BlogLink = {
+  label: string;
+  href: string;
+};
+
+export type BlogLinks = {
+  type: "links";
+  items: BlogLink[];
+};
+
+export type BlogBlock = string | BlogFigure | BlogHeading | BlogLinks;
 
 export type BlogPost = {
   slug: string;

@@ -29,6 +29,42 @@ export function BlogBlocks({
           );
         }
 
+        if (block.type === "heading") {
+          return (
+            <h2
+              key={`h-${index}-${block.text}`}
+              className={cn(
+                "pt-6 text-2xl leading-tight font-semibold tracking-tight",
+                isMercury ? "text-[#F1F5F9]" : "font-journal text-ink",
+              )}
+            >
+              {block.text}
+            </h2>
+          );
+        }
+
+        if (block.type === "links") {
+          return (
+            <ul key={`links-${index}`} className="space-y-3">
+              {block.items.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      "font-medium underline decoration-amber-mark/40 underline-offset-4 hover:decoration-amber-mark",
+                      isMercury ? "text-[#00D2D3]" : "text-navy-link",
+                    )}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          );
+        }
+
         return (
           <figure
             key={`fig-${block.src}`}

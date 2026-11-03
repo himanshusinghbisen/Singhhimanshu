@@ -503,10 +503,107 @@ def coverage_cover() -> None:
     save(image, "healthcare-payer-cover.jpg")
 
 
+def coverage_programs() -> None:
+    """Who the sponsor is in commercial coverage, Medicare, and Medicaid."""
+    image, draw = canvas(1080, 1460)
+    heading(draw, "Who the sponsor is")
+    draw.text(
+        (64, 112),
+        "The role changes with the program. This is not one hierarchy.",
+        font=F(REG, 22),
+        fill=MUTED,
+    )
+    rows = [
+        (
+            (219, 234, 254),
+            (37, 99, 235),
+            (30, 58, 138),
+            "Commercial",
+            [
+                ("Authority", "The contract, under state insurance rules or ERISA"),
+                ("Sponsor", "Employer or other group"),
+                ("Administers", "An insurer, or a TPA when the employer keeps the risk"),
+            ],
+        ),
+        (
+            (224, 242, 254),
+            (2, 132, 199),
+            (7, 89, 133),
+            "Original Medicare",
+            [
+                ("Authority", "Federal government / CMS"),
+                ("Sponsor", "No employer-style sponsor"),
+                ("Administers", "CMS. A MAC processes Part A and Part B claims"),
+            ],
+        ),
+        (
+            (220, 252, 231),
+            (22, 163, 74),
+            (22, 101, 52),
+            "Medicare Advantage",
+            [
+                ("Authority", "Federal government / CMS"),
+                ("Sponsor", "Private Medicare Advantage organization"),
+                ("Administers", "That organization, under a contract with CMS"),
+            ],
+        ),
+        (
+            (254, 243, 199),
+            (217, 119, 6),
+            (146, 64, 14),
+            "Medicaid",
+            [
+                ("Authority", "Federal and state governments"),
+                ("Sponsor", "State Medicaid agency"),
+                ("Administers", "The state agency, or an MCO under a state contract"),
+            ],
+        ),
+    ]
+    y = 168
+    for fill, stroke, ink, title, lines in rows:
+        rounded(draw, (40, y, 1040, y + 280), 18, fill, stroke, 3)
+        draw.text((68, y + 20), title, font=F(BOLD, 28), fill=ink)
+        line_y = y + 68
+        for label, value in lines:
+            draw.text((68, line_y), label, font=F(MED, 18), fill=MUTED)
+            line_y += 24
+            line_y = paragraph(draw, value, 68, line_y, 920, F(REG, 24), INK, gap=4)
+            line_y += 8
+        y += 296
+    save(image, "healthcare-payer-programs.jpg")
+
+
+def coverage_takeaways() -> None:
+    image, draw = canvas(1080, 860)
+    heading(draw, "Five questions")
+    draw.text(
+        (64, 112),
+        "Each entity answers a different one.",
+        font=F(REG, 22),
+        fill=MUTED,
+    )
+    rows = [
+        ((219, 234, 254), (37, 99, 235), (30, 58, 138), "Carrier", "Who insures or administers?"),
+        ((219, 234, 254), (37, 99, 235), (30, 58, 138), "Sponsor", "Who establishes or funds?"),
+        ((224, 242, 254), (2, 132, 199), (7, 89, 133), "Policy", "What governs the arrangement?"),
+        ((220, 252, 231), (22, 163, 74), (22, 101, 52), "Plan", "Which coverage package?"),
+        ((220, 252, 231), (22, 163, 74), (22, 101, 52), "Benefit", "What rules apply to this service?"),
+    ]
+    y = 170
+    for fill, stroke, ink, name, question in rows:
+        rounded(draw, (40, y, 1040, y + 112), 18, fill, stroke, 3)
+        draw.text((68, y + 36), name, font=F(BOLD, 28), fill=ink)
+        draw.text((340, y + 38), question, font=F(MED, 26), fill=INK)
+        y += 128
+    save(image, "healthcare-payer-takeaways.jpg")
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     coverage_architecture()
     coverage_cover()
+    coverage_programs()
+    coverage_takeaways()
     sampling_two_samples()
     sampling_standard_error()
     simulation_methods()

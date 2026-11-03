@@ -10,9 +10,9 @@ export const coverageArchitecture: BlogPost[] = [
     slug: "healthcare-payer-business-architecture",
     title: "Healthcare payer business architecture: the five core entities",
     summary:
-      "Part 1 of 6. Carrier, sponsor, policy, plan, and benefit. Who administers, who funds, what the contract is, which package applies, and which rules cover one service.",
+      "Part 1 of 6. Carrier, sponsor, policy, plan, and benefit. The same words point to different organizations in commercial coverage, Medicare, and Medicaid.",
     date: "2026-11-16",
-    readingMinutes: 10,
+    readingMinutes: 12,
     tags: ["Healthcare", "Business Architecture", "Payer Systems"],
     body: [
       {
@@ -23,8 +23,8 @@ export const coverageArchitecture: BlogPost[] = [
       "Part 1 of a series on healthcare payer business architecture. This part is the foundation: five business entities, what each one is responsible for, and how they relate. Claims adjudication, the data model, and benefit calculations come later. They are not this article.",
       "Healthcare insurance is often described as a relationship between an insurance company and a member. Behind every card is a larger arrangement: organizations, contracts, coverage, plan options, and benefit rules. Anyone designing or configuring a payer platform has to know which of those is which.",
       "Acme Corporation provides health coverage to its employees. It has two divisions, a corporate headquarters and a unionized manufacturing plant. They share a brand. They do not share a coverage arrangement. Headquarters employees have a PPO. The plant has a separate arrangement. Both may use the same carrier. Their contracts, eligibility, plan options, and benefits may still differ.",
-      "The architectural question is a narrow one. How does a payer system know which coverage rules apply to a particular member? Five entities are enough to start: carrier, sponsor, policy, plan, and benefit.",
-      "A carrier is the organization that provides the coverage or performs an agreed administrative role. UnitedHealthcare, in this example, provides commercial coverage to an employer. Not every arrangement works that way. In a fully insured arrangement the insurer generally holds the financial risk for covered claims. In a self-funded arrangement the employer generally holds that risk, and a third-party administrator may run claims, eligibility, and the other services. The organization administering the arrangement and the organization bearing the risk are not necessarily the same. From an architecture point of view, the carrier or administrator is who is responsible for the relevant coverage or administrative services.",
+      "The architectural question is a narrow one. How does a payer system know which coverage rules apply to a particular member? Five entities are enough to start: carrier, sponsor, policy, plan, and benefit. Commercial, Medicare, and Medicaid fill those roles with different organizations. The five entities stay. The occupants change.",
+      "In a fully insured commercial arrangement, an insurer assumes the financial risk for covered claims. A third-party administrator performs agreed administrative work, which is the usual pattern when the employer is self-funded and keeps that risk. One organization can do both jobs. The architecture should still treat them as distinct responsibilities. UnitedHealthcare, in this example, provides commercial coverage to Acme. That does not make every carrier a TPA, and it does not mean every sponsor contracts with a carrier in the same way.",
       "A sponsor is the organization that establishes or funds a coverage arrangement for an eligible population. In employer coverage that is typically the employer. Here the sponsor is Acme. Headquarters employees and the unionized plant may have different eligibility, different contracts, and different coverage. The sponsor has to be understood as the group or benefit arrangement, not merely the name on the building. From an architecture point of view, the sponsor is who establishes or funds the applicable arrangement.",
       "A policy is the insurance contract in a fully insured arrangement. For Acme headquarters the example contract is group coverage G-88421, in force from January 1 through December 31, 2026, fully insured, between Acme and the insurer. The contract is the terms under which coverage is provided. In a self-funded arrangement the documents are different: the employer's plan documents, and an administrative services agreement with the administrator. Not every employer arrangement has the same contractual shape. From an architecture point of view, the policy or the applicable plan documents are the contractual foundation.",
       "A plan is a specific coverage option available to eligible members. Acme headquarters offers three: Acme Standard PPO 1500, Acme Premium PPO 500, and Acme HDHP 3000. They can differ in deductible, copay, coinsurance, network, covered services, limits, and out-of-pocket maximum. The sponsor does not by itself determine the plan. The contract and the plan documents say which options exist. A member has to be enrolled in one of them before any coverage rule can apply. From an architecture point of view, the plan is the package selected or assigned to that member.",
@@ -34,13 +34,92 @@ export const coverageArchitecture: BlogPost[] = [
         src: "/images/blog/healthcare-payer-flowchart.jpg",
         alt: "UnitedHealthcare and Acme meet in the coverage arrangement. That arrangement defines the plan options, which contain the benefit rules. Member enrollment points at the plan options.",
         caption:
-          "The carrier link runs both ways. The sponsor funds the arrangement. Enrollment selects a plan option, and that option contains the benefit rules.",
+          "A commercial group arrangement. The carrier may insure, administer, or both. Enrollment selects a plan option, and that option contains the benefit rules.",
       },
-      "Bring Acme back to one picture. Headquarters employees are enrolled in the Acme Standard PPO 1500. The carrier in the example is UnitedHealthcare. The sponsor is Acme. The contract is G-88421. The plan is that PPO. The benefit, for this visit, is the outpatient specialist rule. Each entity answers a different question. Who provides or administers the coverage. Who establishes or funds it. What contract governs it. Which package applies. Which rules apply to this service.",
+      "Bring Acme back to one picture. Headquarters employees are enrolled in the Acme Standard PPO 1500. The insurer in the example is UnitedHealthcare. The sponsor is Acme. The contract is G-88421. The plan is that PPO. The benefit, for this visit, is the outpatient specialist rule. Each entity answers a different question. Who insures or administers the coverage. Who establishes or funds it. What contract governs it. Which package applies. Which rules apply to this service.",
       "These entities are not interchangeable. A sponsor is not a carrier. A plan is not a policy. A benefit is not a plan. When a design or a configuration treats them as the same thing, the relationships go wrong, and coverage and processing go wrong with them.",
       "The distinctions matter past the glossary. Configuration needs an owner for each entity. Eligibility has to decide whether this member belongs to this arrangement on this date. Enrollment has to attach the member to the right plan. Benefit administration has to use the rules of that plan. The links among sponsor, contract, plan, and benefit have to stay consistent. Changes, and the dates they take effect, have to be traceable.",
-      "Healthcare coverage is not one insurance record. It is these related entities. The carrier identifies the insurer or the administrator. The sponsor identifies who establishes or funds the arrangement. The policy or the plan documents establish the contract. The plan is the package. The benefit is the rule for a service. That is the foundation. The next part is how these entities become a data model. Enrollment, claims adjudication, benefit calculation, and the mistakes that show up in configuration come after that.",
-      "Acme Corporation, the contract reference, and the coverage examples are fictional. They are here to show the relationships. They are not an actual insurance contract or product.",
+      {
+        type: "heading",
+        text: "Who is the sponsor in commercial, Medicare, and Medicaid?",
+      },
+      "Sponsor is not a single kind of organization. In commercial coverage it is usually the employer. In Medicare and Medicaid the word points somewhere else, or it does not apply in the employer sense at all. The five entities remain a conceptual model. They are not a universal payer database hierarchy.",
+      "Commercial coverage is the Acme case. The sponsor is the employer or another group purchasing coverage. A fully insured plan is underwritten by an insurer. A self-funded plan leaves the claims risk with the employer, and a TPA or an insurer acting only as administrator runs the services. The coverage arrangement is the group contract, or the plan documents together with an administrative services agreement.",
+      "Original Medicare has no employer-style sponsor. The federal government establishes the program, and the Centers for Medicare & Medicaid Services administers it. Private Medicare Administrative Contractors process Part A and Part B claims for geographic jurisdictions. A contractor that pays a claim is not the sponsor, and it is not the insurer of the benefit in the commercial sense.",
+      "Medicare Advantage keeps CMS as the program authority and moves the plan sponsorship to a private organization. That Medicare Advantage organization contracts with CMS to provide Part A and Part B benefits, and often supplemental benefits. It can belong to the same corporate family as a commercial carrier. The CMS contract is not Acme's group contract, and the Medicare Advantage organization is not the employer.",
+      "Medicaid is funded jointly by the federal government and the states. CMS oversees the federal rules and the federal matching funds. The state Medicaid agency administers the program. In Texas, that agency is the Health and Human Services Commission. Where a state uses managed care, it contracts with managed care organizations to deliver covered services. Those organizations are contractors of the state. They do not replace the state agency. States do not all use the same mix of managed care and fee-for-service.",
+      {
+        type: "figure",
+        src: "/images/blog/healthcare-payer-programs.jpg",
+        alt: "Sponsor and administrator for commercial coverage, Original Medicare, Medicare Advantage, and Medicaid. Original Medicare has no employer-style sponsor. Medicaid's program sponsor is the state agency.",
+        caption:
+          "Program roles, not a single legal hierarchy. Original Medicare has no employer-style sponsor. In Medicaid the state agency is the program authority, and a managed care organization is a contractor where the state uses one.",
+      },
+      {
+        type: "heading",
+        text: "Key takeaways",
+      },
+      "Healthcare coverage is not one insurance record. It is these related entities, and the program decides who occupies them. The next part is how the entities become a data model. Enrollment, claims adjudication, and benefit calculation come after that.",
+      {
+        type: "figure",
+        src: "/images/blog/healthcare-payer-takeaways.jpg",
+        alt: "Five questions: who insures or administers, who establishes or funds, what governs the arrangement, which coverage package, and what rules apply to this service.",
+      },
+      "Acme Corporation, the contract reference, and the commercial coverage examples are fictional. The Medicare and Medicaid notes describe program roles. They are not a specific contract or product.",
+      {
+        type: "heading",
+        text: "References and further reading",
+      },
+      "Government sources are the primary references for terminology and program structure. HealthCare.gov's cost-sharing pages are the ones to use when a later article gets to deductibles, copayments, and coinsurance. The architecture in this article is a conceptual model for education. Relationships and terms vary with the program, the contract, and the funding arrangement.",
+      {
+        type: "links",
+        items: [
+          {
+            label: "HealthCare.gov — Glossary of Health Coverage and Medical Terms",
+            href: "https://www.healthcare.gov/sbc-glossary/",
+          },
+          {
+            label: "HealthCare.gov — Deductible",
+            href: "https://www.healthcare.gov/glossary/deductible/",
+          },
+          {
+            label: "HealthCare.gov — Copayment",
+            href: "https://www.healthcare.gov/glossary/co-payment/",
+          },
+          {
+            label: "HealthCare.gov — Coinsurance",
+            href: "https://www.healthcare.gov/glossary/co-insurance/",
+          },
+          {
+            label: "U.S. Department of Labor — Health plans",
+            href: "https://www.dol.gov/general/topic/health-plans",
+          },
+          {
+            label: "U.S. Department of Labor — Plan information",
+            href: "https://www.dol.gov/general/topic/health-plans/planinformation",
+          },
+          {
+            label: "CMS — What is a Medicare Administrative Contractor?",
+            href: "https://www.cms.gov/medicare/coding-billing/medicare-administrative-contractors-macs/whats-mac",
+          },
+          {
+            label: "CMS — Medicare Advantage and other health plans",
+            href: "https://www.cms.gov/medicare/enrollment-renewal/health-plans",
+          },
+          {
+            label: "Medicare.gov",
+            href: "https://www.medicare.gov/",
+          },
+          {
+            label: "Medicaid.gov",
+            href: "https://www.medicaid.gov/",
+          },
+          {
+            label: "Centers for Medicare & Medicaid Services",
+            href: "https://www.cms.gov/",
+          },
+        ],
+      },
     ],
   },
 ];

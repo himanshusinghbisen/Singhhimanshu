@@ -4,32 +4,44 @@ import { useEffect, useState } from "react";
 
 import { navItems } from "@/lib/data";
 
-type SectionId = (typeof navItems)[number]["id"];
+const defaultSectionIds: readonly string[] = navItems.map((item) => item.id);
 
 /** Last section whose top has crossed a line near the top of the viewport. */
-function sectionFromScroll(offset = 120): SectionId {
-  let current: SectionId = navItems[0].id;
+function sectionFromScroll(ids: readonly string[], offset = 120): string {
+  let current = ids[0] ?? "";
+  let lastExisting = "";
 
-  for (const item of navItems) {
-    const el = document.getElementById(item.id);
+  for (const id of ids) {
+    const el = document.getElementById(id);
     if (!el) continue;
+    lastExisting = id;
     if (el.getBoundingClientRect().top <= offset) {
-      current = item.id;
+      current = id;
     }
+  }
+
+  // The last section cannot always reach the offset line. Once the page is
+  // scrolled to the end, that section is the one in view.
+  const remaining =
+    document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
+  if (lastExisting && remaining <= 4) {
+    current = lastExisting;
   }
 
   return current;
 }
 
-export function useActiveSection() {
-  const [activeId, setActiveId] = useState<SectionId>(navItems[0].id);
+export function useActiveSection(
+  sectionIds: readonly string[] = defaultSectionIds,
+) {
+  const [activeId, setActiveId] = useState(sectionIds[0] ?? "");
 
   useEffect(() => {
     let frame = 0;
 
     const update = () => {
       frame = 0;
-      setActiveId(sectionFromScroll());
+      setActiveId(sectionFromScroll(sectionIds));
     };
 
     const onScrollOrResize = () => {
@@ -60,8 +72,8 @@ export function useActiveSection() {
       if (!anchor) return;
       const href = anchor.getAttribute("href");
       if (!href || href.length < 2) return;
-      const id = href.slice(1) as SectionId;
-      if (navItems.some((item) => item.id === id)) {
+      const id = href.slice(1);
+      if (sectionIds.includes(id)) {
         setActiveId(id);
       }
     };
@@ -75,7 +87,7 @@ export function useActiveSection() {
       window.removeEventListener("hashchange", onHashChange);
       document.removeEventListener("click", onClick);
     };
-  }, []);
+  }, [sectionIds]);
 
   return activeId;
 }

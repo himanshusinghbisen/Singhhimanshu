@@ -105,6 +105,15 @@ export default function Home() {
                   </a>
                   .
                 </p>
+                <div className="mt-8">
+                  <Link
+                    href="/about"
+                    className="group inline-flex items-center font-semibold text-ink hover:text-navy-link"
+                  >
+                    Full profile
+                    <ArrowUpRightIcon className="ml-1 h-4 w-4 text-amber-mark transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </Link>
+                </div>
               </div>
             </section>
 
@@ -146,6 +155,57 @@ export default function Home() {
             <WritingPreview />
 
             <Credentials />
+
+            <section
+              id="contact"
+              className="mb-16 scroll-mt-16 md:mb-24 lg:mb-32 lg:scroll-mt-24"
+              aria-label="Contact"
+            >
+              <SectionHeading index="06">Contact</SectionHeading>
+              <div className="max-w-prose">
+                <p className="text-[16px] leading-relaxed text-ink/70">
+                  {profile.location}
+                </p>
+                <ul className="mt-6 space-y-3 text-[16px] leading-relaxed">
+                  <li>
+                    <a
+                      href={`mailto:${profile.email}`}
+                      className="font-semibold text-navy-link underline decoration-amber-mark/50 underline-offset-4 hover:decoration-amber-mark"
+                    >
+                      {profile.email}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={profile.phoneHref}
+                      className="font-semibold text-navy-link underline decoration-amber-mark/50 underline-offset-4 hover:decoration-amber-mark"
+                    >
+                      {profile.phone}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={profile.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-navy-link underline decoration-amber-mark/50 underline-offset-4 hover:decoration-amber-mark"
+                    >
+                      LinkedIn
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={profile.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-navy-link underline decoration-amber-mark/50 underline-offset-4 hover:decoration-amber-mark"
+                    >
+                      GitHub
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </section>
 
             <footer className="max-w-md border-t border-rule pt-8 pb-16 text-sm text-ink/65 sm:pb-0">
                 <p>
@@ -190,6 +250,74 @@ export default function Home() {
         </div>
       </div>
       <ThemeCompare current="journal" />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `(function () {
+  var nav = document.querySelector('nav[aria-label="Primary"]');
+  if (!nav || !document.getElementById("contact")) return;
+  var ids = ["about", "experience", "writing", "credentials", "contact"];
+  var links = {};
+  nav.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    links[link.getAttribute("href").slice(1)] = link;
+  });
+  function mark(id) {
+    ids.forEach(function (key) {
+      var link = links[key];
+      if (!link) return;
+      var spans = link.querySelectorAll("span");
+      var bar = spans[0];
+      var label = spans[1];
+      var on = key === id;
+      if (on) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+      if (!bar || !label) return;
+      bar.classList.toggle("w-10", on);
+      bar.classList.toggle("bg-amber-mark", on);
+      bar.classList.toggle("w-5", !on);
+      bar.classList.toggle("bg-rule", !on);
+      bar.classList.toggle("group-hover:w-10", !on);
+      bar.classList.toggle("group-hover:bg-amber-mark", !on);
+      label.classList.toggle("text-ink", on);
+      label.classList.toggle("text-ink/65", !on);
+      label.classList.toggle("group-hover:text-ink", !on);
+    });
+  }
+  function current() {
+    var active = ids[0];
+    var last = "";
+    ids.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      last = id;
+      if (el.getBoundingClientRect().top <= 120) active = id;
+    });
+    var remaining =
+      document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
+    if (last && remaining <= 4) active = last;
+    return active;
+  }
+  var frame = 0;
+  function update() {
+    frame = 0;
+    mark(current());
+  }
+  document.addEventListener("scroll", function () {
+    if (frame) return;
+    frame = window.requestAnimationFrame(update);
+  }, { passive: true, capture: true });
+  window.addEventListener("hashchange", update);
+  document.addEventListener("click", function (event) {
+    var target = event.target;
+    if (!target || !target.closest) return;
+    var anchor = target.closest('a[href^="#"]');
+    if (!anchor) return;
+    var id = anchor.getAttribute("href").slice(1);
+    if (ids.indexOf(id) !== -1) mark(id);
+  });
+  update();
+})();`,
+        }}
+      />
     </div>
   );
 }

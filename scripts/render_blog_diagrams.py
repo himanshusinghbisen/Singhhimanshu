@@ -389,34 +389,48 @@ def coverage_architecture() -> None:
     heading(draw, "How the five entities connect")
     draw.text(
         (64, 108),
-        "The sponsor and the carrier stay separate. They meet in the arrangement.",
+        "Insurer and administrator are separate. The sponsor is neither.",
         font=F(REG, 22),
         fill=MUTED,
     )
 
     node(
-        (36, 164, 500, 318),
+        (36, 158, 360, 292),
         carrier_fill,
         carrier_stroke,
         carrier_ink,
-        [("Carrier / administrator", BOLD, 26), ("UnitedHealthcare", MED, 28)],
+        [("Insurer", BOLD, 26), ("Assumes the risk", MED, 22)],
     )
     node(
-        (580, 164, 1044, 318),
-        carrier_fill,
+        (376, 158, 700, 292),
+        WHITE,
         carrier_stroke,
         carrier_ink,
-        [("Sponsor", BOLD, 26), ("Acme Corporation", MED, 28)],
+        [("Administrator", BOLD, 26), ("Runs the services", MED, 22)],
+    )
+    node(
+        (716, 158, 1044, 292),
+        enroll_fill,
+        enroll_stroke,
+        enroll_ink,
+        [("Sponsor", BOLD, 26), ("Acme Corporation", MED, 22)],
     )
 
-    arrow(draw, (268, 456), (268, 330), edge, 4)
-    arrow(draw, (268, 330), (268, 456), edge, 4)
-    edge_label("Insures or administers", 292, 376)
-    arrow(draw, (812, 330), (812, 456), edge, 4)
-    edge_label("Sponsors or funds", 836, 376)
+    def centered_label(text: str, center: int, y: int) -> None:
+        face = F(MED, 20)
+        tw = draw.textlength(text, font=face)
+        draw.text((center - tw / 2, y), text, font=face, fill=label_ink)
+
+    for center, label in (
+        (198, "Insures"),
+        (538, "Administers"),
+        (880, "Sponsors or funds"),
+    ):
+        centered_label(label, center, 304)
+        arrow(draw, (center, 340), (center, 428), edge, 4)
 
     node(
-        (120, 468, 960, 640),
+        (120, 440, 960, 612),
         arrange_fill,
         arrange_stroke,
         arrange_ink,
@@ -458,7 +472,7 @@ def coverage_architecture() -> None:
         enroll_ink,
         [("Member enrollment", BOLD, 28), ("Employee + selected plan", MED, 24)],
     )
-    save(image, "healthcare-payer-flowchart.jpg")
+    save(image, "healthcare-payer-responsibilities.jpg")
 
 
 def coverage_cover() -> None:
@@ -554,8 +568,8 @@ def coverage_programs() -> None:
             "Medicaid",
             [
                 ("Authority", "Federal and state governments"),
-                ("Sponsor", "State Medicaid agency"),
-                ("Administers", "The state agency, or an MCO under a state contract"),
+                ("Administrator", "State Medicaid agency. Not a commercial sponsor"),
+                ("Contractors", "MCOs, where the state uses managed care"),
             ],
         ),
     ]
@@ -570,7 +584,7 @@ def coverage_programs() -> None:
             line_y = paragraph(draw, value, 68, line_y, 920, F(REG, 24), INK, gap=4)
             line_y += 8
         y += 296
-    save(image, "healthcare-payer-programs.jpg")
+    save(image, "healthcare-payer-program-roles.jpg")
 
 
 def coverage_takeaways() -> None:
@@ -583,7 +597,7 @@ def coverage_takeaways() -> None:
         fill=MUTED,
     )
     rows = [
-        ((219, 234, 254), (37, 99, 235), (30, 58, 138), "Carrier", "Who insures or administers?"),
+        ((219, 234, 254), (37, 99, 235), (30, 58, 138), "Carrier", "Who insures, and who administers?"),
         ((219, 234, 254), (37, 99, 235), (30, 58, 138), "Sponsor", "Who establishes or funds?"),
         ((224, 242, 254), (2, 132, 199), (7, 89, 133), "Policy", "What governs the arrangement?"),
         ((220, 252, 231), (22, 163, 74), (22, 101, 52), "Plan", "Which coverage package?"),
@@ -595,7 +609,7 @@ def coverage_takeaways() -> None:
         draw.text((68, y + 36), name, font=F(BOLD, 28), fill=ink)
         draw.text((340, y + 38), question, font=F(MED, 26), fill=INK)
         y += 128
-    save(image, "healthcare-payer-takeaways.jpg")
+    save(image, "healthcare-payer-questions.jpg")
 
 
 def main() -> None:

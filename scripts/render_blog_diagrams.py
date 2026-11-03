@@ -361,27 +361,96 @@ def togaf_loop() -> None:
 
 
 def coverage_architecture() -> None:
-    image, draw = canvas(1100, 1280)
-    heading(draw, "How coverage is connected")
-    draw.text((64, 122), "Each row answers a question the row below does not reopen.", font=F(REG, 24), fill=MUTED)
-    layers = [
-        ("Carrier", "Who administers the coverage, and in which book.", BLUE_BG, BLUE_BD, NAVY),
-        ("Sponsor", "Who buys or funds it.", ORANGE_BG, ORANGE_BD, AMBER),
-        ("Policy", "The contract: term, funding, and who is covered.", GREEN_BG, GREEN_BD, TEAL),
-        ("Plan", "The package the policy points at.", BLUE_BG, BLUE_BD, NAVY),
-        ("Benefit", "One covered service, and what the member pays.", ORANGE_BG, ORANGE_BD, AMBER),
+    """Two parties meet in one arrangement. Enrollment points at a plan, not at a benefit."""
+    image, draw = canvas(1248, 1500)
+    heading(draw, "Two parties, one arrangement")
+    draw.text(
+        (64, 112),
+        "The sponsor and the carrier stay separate. They meet in the coverage arrangement.",
+        font=F(REG, 24),
+        fill=MUTED,
+    )
+
+    rounded(draw, (40, 168, 580, 328), 20, BLUE_BG, BLUE_BD, 2)
+    draw.text((68, 192), "Carrier", font=F(BOLD, 28), fill=NAVY)
+    draw.text((68, 236), "UnitedHealthcare", font=F(MED, 26), fill=INK)
+    draw.text((68, 278), "Insures or administers", font=F(REG, 22), fill=MUTED)
+
+    rounded(draw, (668, 168, 1208, 328), 20, ORANGE_BG, ORANGE_BD, 2)
+    draw.text((696, 192), "Sponsor", font=F(BOLD, 28), fill=AMBER)
+    draw.text((696, 236), "Acme Corporation", font=F(MED, 26), fill=INK)
+    draw.text((696, 278), "Sponsors or funds", font=F(REG, 22), fill=MUTED)
+
+    arrow(draw, (310, 340), (500, 428), INK, 4)
+    arrow(draw, (938, 340), (748, 428), INK, 4)
+
+    rounded(draw, (200, 436, 1048, 628), 20, GREEN_BG, GREEN_BD, 2)
+    draw.text((228, 460), "Coverage arrangement", font=F(BOLD, 30), fill=TEAL)
+    paragraph(
+        draw,
+        "Group contract or plan documents. Headquarters example: G-88421, fully insured, calendar year 2026.",
+        228,
+        516,
+        780,
+        F(REG, 24),
+        INK,
+        gap=8,
+    )
+
+    arrow(draw, (624, 640), (624, 708), INK, 4)
+    draw.text((648, 658), "Defines available options", font=F(MED, 22), fill=TEAL)
+
+    draw.text((40, 724), "Plan options", font=F(BOLD, 24), fill=INK)
+    plans = [
+        (40, "Standard PPO 1500", True),
+        (436, "Premium PPO 500", False),
+        (832, "HDHP 3000", False),
     ]
-    y = 186
-    for title, body, fill, outline, color in layers:
-        rounded(draw, (120, y, 980, y + 140), 20, fill, outline, 2)
-        draw.text((156, y + 24), title, font=F(BOLD, 32), fill=color)
-        draw.text((156, y + 78), body, font=F(REG, 24), fill=INK)
-        if title != "Benefit":
-            arrow(draw, (550, y + 144), (550, y + 188), INK, 4)
-        y += 188
-    rounded(draw, (56, 1128, 1044, 1224), 18, WHITE, LINE, 2)
-    paragraph(draw, "A visit looks up the benefit. It does not choose the carrier.", 88, 1158, 900, F(MED, 24), INK, gap=6)
-    save(image, "healthcare-coverage-architecture.jpg")
+    for x, label, selected in plans:
+        if selected:
+            rounded(draw, (x, 768, x + 376, 888), 18, BLUE_BG, NAVY, 3)
+            draw.text((x + 24, 792), label, font=F(BOLD, 26), fill=NAVY)
+            draw.text((x + 24, 834), "Selected for this member", font=F(REG, 20), fill=MUTED)
+        else:
+            rounded(draw, (x, 768, x + 376, 888), 18, BLUE_BG, BLUE_BD, 2)
+            draw.text((x + 24, 812), label, font=F(BOLD, 26), fill=NAVY)
+
+    arrow(draw, (640, 960), (400, 896), INK, 4)
+    draw.text((668, 904), "Enrolls in", font=F(MED, 22), fill=NAVY)
+
+    rounded(draw, (500, 964, 1208, 1140), 18, WHITE, LINE, 2)
+    draw.text((528, 988), "Member enrollment", font=F(BOLD, 26), fill=INK)
+    paragraph(
+        draw,
+        "A headquarters employee, enrolled in Standard PPO 1500. Enrollment picks a plan. It does not pick a benefit row.",
+        528,
+        1036,
+        640,
+        F(REG, 22),
+        MUTED,
+        gap=8,
+    )
+
+    arrow(draw, (140, 900), (140, 1204), INK, 4)
+    draw.text((168, 1028), "Contains", font=F(MED, 22), fill=AMBER)
+
+    draw.text((220, 1172), "Benefit rules inside the selected plan", font=F(BOLD, 24), fill=INK)
+    benefits = [(40, "Specialist visit"), (436, "Hospitalization"), (832, "Prescription")]
+    for x, label in benefits:
+        rounded(draw, (x, 1220, x + 376, 1332), 18, ORANGE_BG, ORANGE_BD, 2)
+        draw.text((x + 24, 1256), label, font=F(BOLD, 26), fill=AMBER)
+
+    paragraph(
+        draw,
+        "The links change if the arrangement is self-funded. The two parties stay separate either way.",
+        40,
+        1368,
+        1160,
+        F(REG, 22),
+        MUTED,
+        gap=6,
+    )
+    save(image, "healthcare-payer-entities.jpg")
 
 
 def main() -> None:

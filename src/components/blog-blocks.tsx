@@ -46,6 +46,19 @@ export function BlogBlocks({
           );
         }
 
+        if (block.type === "code") {
+          return (
+            <figure key={`code-${index}`} className={cn("overflow-hidden border", isMercury ? "rounded-xl border-[#23334D] bg-[#101827]" : "rounded-sm border-rule bg-[#172033]")}>
+              <div className="flex items-center justify-between border-b border-white/10 px-4 py-2">
+                <span className="font-mono text-[11px] uppercase tracking-wider text-white/60">{block.language}</span>
+                <span className="text-[11px] text-white/45">Example</span>
+              </div>
+              <pre className="overflow-x-auto p-4 text-[13px] leading-6 text-[#E5E7EB]"><code>{block.code}</code></pre>
+              {block.caption ? <figcaption className="border-t border-white/10 px-4 py-3 text-sm text-white/60">{block.caption}</figcaption> : null}
+            </figure>
+          );
+        }
+
         if (block.type === "links") {
           return (
             <ul key={`links-${index}`} className="space-y-3">

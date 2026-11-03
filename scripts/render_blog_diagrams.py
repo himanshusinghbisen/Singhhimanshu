@@ -461,9 +461,52 @@ def coverage_architecture() -> None:
     save(image, "healthcare-payer-flowchart.jpg")
 
 
+def coverage_cover() -> None:
+    """Original series cover. Five entities, side by side, not a copy of anyone else's art."""
+    image, draw = canvas(1480, 540)
+    carrier_fill, carrier_stroke, carrier_ink = (219, 234, 254), (37, 99, 235), (30, 58, 138)
+    arrange_fill, arrange_stroke, arrange_ink = (224, 242, 254), (2, 132, 199), (7, 89, 133)
+    plan_fill, plan_stroke, plan_ink = (220, 252, 231), (22, 163, 74), (22, 101, 52)
+
+    draw.text((64, 52), "Part 1 of 6", font=F(MED, 22), fill=AMBER)
+    title = "Healthcare payer business architecture"
+    title_font = F(BOLD, 44)
+    draw.text((64, 96), title, font=title_font, fill=INK)
+    draw.text(
+        (64, 164),
+        "Carrier, sponsor, policy, plan, and benefit.",
+        font=F(REG, 26),
+        fill=MUTED,
+    )
+
+    tiles = [
+        ("Carrier", "UnitedHealthcare", carrier_fill, carrier_stroke, carrier_ink),
+        ("Sponsor", "Acme Corporation", carrier_fill, carrier_stroke, carrier_ink),
+        ("Policy", "Group contract", arrange_fill, arrange_stroke, arrange_ink),
+        ("Plan", "Standard PPO 1500", plan_fill, plan_stroke, plan_ink),
+        ("Benefit", "Specialist visit", plan_fill, plan_stroke, plan_ink),
+    ]
+    gap = 18
+    left = 48
+    usable = 1480 - left * 2 - gap * (len(tiles) - 1)
+    width = usable // len(tiles)
+    top, bottom = 248, 448
+    for index, (role, example, fill, stroke, ink) in enumerate(tiles):
+        x = left + index * (width + gap)
+        rounded(draw, (x, top, x + width, bottom), 18, fill, stroke, 3)
+        role_font = F(BOLD, 28)
+        example_font = F(MED, 22)
+        role_w = draw.textlength(role, font=role_font)
+        example_w = draw.textlength(example, font=example_font)
+        draw.text((x + (width - role_w) / 2, 312), role, font=role_font, fill=ink)
+        draw.text((x + (width - example_w) / 2, 358), example, font=example_font, fill=ink)
+    save(image, "healthcare-payer-cover.jpg")
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     coverage_architecture()
+    coverage_cover()
     sampling_two_samples()
     sampling_standard_error()
     simulation_methods()

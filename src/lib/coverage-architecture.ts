@@ -15,6 +15,11 @@ export const coverageArchitecture: BlogPost[] = [
     readingMinutes: 10,
     tags: ["Healthcare", "Business Architecture", "Payer Systems"],
     body: [
+      {
+        type: "figure",
+        src: "/images/blog/healthcare-payer-cover.jpg",
+        alt: "Part 1 cover. Five entities of healthcare payer business architecture: carrier, sponsor, policy, plan, and benefit.",
+      },
       "Part 1 of a series on healthcare payer business architecture. This part is the foundation: five business entities, what each one is responsible for, and how they relate. Claims adjudication, the data model, and benefit calculations come later. They are not this article.",
       "Healthcare insurance is often described as a relationship between an insurance company and a member. Behind every card is a larger arrangement: organizations, contracts, coverage, plan options, and benefit rules. Anyone designing or configuring a payer platform has to know which of those is which.",
       "Acme Corporation provides health coverage to its employees. It has two divisions, a corporate headquarters and a unionized manufacturing plant. They share a brand. They do not share a coverage arrangement. Headquarters employees have a PPO. The plant has a separate arrangement. Both may use the same carrier. Their contracts, eligibility, plan options, and benefits may still differ.",

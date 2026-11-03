@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
+import { headingAnchorId } from "@/components/payer-article-enhancements";
 import type { BlogBlock } from "@/lib/posts";
 
 export function BlogBlocks({
@@ -34,6 +35,7 @@ export function BlogBlocks({
           return (
             <h2
               key={`h-${index}-${block.text}`}
+              id={headingAnchorId(block.text)}
               className={cn(
                 "pt-6 text-2xl leading-tight font-semibold tracking-tight",
                 isMercury ? "text-[#F1F5F9]" : "font-journal text-ink",

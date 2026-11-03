@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArticleJsonLd } from "@/components/article-json-ld";
 import { BlogBlocks } from "@/components/blog-blocks";
 import { PayerArticleEnhancements } from "@/components/payer-article-enhancements";
+import { DataIngestionEnhancements } from "@/components/data-ingestion-enhancements";
 import { ThemeCompare } from "@/components/theme-compare";
 import { profile } from "@/lib/data";
 import { formatPostDate, getAllPosts, getPost, postImage } from "@/lib/posts";
@@ -101,6 +102,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {post.slug === "healthcare-payer-business-architecture" ? (
           <PayerArticleEnhancements
+            headings={post.body.flatMap((block) =>
+              typeof block !== "string" && block.type === "heading" ? [block.text] : [],
+            )}
+          />
+        ) : null}
+
+        {post.slug === "data-collection-and-ingestion" ? (
+          <DataIngestionEnhancements
             headings={post.body.flatMap((block) =>
               typeof block !== "string" && block.type === "heading" ? [block.text] : [],
             )}

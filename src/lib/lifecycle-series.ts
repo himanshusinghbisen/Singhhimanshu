@@ -1,7 +1,7 @@
 import type { BlogPost } from "@/lib/posts";
 
 /**
- * Weekly data-science lifecycle series.
+ * End-to-end data science lifecycle series.
  * Production shows a part on its date. Development shows every part.
  * Mondays: Oct 26, Nov 2, Nov 9, Nov 16, Nov 23, Nov 30, Dec 7, Dec 14 (2026).
  */
@@ -10,13 +10,13 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "problem-framing-before-the-model",
     title: "Problem framing: the question before the model",
     summary:
-      "Part 1 of 8. A data science effort starts by turning a vague ask into a question, a metric, and a constraint. Classification when the action is a label. Regression when the action needs a number.",
+      "Part 1 of 10. Translate a business problem into an analytical question, define the target and success metrics, and make the constraints explicit before choosing a model.",
     date: "2026-10-26",
     readingMinutes: 9,
-    tags: ["Data Science", "Machine Learning", "Lifecycle"],
+    tags: ["Data Science", "Problem Framing", "Machine Learning", "Lifecycle"],
     body: [
-      "This is part 1 of a series on the data science lifecycle, from the question through cleaning, wrangling, exploration, mining, modeling, and the chart that has to carry a decision. Each part stands alone. Together they are the order of the work.",
-      "A data science effort fails early when it starts in a notebook. Someone says reduce churn, find the bad claims, or tell us what next quarter looks like. Those sentences are asks. They are not yet questions a dataset can answer. The first job is translation: what decision will change if the analysis is right, and what would count as right.",
+      "This is part 1 of a practical series on the end-to-end data science lifecycle: framing the problem, acquiring and preparing data, exploring patterns, building and validating models, and putting results into use. The methods apply across industries. Examples will draw from different domains—including healthcare—but the focus is on transferable analytical and engineering skills.",
+      "A data science effort can fail before the first line of Python when it starts with a tool instead of a decision. Someone says reduce customer churn, detect suspicious transactions, improve a manufacturing yield, or forecast next quarter\u2019s demand. Those are business asks, not yet analytical questions. Translate the request into a decision: who will act on the result, what action could change, and what evidence would make that action worthwhile.",
       {
         type: "figure",
         src: "/images/blog/lifecycle-problem-framing.jpg",
@@ -25,8 +25,8 @@ export const lifecycleSeries: BlogPost[] = [
           "The ask, the question, and the metric belong on one page, with the constraints that will not move.",
       },
       "The translation names the task. Classification asks which case belongs in a class. Regression asks for a number. Clustering, which comes later in this series, asks for groups when nobody has labeled the rows yet. Picking the task is not a technical preference. It is a statement of what the business is willing to act on.",
-      "Classification is the right task when the decision is a label. Two cases should be treated differently because they fall in different classes, and a score is only a way to reach that label. A member either receives an outreach call or does not: will they leave in the next 60 days, yes or no. A claim line is queued for review or it is paid: proper or improper. A provider is placed in a tier, low, medium, or high, and the tier changes the audit rate. Two classes or several classes are both classification. What makes it classification is that the action is the class.",
-      "Regression is the right task when the decision needs the number itself. A difference of dollars, days, or volume changes what you reserve, staff, or schedule. Expected paid amount is a reserve, not a yes or no. Days until discharge is a bed count. Volume next quarter tells you what is coming. Forecasting is regression pointed at a future time: the same kind of number, with the clock as part of the question. If you only needed to know whether volume will cross a threshold, you have turned it back into classification, and the threshold belongs on the framing page.",
+      "Classification is the right task when the decision is a label. A customer may renew or cancel; a transaction may be legitimate or suspicious; a manufactured unit may pass or fail inspection. Healthcare offers another example: a member may or may not need an outreach intervention. Binary and multiclass problems are both classification. What makes the task classification is that the action depends on the predicted category.",
+      "Regression is the right task when the decision needs a numeric estimate. Predicting customer lifetime value, delivery time, equipment energy use, or monthly sales volume are examples. Healthcare can provide a familiar case too, such as estimating length of stay or expected cost. Forecasting is regression with time made explicit. If the real decision is only whether a value will cross a threshold, the task may instead be classification; document that threshold during framing.",
       {
         type: "figure",
         src: "/images/blog/lifecycle-classification-regression.jpg",
@@ -34,7 +34,7 @@ export const lifecycleSeries: BlogPost[] = [
         caption:
           "Classification changes the action by category. Regression changes the action by the size of a number.",
       },
-      "Here is that choice as two pictures. Classification, for a member who might leave: claims in the past year against months since the last visit. The clouds look like clusters. They differ from clustering because the dots already have names, stays or leaves. A new member is a point, and the action is which side of the line they land on. Regression, for a claim not yet paid: billed amount against what similar claims paid. The cloud has a slope. The line reads off a dollar amount, and that amount is the reserve. If you only needed to know whether the payment would clear a cap, you would draw a threshold across this same picture and be back in classification.",
+      "The classification picture might compare customer activity with time since the last purchase, using known renewals and cancellations as labels. The regression picture might compare advertising spend with sales, then estimate sales for a proposed budget. These examples make the distinction visible: classification predicts a category; regression estimates a quantity. The same distinction applies to healthcare, finance, retail, and industrial data.",
       {
         type: "figure",
         src: "/images/blog/lifecycle-task-examples.jpg",
@@ -42,21 +42,21 @@ export const lifecycleSeries: BlogPost[] = [
         caption:
           "Labeled groups decide an action. A fitted line estimates a value.",
       },
-      "The metric has to match the cost of being wrong. Accuracy is a poor default when the event you care about is rare. A model that calls every member a stayer can look accurate and never catch a cancellation. Recall matters when missing a case is expensive and you can still act. Precision matters when a false alarm spends a reviewer’s hour or a provider’s patience. Sometimes the honest metric is not a percentage at all. It is dollars kept, hours saved, or error against a naive baseline that a careful person could have computed in a spreadsheet.",
+      "The metric has to match the cost of being wrong. Accuracy is a poor default when the event is rare: a fraud detector that labels every transaction legitimate may look accurate while missing every fraudulent event. Recall matters when missed cases are costly; precision matters when false alarms trigger expensive reviews. For regression, consider MAE, RMSE, or error against a simple baseline. Ultimately, connect technical metrics to business outcomes such as revenue retained, defects avoided, time saved, or service levels improved.",
       "Constraints belong on that same page, or they arrive later as surprises. Which data are you allowed to use. How fast the decision has to return. What privacy rule covers the row. Whether the result has to run inside a system that already exists, or whether a monthly memo is the whole deployment. A question you cannot answer under those constraints is a different project, not a harder version of this one.",
-      "Write the frame in one place before any cleaning: the decision, the population, the time window, the metric, the baseline you have to beat, and what you will not try. If that page is still vague, more data will not rescue it. Next week is where the raw material enters: sources, a repeatable pull, and what the file is allowed to be used for.",
+      "Create a short problem-framing brief before data exploration: business decision; analytical question; unit of analysis and eligible population; target variable and prediction horizon; available-at-decision-time features; success metric and baseline; operational constraints; and the action that follows the result. Check for target leakage: a feature must not contain information that would only become available after the prediction is made. This brief becomes the contract between the business question and the technical work. Part 2 moves into source discovery and reliable data ingestion.",
     ],
   },
   {
     slug: "data-collection-and-ingestion",
     title: "Data collection and ingestion: building a reliable data foundation",
     summary:
-      "Part 2 of 8. A practical guide to sourcing, extracting, validating, securing, and landing healthcare payer data—with repeatable pipelines, lineage, and operational controls.",
+      "Part 2 of 10. Build a reliable data foundation with source discovery, SQL and API extraction, batch and streaming patterns, data contracts, validation, orchestration, and lineage.",
     date: "2026-11-02",
     readingMinutes: 12,
-    tags: ["Data Engineering", "Healthcare Data", "ETL", "Lifecycle"],
+    tags: ["Data Engineering", "ETL", "APIs", "Data Pipelines", "Lifecycle"],
     body: [
-      "Part 2 of the lifecycle series. The question is framed; now the data has to arrive in a form that can be trusted, traced, secured, and collected again tomorrow. Collection is the decision about which information is needed and whether it may be used. Ingestion is the controlled movement of that information from its source into a platform where it can be validated and prepared.",
+      "Part 2 of the data science lifecycle. With the analytical question, target, and constraints defined, the next task is to acquire the right data and move it reliably into an environment where it can be analyzed. Collection identifies the sources and fields needed for the question. Ingestion is the controlled movement of data from those sources into a platform where it can be validated, tracked, and prepared. These practices apply whether the source is a customer database, a public API, an IoT stream, a financial feed, or a healthcare system.",
       {
         type: "heading",
         text: "1. Start with the business question and source inventory",
@@ -73,26 +73,26 @@ export const lifecycleSeries: BlogPost[] = [
       },
       {
         type: "heading",
-        text: "2. Understand the common healthcare data feeds",
+        text: "2. Understand common data sources and formats",
       },
-      "Payer data arrives through operational database extracts, warehouse tables, APIs, event streams, and partner file exchanges. Common administrative EDI transactions include the 834 for benefit enrollment and maintenance, 837 for claims, 835 for payment and remittance advice, 270/271 for eligibility inquiry and response, 276/277 for claim status, and 278 for review or authorization-related services. The transaction you need depends on the workflow; do not assume every payer receives every transaction directly or in the same way.",
-      "FHIR APIs can provide resource-oriented access to information such as Patient, Coverage, ExplanationOfBenefit, Claim, Organization, Practitioner, and related clinical resources, depending on the partner, implementation guide, authorization, and use case. FHIR is not a magic replacement for every administrative EDI feed. Confirm the resource profiles, required fields, terminology bindings, version, and exchange agreement with the source organization.",
+      "Most analytical platforms combine data from relational databases, cloud warehouses, application APIs, event brokers, object storage, public datasets, and partner file exchanges. In a healthcare payer example, common administrative EDI transactions include the 834 for enrollment, 837 for claims, 835 for remittance advice, 270/271 for eligibility, 276/277 for claim status, and 278 for authorization-related services. The same source-inventory method applies to retail orders, banking transactions, web events, manufacturing sensors, and customer-support systems; only the domain-specific formats change.",
+      "For healthcare interoperability, FHIR APIs may expose resources such as Patient, Coverage, ExplanationOfBenefit, Claim, Organization, and Practitioner, depending on the implementation and access agreement. This is one domain-specific API example—not a requirement for a general data science pipeline. For any API, understand its schema, authentication, pagination, rate limits, versioning, and permitted use before building the extractor.",
       "Files remain common because employers, vendors, clearinghouses, and legacy platforms often exchange scheduled extracts. CSV is easy to inspect but weakly typed. JSON represents nested API payloads. XML appears in several established exchange formats. Parquet is efficient for analytical storage because it is columnar and preserves a schema. The extension alone does not define the contract: document encoding, delimiters, compression, null conventions, date formats, code sets, and schema version too.",
       {
         type: "heading",
         text: "3. Choose the ingestion pattern deliberately",
       },
-      "Batch ingestion is appropriate when the business can work with scheduled freshness: a nightly eligibility snapshot, a daily claims extract, or a weekly provider directory. Define the schedule, delivery window, expected file count, and what happens when a delivery is late. A batch process should be restartable for a specific business date or source batch rather than requiring an operator to rerun everything.",
+      "Batch ingestion is appropriate when scheduled freshness is sufficient: nightly orders, daily account transactions, weekly product catalogs, or periodic sensor summaries. Define the schedule, delivery window, expected volume, and what happens when a delivery is late. A batch process should be restartable for a specific business date or source batch rather than requiring an operator to rerun everything.",
       "API-based ingestion is useful when a consumer needs request-and-response access or a source publishes resources through a managed interface. Plan for authentication and token renewal, pagination, rate limits, timeouts, retries with backoff, and source throttling. Store the request window and continuation state so a partial page sequence is not mistaken for a complete pull. Respect the API's permitted purpose and access scope.",
-      "Event-driven ingestion is useful when a downstream process needs changes with lower latency. Events can announce claim status changes, enrollment updates, or payment events. Design for at-least-once delivery: a consumer may receive the same event more than once. Use a stable event identifier, idempotent processing, ordering strategy where required, and a dead-letter path for messages that cannot be processed. Do not promise exactly-once business outcomes merely because a broker offers delivery features.",
+      "Event-driven ingestion is useful when a downstream process needs lower-latency updates. Events might represent an order being placed, a payment being authorized, a device crossing a temperature threshold, or a claim status changing. Design for at-least-once delivery: a consumer may receive the same event more than once. Use a stable event identifier, idempotent processing, an ordering strategy where required, and a dead-letter path for messages that cannot be processed. Do not promise exactly-once business outcomes merely because a broker offers delivery features.",
       "ETL transforms data before loading it into its destination. ELT lands source data first and transforms it inside the analytical platform. Neither is universally better. ETL may be appropriate when sensitive fields must be minimized before they reach a destination. ELT can preserve source history and use scalable warehouse compute, provided raw access is tightly controlled. The architecture should follow security, latency, audit, and operating constraints—not fashion.",
       {
         type: "heading",
         text: "4. Define the data contract before building the job",
       },
       "A data contract is an agreement between the producer and consumer about what a delivery means. At minimum, define the business grain, schema and version, field definitions, data types, required and optional fields, code sets, primary or natural keys, effective-date rules, timezone, null semantics, delivery cadence, expected volume, and correction behavior. Name the owner on both sides and the process for communicating a breaking change.",
-      "Grain is especially important in payer data. One row may represent a member, a coverage span, a claim header, a claim line, a provider location, or a remittance adjustment. A claim header and its service lines are not interchangeable. If a downstream analyst sums a header amount after joining it to several lines, the total may multiply. Put the grain in the contract and preserve it in table names and documentation.",
-      "Every extract also needs an as-of time and a business-effective time when those differ. A claim can be received today, processed tomorrow, adjusted next week, and describe a service delivered last month. A member eligibility change can arrive late but apply to an earlier coverage period. Store event or transaction time, source update time, ingestion time, and effective dates separately where the source provides them. This makes late-arriving data explainable instead of silently rewriting history.",
+      "Grain is fundamental to analytical correctness. One row may represent a customer, an order, an order line, a product, an account transaction, or a sensor reading. These are not interchangeable. If an order-level total is joined to several order lines and then summed, the total may multiply. In a healthcare example, a claim header and its service lines also represent different grains. Put the grain in the contract and preserve it in table names and documentation.",
+      "Every extract needs an as-of time and an event or business-effective time when those differ. An order may be placed today, shipped tomorrow, and returned next week. A financial transaction may be posted later than its event date. Store event time, source update time, ingestion time, and effective dates separately where available. This makes late-arriving data explainable instead of silently rewriting history.",
       {
         type: "heading",
         text: "5. Build a repeatable, restartable pipeline",
@@ -109,10 +109,10 @@ export const lifecycleSeries: BlogPost[] = [
       "Lineage should be traceable in both directions. From a dashboard value, an analyst should be able to identify the curated table, transformation version, source batches, and upstream systems. From a source delivery, an operator should be able to see which tables and reports it affected. This is essential when a vendor corrects a file or a source system reprocesses claims.",
       {
         type: "heading",
-        text: "7. Protect PHI and enforce allowed use",
+        text: "7. Protect sensitive data and enforce allowed use",
       },
-      "Healthcare data collection is a governance decision as much as an engineering task. Confirm the permitted purpose, contractual authority, consent or other applicable basis, minimum-necessary fields, retention period, and approved destinations before moving data. HIPAA obligations depend on the organizations, roles, data, and use involved; a data pipeline does not create permission to use information for a new purpose. Involve privacy, security, compliance, and data owners when the use or sharing arrangement is unclear.",
-      "Use encryption in transit and at rest, managed secrets, least-privilege service identities, network restrictions, and auditable access. Separate production credentials from development. Mask or tokenize identifiers in lower environments, and use synthetic or appropriately de-identified data for testing where feasible. Avoid PHI in job logs, exception messages, filenames, and monitoring labels. Define retention and secure deletion for both payloads and temporary copies.",
+      "Data collection is a governance decision as much as an engineering task. Confirm the permitted purpose, legal or contractual basis, minimum-necessary fields, retention period, and approved destinations before moving personal, financial, confidential, or regulated data. In a healthcare implementation, HIPAA requirements may also apply depending on the organizations, roles, data, and use. A data pipeline does not create permission to use information for a new purpose. Involve privacy, security, compliance, and data owners when the use or sharing arrangement is unclear.",
+      "Use encryption in transit and at rest, managed secrets, least-privilege service identities, network restrictions, and auditable access. Separate production credentials from development. Mask or tokenize sensitive identifiers in lower environments, and use synthetic or appropriately de-identified data for testing where feasible. Avoid personal or confidential data in job logs, exception messages, filenames, and monitoring labels. Define retention and secure deletion for both payloads and temporary copies.",
       "Allowed use belongs in metadata. Record the source, data owner, classification, approved purpose, restrictions, and applicable agreement or policy reference. A dataset that is technically accessible is not automatically approved for every analytic question. Recheck permissions when a new feature, vendor, model, or downstream consumer is introduced.",
       {
         type: "heading",
@@ -131,9 +131,9 @@ export const lifecycleSeries: BlogPost[] = [
         type: "heading",
         text: "10. A worked example: ingesting a daily claims feed",
       },
-      "Imagine a payer receives a daily 837 claims feed from a clearinghouse and a later 835 remittance feed. The ingestion service registers each delivery, verifies transport and checksum, stores the original payload in a restricted raw zone, and records the partner, batch, timestamps, schema version, and record count. A parser validates envelope and transaction structure, then checks required identifiers and dates before publishing accepted records to a validated zone.",
-      "The claims pipeline preserves claim-header and claim-line grain separately. It reconciles the accepted transaction count to the delivery control totals, quarantines malformed transactions, and makes the batch status visible to operations. When an 835 arrives, it is linked through the appropriate claim and payment references; it is not simply treated as another claims row. Later adjustments are retained as new business events or versioned changes according to the source contract, rather than silently overwriting the original history.",
-      "An analyst can now ask which claim lines were received for a service period, which were adjudicated, and which were paid—while understanding that the 837 and 835 describe different stages of the lifecycle. That distinction is the difference between a dataset that merely loads and one that can support a defensible business answer.",
+      "Consider an online retailer receiving daily order files from a commerce platform and inventory updates from a warehouse system. The ingestion service registers each delivery, verifies transport and checksum, stores the original payload in a controlled raw zone, and records the source, batch, timestamps, schema version, and record count. A parser validates the structure and required fields before publishing accepted records to a validated zone. The same design could ingest a healthcare 837 claims feed, but the domain-specific parser and governance rules would differ.",
+      "The order pipeline preserves order-header and order-line grain separately. It reconciles accepted records to delivery control totals, quarantines malformed rows, and makes batch status visible to operations. Inventory events are linked through stable product and location keys rather than being appended as if they were order lines. Corrections are retained as new events or versioned changes according to the source contract, rather than silently overwriting history.",
+      "An analyst can now calculate order volume, fulfillment time, and product availability while tracing each result back to the source delivery and transformation version. That distinction is the difference between a dataset that merely loads and one that can support a defensible business answer.",
       {
         type: "heading",
         text: "A practical ingestion readiness checklist",
@@ -146,7 +146,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "data-cleaning-and-preparation",
     title: "Data cleaning: making messy records usable",
     summary:
-      "Part 3 of 8. Missing values, duplicate keys, outliers, and types. Cleaning is a set of decisions, not a pass that makes the table innocent.",
+      "Part 3 of 10. Missing values, duplicate keys, outliers, and types. Cleaning is a set of decisions, not a pass that makes the table innocent.",
     date: "2026-11-09",
     readingMinutes: 7,
     tags: ["Data Science", "Data Preparation", "Lifecycle"],
@@ -169,7 +169,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "data-wrangling-and-feature-engineering",
     title: "Data wrangling: shape the table the question needs",
     summary:
-      "Part 4 of 8. Joins, aggregation, and new columns. A feature is a hypothesis about what predicts the outcome.",
+      "Part 4 of 10. Joins, aggregation, and new columns. A feature is a hypothesis about what predicts the outcome.",
     date: "2026-11-16",
     readingMinutes: 7,
     tags: ["Data Science", "Feature Engineering", "Lifecycle"],
@@ -192,7 +192,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "exploratory-data-analysis",
     title: "Exploratory analysis: what the data is willing to say",
     summary:
-      "Part 5 of 8. Distributions, relationships, and a correlation grid. A pattern at this stage is a hypothesis, not a finding for the steering committee.",
+      "Part 5 of 10. Distributions, relationships, and a correlation grid. A pattern at this stage is a hypothesis, not a finding for the steering committee.",
     date: "2026-11-23",
     readingMinutes: 6,
     tags: ["Data Science", "Exploratory Analysis", "Lifecycle"],
@@ -215,7 +215,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "data-mining-and-pattern-discovery",
     title: "Data mining: finding structure you did not label",
     summary:
-      "Part 6 of 8. Principal components, clusters, and association rules. They propose a structure. They do not prove a cause.",
+      "Part 6 of 10. Principal components, clusters, and association rules. They propose a structure. They do not prove a cause.",
     date: "2026-11-30",
     readingMinutes: 7,
     tags: ["Data Science", "Data Mining", "Lifecycle"],
@@ -238,7 +238,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "modeling-baselines-and-validation",
     title: "Modeling: a baseline, then a harder model, then proof",
     summary:
-      "Part 7 of 8. Beat a simple baseline, add complexity only when the errors justify it, and trust the score you did not train on.",
+      "Part 7 of 10. Beat a simple baseline, add complexity only when the errors justify it, and trust the score you did not train on.",
     date: "2026-12-07",
     readingMinutes: 7,
     tags: ["Machine Learning", "Modeling", "Lifecycle"],
@@ -261,7 +261,7 @@ export const lifecycleSeries: BlogPost[] = [
     slug: "visualization-and-data-storytelling",
     title: "Visualization: the chart has to carry a decision",
     summary:
-      "Part 8 of 8. Choose the chart for the comparison you need, and decide whether the audience needs a live dashboard or a frozen argument.",
+      "Part 8 of 10. Choose the chart for the comparison you need, and decide whether the audience needs a live dashboard or a frozen argument.",
     date: "2026-12-14",
     readingMinutes: 6,
     tags: ["Data Science", "Visualization", "Lifecycle"],

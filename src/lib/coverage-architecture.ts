@@ -26,10 +26,10 @@ export const coverageArchitecture: BlogPost[] = [
       "A benefit is the coverage and cost-sharing rule for a particular service or category. On the Acme Standard PPO 1500, an outpatient specialist office visit might be a $40 copay, in network, up to 12 visits in the year if the plan says so, and without prior authorization if the applicable rules say so. Other benefits are separate rows: primary care, emergency, hospitalization, prescriptions, physical therapy, imaging. A benefit is not simply a price. It can include conditions, exclusions, limits, authorization, and what the member pays. The provider's negotiated reimbursement is generally a contracting matter, not something the benefit definition settles alone. From an architecture point of view, the benefit is how that service is covered under the member's plan.",
       {
         type: "figure",
-        src: "/images/blog/healthcare-payer-entities.jpg",
-        alt: "UnitedHealthcare and Acme meet in a coverage arrangement, which defines plan options, which contain benefit rules. A member enrolls in one plan.",
+        src: "/images/blog/healthcare-payer-flowchart.jpg",
+        alt: "UnitedHealthcare and Acme meet in the coverage arrangement. That arrangement defines the plan options, which contain the benefit rules. Member enrollment points at the plan options.",
         caption:
-          "The sponsor and the carrier are separate parties. They meet in the coverage arrangement. The exact links depend on the funding.",
+          "The carrier link runs both ways. The sponsor funds the arrangement. Enrollment selects a plan option, and that option contains the benefit rules.",
       },
       "Bring Acme back to one picture. Headquarters employees are enrolled in the Acme Standard PPO 1500. The carrier in the example is UnitedHealthcare. The sponsor is Acme. The contract is G-88421. The plan is that PPO. The benefit, for this visit, is the outpatient specialist rule. Each entity answers a different question. Who provides or administers the coverage. Who establishes or funds it. What contract governs it. Which package applies. Which rules apply to this service.",
       "These entities are not interchangeable. A sponsor is not a carrier. A plan is not a policy. A benefit is not a plan. When a design or a configuration treats them as the same thing, the relationships go wrong, and coverage and processing go wrong with them.",

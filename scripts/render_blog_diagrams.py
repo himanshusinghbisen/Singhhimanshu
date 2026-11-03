@@ -361,96 +361,104 @@ def togaf_loop() -> None:
 
 
 def coverage_architecture() -> None:
-    """Two parties meet in one arrangement. Enrollment points at a plan, not at a benefit."""
-    image, draw = canvas(1248, 1500)
-    heading(draw, "Two parties, one arrangement")
+    """Match the payer flowchart: two parties, one arrangement, enrollment points at the plans."""
+    image, draw = canvas(1080, 1460)
+    edge = (71, 85, 105)
+    label_ink = (30, 41, 59)
+    carrier_fill, carrier_stroke, carrier_ink = (219, 234, 254), (37, 99, 235), (30, 58, 138)
+    arrange_fill, arrange_stroke, arrange_ink = (224, 242, 254), (2, 132, 199), (7, 89, 133)
+    plan_fill, plan_stroke, plan_ink = (220, 252, 231), (22, 163, 74), (22, 101, 52)
+    enroll_fill, enroll_stroke, enroll_ink = (254, 243, 199), (217, 119, 6), (146, 64, 14)
+
+    def node(box: tuple[int, int, int, int], fill, stroke, ink, lines: list[tuple[str, str, int]]) -> None:
+        rounded(draw, box, 18, fill, stroke, 3)
+        faces = [(text, F(path, size)) for text, path, size in lines]
+        gap = 8
+        heights = [face.size + gap for _, face in faces]
+        total = sum(heights) - gap
+        y = box[1] + ((box[3] - box[1]) - total) / 2
+        width = box[2] - box[0]
+        for (text, face), step in zip(faces, heights):
+            tw = draw.textlength(text, font=face)
+            draw.text((box[0] + (width - tw) / 2, y), text, font=face, fill=ink)
+            y += step
+
+    def edge_label(text: str, x: int, y: int) -> None:
+        draw.text((x, y), text, font=F(MED, 22), fill=label_ink)
+
+    heading(draw, "How the five entities connect")
     draw.text(
-        (64, 112),
-        "The sponsor and the carrier stay separate. They meet in the coverage arrangement.",
-        font=F(REG, 24),
+        (64, 108),
+        "The sponsor and the carrier stay separate. They meet in the arrangement.",
+        font=F(REG, 22),
         fill=MUTED,
     )
 
-    rounded(draw, (40, 168, 580, 328), 20, BLUE_BG, BLUE_BD, 2)
-    draw.text((68, 192), "Carrier", font=F(BOLD, 28), fill=NAVY)
-    draw.text((68, 236), "UnitedHealthcare", font=F(MED, 26), fill=INK)
-    draw.text((68, 278), "Insures or administers", font=F(REG, 22), fill=MUTED)
-
-    rounded(draw, (668, 168, 1208, 328), 20, ORANGE_BG, ORANGE_BD, 2)
-    draw.text((696, 192), "Sponsor", font=F(BOLD, 28), fill=AMBER)
-    draw.text((696, 236), "Acme Corporation", font=F(MED, 26), fill=INK)
-    draw.text((696, 278), "Sponsors or funds", font=F(REG, 22), fill=MUTED)
-
-    arrow(draw, (310, 340), (500, 428), INK, 4)
-    arrow(draw, (938, 340), (748, 428), INK, 4)
-
-    rounded(draw, (200, 436, 1048, 628), 20, GREEN_BG, GREEN_BD, 2)
-    draw.text((228, 460), "Coverage arrangement", font=F(BOLD, 30), fill=TEAL)
-    paragraph(
-        draw,
-        "Group contract or plan documents. Headquarters example: G-88421, fully insured, calendar year 2026.",
-        228,
-        516,
-        780,
-        F(REG, 24),
-        INK,
-        gap=8,
+    node(
+        (36, 164, 500, 318),
+        carrier_fill,
+        carrier_stroke,
+        carrier_ink,
+        [("Carrier / administrator", BOLD, 26), ("UnitedHealthcare", MED, 28)],
+    )
+    node(
+        (580, 164, 1044, 318),
+        carrier_fill,
+        carrier_stroke,
+        carrier_ink,
+        [("Sponsor", BOLD, 26), ("Acme Corporation", MED, 28)],
     )
 
-    arrow(draw, (624, 640), (624, 708), INK, 4)
-    draw.text((648, 658), "Defines available options", font=F(MED, 22), fill=TEAL)
+    arrow(draw, (268, 456), (268, 330), edge, 4)
+    arrow(draw, (268, 330), (268, 456), edge, 4)
+    edge_label("Insures or administers", 292, 376)
+    arrow(draw, (812, 330), (812, 456), edge, 4)
+    edge_label("Sponsors or funds", 836, 376)
 
-    draw.text((40, 724), "Plan options", font=F(BOLD, 24), fill=INK)
-    plans = [
-        (40, "Standard PPO 1500", True),
-        (436, "Premium PPO 500", False),
-        (832, "HDHP 3000", False),
-    ]
-    for x, label, selected in plans:
-        if selected:
-            rounded(draw, (x, 768, x + 376, 888), 18, BLUE_BG, NAVY, 3)
-            draw.text((x + 24, 792), label, font=F(BOLD, 26), fill=NAVY)
-            draw.text((x + 24, 834), "Selected for this member", font=F(REG, 20), fill=MUTED)
-        else:
-            rounded(draw, (x, 768, x + 376, 888), 18, BLUE_BG, BLUE_BD, 2)
-            draw.text((x + 24, 812), label, font=F(BOLD, 26), fill=NAVY)
-
-    arrow(draw, (640, 960), (400, 896), INK, 4)
-    draw.text((668, 904), "Enrolls in", font=F(MED, 22), fill=NAVY)
-
-    rounded(draw, (500, 964, 1208, 1140), 18, WHITE, LINE, 2)
-    draw.text((528, 988), "Member enrollment", font=F(BOLD, 26), fill=INK)
-    paragraph(
-        draw,
-        "A headquarters employee, enrolled in Standard PPO 1500. Enrollment picks a plan. It does not pick a benefit row.",
-        528,
-        1036,
-        640,
-        F(REG, 22),
-        MUTED,
-        gap=8,
+    node(
+        (120, 468, 960, 640),
+        arrange_fill,
+        arrange_stroke,
+        arrange_ink,
+        [("Coverage arrangement", BOLD, 30), ("Group contract or plan documents", MED, 24)],
     )
 
-    arrow(draw, (140, 900), (140, 1204), INK, 4)
-    draw.text((168, 1028), "Contains", font=F(MED, 22), fill=AMBER)
+    arrow(draw, (540, 652), (540, 748), edge, 4)
+    edge_label("Defines available options", 564, 684)
 
-    draw.text((220, 1172), "Benefit rules inside the selected plan", font=F(BOLD, 24), fill=INK)
-    benefits = [(40, "Specialist visit"), (436, "Hospitalization"), (832, "Prescription")]
-    for x, label in benefits:
-        rounded(draw, (x, 1220, x + 376, 1332), 18, ORANGE_BG, ORANGE_BD, 2)
-        draw.text((x + 24, 1256), label, font=F(BOLD, 26), fill=AMBER)
-
-    paragraph(
-        draw,
-        "The links change if the arrangement is self-funded. The two parties stay separate either way.",
-        40,
-        1368,
-        1160,
-        F(REG, 22),
-        MUTED,
-        gap=6,
+    node(
+        (120, 760, 960, 990),
+        plan_fill,
+        plan_stroke,
+        plan_ink,
+        [("Plan options", BOLD, 30), ("Standard PPO 1500", MED, 26), ("Premium PPO 500", MED, 26)],
     )
-    save(image, "healthcare-payer-entities.jpg")
+
+    arrow(draw, (268, 1002), (268, 1110), edge, 4)
+    edge_label("Contains", 292, 1040)
+    arrow(draw, (812, 1110), (812, 1002), edge, 4)
+    edge_label("Enrolls in", 836, 1040)
+
+    node(
+        (36, 1122, 500, 1360),
+        plan_fill,
+        plan_stroke,
+        plan_ink,
+        [
+            ("Benefit rules", BOLD, 28),
+            ("Specialist visit", MED, 24),
+            ("Hospitalization", MED, 24),
+            ("Prescription", MED, 24),
+        ],
+    )
+    node(
+        (580, 1122, 1044, 1360),
+        enroll_fill,
+        enroll_stroke,
+        enroll_ink,
+        [("Member enrollment", BOLD, 28), ("Employee + selected plan", MED, 24)],
+    )
+    save(image, "healthcare-payer-flowchart.jpg")
 
 
 def main() -> None:

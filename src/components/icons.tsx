@@ -59,6 +59,19 @@ export function GitHubIcon({ className }: { className?: string }) {
   );
 }
 
+export function MediumIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+      className={className}
+    >
+      <path d="M2.4 6.1c.03-.3-.08-.6-.3-.8L.2 3.1V2.8h6.2l4.8 10.5 4.2-10.5h5.9v.3l-1.6 1.5c-.14.1-.2.3-.18.5v13.8c-.02.2.04.4.18.5l1.6 1.5v.3h-8.1v-.3l1.7-1.6c.16-.16.16-.2.16-.45V7.8l-4.8 13.4h-.65L4 7.8v9.5c-.05.35.07.7.32.95l2.2 2.65v.3H.3v-.3l2.2-2.65c.25-.25.36-.6.3-.95V6.3c.03-.25-.08-.5-.3-.65z" />
+    </svg>
+  );
+}
+
 export function GoodreadsIcon({ className }: { className?: string }) {
   return (
     <svg

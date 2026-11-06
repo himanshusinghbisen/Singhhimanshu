@@ -1,6 +1,7 @@
 import {
   GitHubIcon,
   GoodreadsIcon,
+  MediumIcon,
   LinkedInIcon,
   MailIcon,
   PhoneIcon,
@@ -17,6 +18,11 @@ const links = [
     href: profile.github,
     label: "GitHub",
     icon: GitHubIcon,
+  },
+  {
+    href: profile.medium,
+    label: "Medium",
+    icon: MediumIcon,
   },
   {
     href: profile.goodreads,

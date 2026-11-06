@@ -40,7 +40,7 @@ export function JsonLd() {
           addressRegion: "TX",
           addressCountry: "US",
         },
-        sameAs: [profile.linkedin, profile.github, profile.goodreads],
+        sameAs: [profile.linkedin, profile.github, profile.goodreads, profile.medium],
         knowsAbout: [
           "Healthcare Systems Architecture",
           "Healthcare Payer Systems",

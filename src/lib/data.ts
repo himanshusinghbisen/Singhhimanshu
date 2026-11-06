@@ -14,6 +14,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/himanshusingh007/",
   github: "https://github.com/himanshusinghbisen",
   goodreads: "https://www.goodreads.com/singhhimanshu",
+  medium: "https://medium.com/@himanshu131986",
   headline:
     "Healthcare Systems Architect focused on payer platforms, claims processing, payment integrity, and enterprise technology modernization.",
   siteUrl: "https://singhhimanshu.com",

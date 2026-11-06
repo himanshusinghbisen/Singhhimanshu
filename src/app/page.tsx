@@ -186,6 +186,26 @@ export default function Home() {
                   </li>
                   <li>
                     <a
+                      href={profile.goodreads}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-navy-link underline decoration-amber-mark/50 underline-offset-4 hover:decoration-amber-mark"
+                    >
+                      Goodreads
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={profile.medium}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-semibold text-navy-link underline decoration-amber-mark/50 underline-offset-4 hover:decoration-amber-mark"
+                    >
+                      Medium
+                    </a>
+                  </li>
+                  <li>
+                    <a
                       href={profile.github}
                       target="_blank"
                       rel="noreferrer"

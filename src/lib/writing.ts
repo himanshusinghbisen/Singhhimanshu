@@ -4,6 +4,7 @@ export type WritingSectionId = "healthcare" | "data-science";
 
 const healthcareSlugs = new Set([
   "healthcare-payer-business-architecture",
+  "healthcare-payer-data-model-entity-relationships",
   "beyond-pay-and-chase-payment-integrity-engine",
   "payment-integrity-architecture-notes",
   "ssis-to-glue-claims-pipelines",
@@ -19,6 +20,8 @@ export const writingSections = [
       "Payer business architecture, claims platforms, payment integrity, and the integrations behind healthcare operations.",
     topics: [
       "Payer business architecture",
+      "Coverage program data models",
+      "Medicare, Medicaid, Marketplace, and dual eligibility",
       "Payer data models",
       "Claims processing",
       "Payment integrity",

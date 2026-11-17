@@ -2,8 +2,8 @@ import type { BlogPost } from "@/lib/posts";
 
 /**
  * End-to-end data science lifecycle series.
- * Production shows a part on its date. Development shows every part.
- * Mondays: Oct 26, Nov 2, Nov 9, Nov 16, Nov 23, Nov 30, Dec 7, Dec 14 (2026).
+ * Production shows each part on its publication date. Development shows all planned parts.
+ * Publication dates: Oct 26, Nov 2, Nov 23, Nov 30, Dec 7, Dec 14 (2026).
  */
 export const lifecycleSeries: BlogPost[] = [
   {
@@ -232,52 +232,6 @@ ORDER BY source_updated_at, order_id;`,
       },
       "Before calling an ingestion pipeline production-ready, confirm eight things: the source owner and permitted purpose are known; grain, keys, schema, and effective dates are documented; the batch, API, or event pattern meets the freshness need; retries, checkpoints, idempotency, and replay are designed; raw payload and lineage are retained appropriately; sensitive-data access and retention are approved; quality rules and reconciliation are defined; and monitoring, ownership, and a recovery runbook are in place.",
       "The pull is complete only when it is repeatable, explainable, and permitted. The next part of this series takes the landed data and deals with what is wrong inside it: missing values, duplicate keys, outliers, and types that do not match.",
-    ],
-  },
-  {
-    slug: "data-cleaning-and-preparation",
-    title: "Data cleaning: making messy records usable",
-    summary:
-      "Part 3 of 10. Missing values, duplicate keys, outliers, and types. Cleaning is a set of decisions, not a pass that makes the table innocent.",
-    date: "2026-11-09",
-    readingMinutes: 7,
-    tags: ["Data Science", "Data Preparation", "Lifecycle"],
-    body: [
-      "Part 3 of the lifecycle series. The extract arrived. It is not ready. Real rows contain blanks, repeated keys, values in the wrong type, and extremes that may be errors or may be the point.",
-      "Missing is a decision, not a blank to fill by habit. Dropping a row is honest when the field is required and the row cannot be used without it. Imputing a mean, a median, or a mode is honest when the gap is small and the absence itself is not informative. A model that predicts the missing field is another assumption, and it can smear one group’s values across another. Sometimes the useful feature is the fact of absence: a missing secondary payer, a missing discharge date. Filling that hole hides the signal.",
-      {
-        type: "figure",
-        src: "/images/blog/lifecycle-data-cleaning.jpg",
-        alt: "A messy record with padded text, a currency string, an ambiguous date, and a duplicated null key, next to a cleaned typed row. Four notes cover missing values, duplicates, outliers, and types.",
-        caption:
-          "Cleaning is a before-and-after you can defend, not a script you run and forget.",
-      },
-      "Duplicates are usually a grain problem. The same member and the same date appearing twice means two events were collapsed, or one event was loaded twice. Deleting one copy without knowing which is a guess. Trailing spaces and inconsistent case are cheaper: \" SMITH \" and \"Smith\" are the same name wearing different clothes. Fix the structure, then decide whether two rows are truly the same fact.",
-      "Outliers need a reason. A paid amount three orders of magnitude above the rest can be a bad decimal, or it can be the implant claim the integrity program exists to see. Delete the tail only when you know it is impossible, and write down the rule. A cap you cannot explain will be the first thing a reviewer asks about.",
-      "Types are the last quiet corruption. A date stored as text will sort as a string and join as a miss. A currency stored with a dollar sign and a comma is not a number until you parse it. Categories need one spelling. After the pass, the table should have a type for every column and a note for every row you dropped or filled. Next week is shaping: joins, the grain of the table, and the new columns that are really hypotheses.",
-    ],
-  },
-  {
-    slug: "data-wrangling-and-feature-engineering",
-    title: "Data wrangling: shape the table the question needs",
-    summary:
-      "Part 4 of 10. Joins, aggregation, and new columns. A feature is a hypothesis about what predicts the outcome.",
-    date: "2026-11-16",
-    readingMinutes: 7,
-    tags: ["Data Science", "Feature Engineering", "Lifecycle"],
-    body: [
-      "Part 4 of the lifecycle series. Clean columns are still the wrong shape if the question wants one row per member and you are holding one row per claim.",
-      "Joins are where grain goes wrong in silence. Members on the left, claims on the right, and a many-to-many key will multiply both sides. The average you compute afterward is then an average of copies. Before the join, say what one output row means. After it, count the rows. If the count is not the count you expected, stop.",
-      {
-        type: "figure",
-        src: "/images/blog/lifecycle-data-wrangling.jpg",
-        alt: "A members table and a claims table joined into one row per member, with new columns for tenure, claim count, paid sum, and age band.",
-        caption:
-          "Two claim rows for member A become one member row. The new columns are summaries, not copies.",
-      },
-      "Aggregation changes the grain on purpose. A group-by rolls claims up to a member, a provider, or a month. A pivot spreads a category into columns. A melt does the reverse when a wide sheet is harder to filter than a long one. The operation is simple. The choice of grain is the analysis. A monthly rate and a member-level rate answer different questions, and mixing them in one chart is how a meeting argues past itself.",
-      "Feature engineering is the step with the most temptation. Tenure in days, claims per year, a ratio of paid to billed, the month extracted from a date, an age band instead of a raw age. Each new column is a hypothesis: this shape carries the outcome better than the raw field. That can be true, and it can also be a leak. A feature that includes information from after the decision, or a total that includes the row you are trying to predict, will look brilliant and fail on the next month.",
-      "Keep a short list of the columns you added, the grain they assume, and what they are forbidden to know. Next week is looking, before any model: one variable, then two, then the grid of how they move together.",
     ],
   },
   {

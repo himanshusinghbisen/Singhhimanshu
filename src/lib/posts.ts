@@ -1,5 +1,7 @@
 import { lifecycleSeries } from "./lifecycle-series";
 import { coverageArchitecture } from "./coverage-architecture";
+import { coverageArchitecturePartTwo } from "./coverage-architecture-part-two";
+import { dataPreparationSeries } from "./data-preparation-series";
 
 export type BlogFigure = {
   type: "figure";
@@ -50,7 +52,9 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   ...coverageArchitecture,
+  ...coverageArchitecturePartTwo,
   ...lifecycleSeries,
+  ...dataPreparationSeries,
   {
     slug: "sampling-variability-standard-error",
     title: "Sampling variability: why two samples from the same population disagree",

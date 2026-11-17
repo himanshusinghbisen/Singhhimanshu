@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#f4f0e7"/><rect x="72" y="72" width="1456" height="756" rx="28" fill="#fffdf8" stroke="#d9d1c2" stroke-width="3"/>
+<text x="130" y="190" font-family="Arial,sans-serif" font-size="30" letter-spacing="7" fill="#9b6b2d">HEALTHCARE PAYER ARCHITECTURE · PART 2</text>
+<text x="130" y="285" font-family="Arial,sans-serif" font-size="62" font-weight="700" fill="#18263b">A program-aware</text><text x="130" y="360" font-family="Arial,sans-serif" font-size="62" font-weight="700" fill="#18263b">payer data model</text>
+<text x="132" y="420" font-family="Arial,sans-serif" font-size="27" fill="#596579">Business entities · eligibility · enrollment · coordination</text>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<rect x="130" y="540" width="260" height="120" rx="18" fill="#e6edf5" stroke="#7890aa" stroke-width="2"/><text x="260" y="590" font-size="27" font-weight="700" fill="#18263b">Commercial</text><text x="260" y="628" font-size="19" fill="#596579">Group / individual</text>
+<rect x="425" y="540" width="260" height="120" rx="18" fill="#e6edf5" stroke="#7890aa" stroke-width="2"/><text x="555" y="590" font-size="27" font-weight="700" fill="#18263b">Medicare</text><text x="555" y="628" font-size="19" fill="#596579">Original / Advantage</text>
+<rect x="720" y="540" width="260" height="120" rx="18" fill="#e6edf5" stroke="#7890aa" stroke-width="2"/><text x="850" y="590" font-size="27" font-weight="700" fill="#18263b">Medicaid</text><text x="850" y="628" font-size="19" fill="#596579">State / managed care</text>
+<rect x="1015" y="540" width="260" height="120" rx="18" fill="#e6edf5" stroke="#7890aa" stroke-width="2"/><text x="1145" y="590" font-size="27" font-weight="700" fill="#18263b">Marketplace</text><text x="1145" y="628" font-size="19" fill="#596579">Qualified health plans</text>
+<rect x="1310" y="540" width="160" height="120" rx="18" fill="#f6e9d4" stroke="#bd8b48" stroke-width="2"/><text x="1390" y="590" font-size="25" font-weight="700" fill="#744d1d">Duals</text><text x="1390" y="628" font-size="18" fill="#744d1d">Overlap</text>
+</g><path d="M260 690 V735 H850 M555 690 V735 M850 690 V735 M1145 690 V735 M1390 690 V735" stroke="#7890aa" stroke-width="3" fill="none"/><rect x="565" y="735" width="570" height="55" rx="14" fill="#18263b"/><text x="850" y="772" text-anchor="middle" font-family="Arial,sans-serif" font-size="23" fill="#fffdf8">One member · multiple time-bound coverage records</text></svg>

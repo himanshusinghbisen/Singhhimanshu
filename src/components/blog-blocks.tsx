@@ -107,6 +107,7 @@ export function BlogBlocks({
               alt={block.alt}
               width={1200}
               height={800}
+              unoptimized={block.src.toLowerCase().endsWith(".svg")}
               className="h-auto w-full"
             />
             {block.caption ? (

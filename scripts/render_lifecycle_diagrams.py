@@ -311,80 +311,6 @@ def ingestion():
     save(image, "lifecycle-data-ingestion.jpg")
 
 
-def cleaning():
-    image, draw = canvas(1480, 780)
-    heading(draw, "A messy row and a usable row")
-    rounded(draw, (56, 160, 700, 430), 18, ORANGE_BG, ORANGE_BD, 2)
-    draw.text((84, 188), "Before", font=F(BOLD, 26), fill=AMBER)
-    messy = ["name: \"  SMITH \"", "paid: \"$1,200\"", "dos: \"13/2/2024\"", "member_id: null", "member_id: null   (again)"]
-    y = 240
-    for row in messy:
-        draw.text((96, y), row, font=F(MED, 24), fill=INK)
-        y += 34
-    rounded(draw, (780, 160, 1424, 430), 18, GREEN_BG, GREEN_BD, 2)
-    draw.text((808, 188), "After", font=F(BOLD, 26), fill=TEAL)
-    clean = ["name: Smith", "paid: 1200.00", "dos: 2024-02-13", "member_id: missing, flagged", "one row per member and date"]
-    y = 240
-    for row in clean:
-        draw.text((820, y), row, font=F(MED, 24), fill=INK)
-        y += 34
-    steps = [
-        (56, "Missing", "Impute only when the absence is not itself the signal."),
-        (400, "Duplicates", "Same key twice is a grain problem, not a typo."),
-        (744, "Outliers", "The tail is sometimes the claim you were hired to find."),
-        (1088, "Types", "Dates, money, and categories get one format."),
-    ]
-    for x, title, body in steps:
-        rounded(draw, (x, 470, x + 328, 710), 16, WHITE, LINE, 2)
-        draw.text((x + 18, 494), title, font=F(BOLD, 22), fill=NAVY)
-        lines(draw, body, x + 18, 540, 292, F(REG, 20), INK, 5)
-    save(image, "lifecycle-data-cleaning.jpg")
-
-
-def wrangling():
-    image, draw = canvas(1480, 820)
-    heading(draw, "Join the grain, then add a signal")
-    rounded(draw, (56, 160, 460, 430), 18, BLUE_BG, BLUE_BD, 2)
-    draw.text((80, 186), "Members", font=F(BOLD, 24), fill=NAVY)
-    draw.text((80, 240), "id    joined", font=F(MED, 20), fill=MUTED)
-    draw.text((80, 280), "A     2022-04", font=F(REG, 22), fill=INK)
-    draw.text((80, 318), "B     2024-01", font=F(REG, 22), fill=INK)
-    rounded(draw, (500, 160, 904, 430), 18, ORANGE_BG, ORANGE_BD, 2)
-    draw.text((524, 186), "Claims", font=F(BOLD, 24), fill=AMBER)
-    draw.text((524, 240), "member    paid", font=F(MED, 20), fill=MUTED)
-    draw.text((524, 280), "A         400", font=F(REG, 22), fill=INK)
-    draw.text((524, 318), "A         250", font=F(REG, 22), fill=INK)
-    draw.text((524, 356), "B          90", font=F(REG, 22), fill=INK)
-    rounded(draw, (944, 160, 1424, 700), 18, GREEN_BG, GREEN_BD, 2)
-    draw.text((972, 186), "One row per member", font=F(BOLD, 24), fill=TEAL)
-    rows = [
-        "A   tenure_days  1600",
-        "A   claims_n        2",
-        "A   paid_sum      650",
-        "A   paid_per_year   …",
-        "B   tenure_days   660",
-        "B   claims_n        1",
-        "B   age_band     40–49",
-    ]
-    y = 250
-    for row in rows:
-        draw.text((984, y), row, font=F(REG, 24), fill=INK)
-        y += 52
-    rounded(draw, (56, 470, 904, 740), 18, WHITE, LINE, 2)
-    draw.text((80, 498), "New columns are hypotheses", font=F(BOLD, 24), fill=INK)
-    lines(
-        draw,
-        "A ratio, a date part, or a bin is a claim that this shape predicts the outcome better than the raw fields. Keep the grain obvious. A many-to-many join will silently multiply the rows.",
-        80,
-        556,
-        780,
-        F(REG, 22),
-        MUTED,
-        8,
-    )
-    save(image, "lifecycle-data-wrangling.jpg")
-
-
 def eda():
     image, draw = canvas(1480, 820)
     heading(draw, "Three looks before a model")
@@ -506,8 +432,6 @@ def main():
     classification_vs_regression()
     example_graphs()
     ingestion()
-    cleaning()
-    wrangling()
     eda()
     mining()
     modeling()

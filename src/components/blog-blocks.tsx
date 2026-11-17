@@ -102,14 +102,27 @@ export function BlogBlocks({
                 : "rounded-sm border-rule bg-card",
             )}
           >
-            <Image
-              src={block.src}
-              alt={block.alt}
-              width={1200}
-              height={800}
-              unoptimized={block.src.toLowerCase().endsWith(".svg")}
-              className="h-auto w-full"
-            />
+            {block.src.toLowerCase().endsWith(".svg") ? (
+              // Serve SVG diagrams directly. Next/Image optimization can fail
+              // to display public SVG assets in some deployment configurations.
+              <img
+                src={block.src}
+                alt={block.alt}
+                width={1600}
+                height={1050}
+                loading="lazy"
+                decoding="async"
+                className="block h-auto w-full object-contain"
+              />
+            ) : (
+              <Image
+                src={block.src}
+                alt={block.alt}
+                width={1200}
+                height={800}
+                className="h-auto w-full"
+              />
+            )}
             {block.caption ? (
               <figcaption
                 className={cn(
